@@ -14,10 +14,7 @@ export interface CanvasView {
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
 
-export function usePlaygroundCanvas(
-  onOpen: (id: string) => void,
-  enabled: boolean,
-) {
+export function usePlaygroundCanvas() {
   const canvas = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 1000, height: 800 });
   const [view, setView] = useState<CanvasView>({ x: 200, y: 90, scale: 0.85 });
@@ -37,7 +34,6 @@ export function usePlaygroundCanvas(
     vx: 0,
     vy: 0,
     moved: false,
-    id: "",
     pinched: false,
   });
   const pinch = useRef<{
@@ -67,7 +63,7 @@ export function usePlaygroundCanvas(
     });
   }, [size.width, size.height, stop, update]);
   useLayoutEffect(() => {
-    if (!enabled || !canvas.current) return;
+    if (!canvas.current) return;
     const element = canvas.current;
     let first = true;
     const observer = new ResizeObserver(() => {
@@ -86,7 +82,7 @@ export function usePlaygroundCanvas(
     });
     observer.observe(element);
     return () => observer.disconnect();
-  }, [enabled, update]);
+  }, [update]);
   const zoom = useCallback(
     (scale: number, point?: { x: number; y: number }) => {
       stop();
@@ -105,7 +101,7 @@ export function usePlaygroundCanvas(
     [size, stop, update],
   );
   useEffect(() => {
-    if (!enabled || !canvas.current) return;
+    if (!canvas.current) return;
     const element = canvas.current;
     const wheel = (event: WheelEvent) => {
       event.preventDefault();
@@ -134,7 +130,7 @@ export function usePlaygroundCanvas(
       element.removeEventListener("wheel", wheel);
       stop();
     };
-  }, [enabled, stop, update, zoom]);
+  }, [stop, update, zoom]);
   useEffect(() => {
     const media = matchMedia("(prefers-reduced-motion: reduce)");
     const change = () => {
@@ -161,9 +157,6 @@ export function usePlaygroundCanvas(
     const p = point(event);
     pointers.current.set(event.pointerId, p);
     if (pointers.current.size === 1) {
-      const tile = (event.target as HTMLElement).closest<HTMLElement>(
-        "[data-piece]",
-      );
       gesture.current = {
         x: p.x,
         y: p.y,
@@ -173,7 +166,6 @@ export function usePlaygroundCanvas(
         vx: 0,
         vy: 0,
         moved: false,
-        id: tile?.dataset.piece || "",
         pinched: false,
       };
       setDragging(true);
@@ -246,10 +238,7 @@ export function usePlaygroundCanvas(
     setDragging(false);
     const g = gesture.current;
     if (event.type === "pointercancel") return;
-    if (!g.moved && !g.pinched && g.id) {
-      onOpen(g.id);
-      return;
-    }
+    if (!g.moved) return;
     if (reduced.current || g.pinched || performance.now() - g.time > 90) return;
     let vx = g.vx,
       vy = g.vy,
@@ -305,9 +294,6 @@ export function usePlaygroundCanvas(
     size,
     view,
     dragging,
-    reset,
-    zoom,
-    stop,
     handlers: {
       onPointerDown,
       onPointerMove,

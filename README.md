@@ -74,7 +74,7 @@ The website intentionally does not claim production readiness for the source pro
 
 ### Motion implementation
 
-`useScrollReveals` uses IntersectionObserver and the browser’s animation API for one-time 650 ms upward arrivals, with a small stagger when several items enter together. Content is always rendered and readable. CSS adds a 450 ms route entrance, a 350 ms sliding navigation capsule and brief menu/hover/dialog transitions. Native scrolling remains intact; anchor links scroll smoothly. Ordinary portfolio pages retain native scrolling. Only the dedicated Playground canvas handles wheel gestures for panning and zoom; Gallery mode uses native scrolling. No perpetual animation or motion dependency is included. Changing reduced-motion preferences immediately cancels running reveal animations and disables CSS movement.
+`useScrollReveals` uses IntersectionObserver and the browser’s animation API for one-time 650 ms upward arrivals, with a small stagger when several items enter together. Content is always rendered and readable. CSS adds a 450 ms route entrance, a 350 ms sliding navigation capsule and brief menu/hover/dialog transitions. Native scrolling remains intact; anchor links scroll smoothly. Ordinary portfolio pages retain native scrolling. Only the dedicated Playground canvas handles wheel gestures for panning and zoom. No perpetual animation or motion dependency is included. Changing reduced-motion preferences immediately cancels running reveal animations and disables CSS movement.
 
 ### About, achievements and contact
 
@@ -85,13 +85,13 @@ The website intentionally does not claim production readiness for the source pro
 
 ## Original image playground
 
-`/playground` is an image-only design playground inspired by the owner’s supplied screen recording. It uses the same shared top navigation and mobile menu as the rest of the portfolio; the canvas fills the viewport beneath it. Theme switching remains available in the bottom canvas toolbar. Sixteen original concepts (12 interface studies, two posters and two pieces of artwork) repeat across a continuous canvas. It is an endless arrangement of a finite collection, not an image-generation service. No Figma or external project links appear on the cards or in the image viewer. Concept imagery is clearly distinguished from real portfolio projects and client work.
+`/playground` is an image-only design playground inspired by the owner’s supplied screen recording. It uses the same shared top navigation and mobile menu as the rest of the portfolio; the canvas fills the viewport beneath it. The canvas follows the portfolio’s selected theme. Sixteen original concepts (12 interface studies, two posters and two pieces of artwork) repeat across a continuous canvas. It is an endless arrangement of a finite collection, not an image-generation service. No Figma or external project links appear on the images. Concept imagery is clearly distinguished from real portfolio projects and client work.
 
-Drag or scroll to pan, pinch or Ctrl-scroll to zoom, and use the reset/shuffle controls to explore. Click an image for a larger preview with previous/next controls. Filters select interfaces, posters or artwork. Gallery mode provides a conventional scrollable grid and full Tab/Enter browsing. The focused canvas supports arrow keys, +/− and 0. Escape closes previews and returns focus. Reduced motion removes inertia and entrance/hover movement.
+Drag or scroll to pan; pinch or Ctrl-scroll to zoom. The focused canvas supports arrow keys, +/− and 0 to reset. The page is deliberately image-only: no visible heading panel, filters, view switch, toolbar, image labels or preview modal. Images do not open links or overlays. A screen-reader-only heading, gesture instructions and single list of all 16 concept descriptions preserve access without repeating the looping tiles. Reduced motion removes inertia.
 
 - `src/data/playground.ts`: image records, categories, descriptions and alt text.
 - `src/hooks/usePlaygroundCanvas.ts`: scoped pointer, wheel, pinch and keyboard interactions.
-- `src/styles/playground.css`: isolated responsive canvas/gallery presentation.
+- `src/styles/playground.css`: isolated responsive canvas presentation.
 - `public/images/playground/`: 16 optimized WebP assets, approximately 552 KiB combined.
 - `design/playground/artboards.html`: editable source for 14 original UI/poster images. The blue clay character and glossy blue ribbon artwork were generated with AI; their final assets are stored locally and reused in two concept artboards.
 

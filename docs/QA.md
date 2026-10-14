@@ -10,7 +10,7 @@
 
 ## Browser checks
 
-Current revision: **23 checks passed**: 22 in the full run and the remaining existing reduced-motion test in a focused rerun after correcting a navigation-wait race in that test. Includes all routes/themes, contact validation, navigation, project dialogs and the new playground.
+Before the image-only simplification: **23 checks passed**: 22 in the full run and the remaining existing reduced-motion test in a focused rerun after correcting a navigation-wait race in that test. Includes all routes/themes, contact validation, navigation, project dialogs and the new playground.
 
 Google Chrome through Playwright against production output. T3 preview initially worked for source captures, then disconnected and timed out; local Chrome was used for final checks.
 
@@ -90,3 +90,10 @@ Added the owner's Mahesh PU College (93.3%) and St. Mary's High School (83.3%) e
 Removed the reference-inspired left rail at the owner’s request. Playground now renders the shared `Header` with identical top pill navigation, active state and mobile menu. The canvas sits beneath the header and spans the full width; theme switching moved to the bottom toolbar. Production build and the four playground interaction/accessibility checks passed. Refreshed desktop, mobile, dark-mobile, Gallery and preview screenshots.
 
 Additional navigation/responsive run: all nine checks passed, covering all routes at seven widths, the shared active-pill navigation including Playground, and mobile menu dismissal followed by canvas touch gestures.
+
+
+## Image-only playground simplification
+
+At the owner’s request, removed the title/filter panel, Canvas/Gallery switch, conventional gallery, image-preview dialog, tile captions and bottom toolbar. The shared portfolio navbar remains above a full-width, full-height image canvas. Drag, wheel pan, pinch/Ctrl-scroll zoom and keyboard arrow/+/−/0 controls remain. Images are no longer buttons and clicking does not open an overlay. Each original concept is described once in screen-reader-only content; the repeating visual tiles are hidden from assistive technology. Deleted the unused viewer and icon components. Previous Gallery/preview screenshots document superseded UI and have been removed.
+
+Current simplification validation: production TypeScript/build passed; all three focused playground checks passed, covering mouse/keyboard navigation, image loading and no popups, axe in both themes, and mobile menu/touch/pinch/reduced-motion behavior. Visual and overflow checks completed at 320, 390, 768 and 1440 px. Route assets reduced to 9.97 KB JS and 1.27 KB CSS before gzip.

@@ -1,157 +1,52 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-test("canvas pans endlessly, zooms, resets and opens image-only previews", async ({
-  page,
-}) => {
+test("image-only canvas pans and zooms without opening overlays", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/playground");
   const canvas = page.getByRole("region", { name: "Infinite design canvas" });
   const plane = page.locator(".play-plane");
   await expect(canvas).toBeVisible();
-  const initial = await plane.getAttribute("style");
+  await expect(page.locator(".playground-shell button")).toHaveCount(0);
   const rect = await canvas.boundingBox();
   if (!rect) throw new Error("No canvas bounds");
-  await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2);
-  await page.mouse.down();
-  await page.mouse.move(
-    rect.x + rect.width / 2 - 230,
-    rect.y + rect.height / 2 + 70,
-    { steps: 12 },
-  );
-  await page.mouse.up();
-  await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect.poll(() => plane.getAttribute("style")).not.toBe(initial);
-  await page.getByRole("button", { name: "Zoom in", exact: true }).click();
-  await expect(page.getByLabel("Canvas zoom")).toHaveText("105%");
-  await page.getByRole("button", { name: "Zoom out", exact: true }).click();
-  await expect(page.getByLabel("Canvas zoom")).toHaveText("90%");
-  await page.getByRole("button", { name: "Reset canvas view" }).click();
-  await expect.poll(() => plane.getAttribute("style")).toBe(initial);
+  expect(rect.y).toBe(110);
+  expect(rect.height).toBe(890);
   await canvas.focus();
-  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("0");
+  const initial = await plane.getAttribute("style");
+  const x = rect.x + rect.width / 2, y = rect.y + rect.height / 2;
+  await page.mouse.click(x, y);
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x - 230, y + 70, { steps: 12 });
+  await page.mouse.up();
   await expect.poll(() => plane.getAttribute("style")).not.toBe(initial);
   await page.keyboard.press("0");
   await expect.poll(() => plane.getAttribute("style")).toBe(initial);
-  // A very long trackpad move still has a bounded, populated tile window.
-  await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2);
+  await page.keyboard.press("+");
+  await expect.poll(() => plane.getAttribute("style")).toContain("scale(1)");
+  await page.keyboard.press("0");
+  await page.keyboard.press("ArrowDown");
+  await expect.poll(() => plane.getAttribute("style")).not.toBe(initial);
   await page.mouse.wheel(15000, 24000);
   await expect.poll(() => plane.getAttribute("style")).not.toBe(initial);
-  expect(await page.locator(".play-tile").count()).toBeLessThan(60);
-  expect(
-    await page.locator('.play-tile[aria-hidden="false"]').count(),
-  ).toBeGreaterThan(0);
-  await page.getByRole("button", { name: "Reset canvas view" }).click();
-  await page
-    .locator('.play-tile[data-piece="muse"][aria-hidden="false"]')
-    .first()
-    .click();
-  const viewer = page.getByRole("dialog");
-  await expect(viewer).toBeVisible();
-  await expect(viewer.getByRole("heading", { level: 2 })).toHaveText(
-    "A little play",
-  );
-  await expect(viewer.locator("a")).toHaveCount(0);
-  await expect(
-    viewer.getByRole("button", { name: "Close image preview" }),
-  ).toBeFocused();
-  await page.keyboard.press("ArrowRight");
-  await expect(viewer.getByRole("heading", { level: 2 })).toHaveText(
-    "A calmer workspace",
-  );
-  await viewer.getByRole("button", { name: "Enlarge image" }).click();
-  await expect(page.locator(".play-viewer-image")).toHaveClass(/is-actual/);
-  await page.keyboard.press("Escape");
-  await expect(viewer).toHaveCount(0);
-  await expect(canvas).toBeFocused();
-  await page
-    .getByRole("navigation")
-    .getByRole("link", { name: "Home", exact: true })
-    .click();
+  expect(await page.locator(".play-tile").count()).toBeLessThan(70);
+  await page.getByRole("navigation").getByRole("link", { name: "Home", exact: true }).click();
   await expect(page).toHaveURL("/");
-  expect(await page.evaluate(() => document.body.style.overflow)).not.toBe(
-    "hidden",
-  );
+  expect(await page.evaluate(() => document.body.style.overflow)).not.toBe("hidden");
 });
 
-test("gallery filters, loads every image, traps viewer focus and restores trigger", async ({
-  page,
-}) => {
+test("image-only canvas remains accessible in both themes", async ({ page }) => {
   await page.goto("/playground");
-  await page.getByRole("button", { name: "Gallery", exact: true }).click();
-  await expect(page.locator(".play-gallery-card")).toHaveCount(16);
-  for (const img of await page.locator(".play-gallery-card img").all()) {
-    await img.scrollIntoViewIfNeeded();
-    await expect(img).toHaveJSProperty("complete", true);
-    expect(
-      await img.evaluate((el) => (el as HTMLImageElement).naturalWidth),
-    ).toBeGreaterThan(0);
-  }
-  await page.getByRole("button", { name: "Posters 2", exact: true }).click();
-  await expect(page.locator(".play-gallery-card")).toHaveCount(2);
-  const trigger = page.getByRole("button", {
-    name: "Preview Make room for play",
-  });
-  await trigger.focus();
-  await page.keyboard.press("Enter");
-  const viewer = page.getByRole("dialog");
-  await expect(viewer).toBeVisible();
-  await page.keyboard.press("Shift+Tab");
-  await expect(
-    viewer.getByRole("button", { name: "Enlarge image" }),
-  ).toBeFocused();
-  for (let i = 0; i < 9; i++) {
-    await page.keyboard.press("Tab");
-    expect(
-      await viewer.evaluate((el) => el.contains(document.activeElement)),
-    ).toBe(true);
-  }
-  await page.keyboard.press("Escape");
-  await expect(trigger).toBeFocused();
-  await page.getByRole("button", { name: "Artwork 2", exact: true }).click();
-  await expect(page.locator(".play-gallery-card")).toHaveCount(2);
-  await page.getByRole("button", { name: "All 16", exact: true }).click();
-  await expect(page.locator(".play-gallery-card")).toHaveCount(16);
-  await page.getByRole("button", { name: "Canvas", exact: true }).click();
-  const first = await page
-    .locator(".play-tile")
-    .first()
-    .getAttribute("data-piece");
-  await page.getByRole("button", { name: "Shuffle designs" }).click();
-  await expect
-    .poll(() => page.locator(".play-tile").first().getAttribute("data-piece"))
-    .not.toBe(first);
-});
-
-test("canvas, gallery and image preview pass axe in both themes", async ({
-  page,
-}) => {
-  await page.goto("/playground");
+  await expect(page.getByRole("list", { name: "Original design concepts" }).getByRole("listitem")).toHaveCount(16);
   for (const theme of ["light", "dark"]) {
-    await page.evaluate((t) => {
-      document.documentElement.dataset.theme = t;
-    }, theme);
-    for (const mode of ["Canvas", "Gallery"]) {
-      await page.getByRole("button", { name: mode, exact: true }).click();
-      expect(
-        (
-          await new AxeBuilder({ page })
-            .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-            .analyze()
-        ).violations,
-      ).toEqual([]);
-    }
-    await page
-      .getByRole("button", { name: "Preview A little play", exact: true })
-      .click();
-    expect(
-      (
-        await new AxeBuilder({ page })
-          .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-          .analyze()
-      ).violations,
-    ).toEqual([]);
-    await page.keyboard.press("Escape");
+    await page.evaluate(t => { document.documentElement.dataset.theme = t; }, theme);
+    expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze()).violations).toEqual([]);
+  }
+  for (const img of await page.locator(".play-tile img").all()) {
+    expect(await img.evaluate(e => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   }
 });
 
@@ -196,7 +91,7 @@ test("touch pan and pinch, compact layouts and reduced motion", async ({
     .poll(() => page.locator(".play-plane").getAttribute("style"))
     .not.toBe(start);
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  const before = await page.getByLabel("Canvas zoom").textContent();
+  const before = await page.locator(".play-plane").getAttribute("style");
   await cdp.send("Input.dispatchTouchEvent", {
     type: "touchStart",
     touchPoints: [
@@ -216,22 +111,16 @@ test("touch pan and pinch, compact layouts and reduced motion", async ({
     touchPoints: [],
   });
   await expect
-    .poll(() => page.getByLabel("Canvas zoom").textContent())
+    .poll(() => page.locator(".play-plane").getAttribute("style"))
     .not.toBe(before);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
-  await page.getByRole("button", { name: "Gallery", exact: true }).click();
-  await page
-    .getByRole("button", { name: "Preview A little play", exact: true })
-    .click();
-  expect(
-    await page
-      .getByRole("dialog")
-      .evaluate((el) => getComputedStyle(el).animationName),
-  ).toBe("none");
-  await page.getByRole("button", { name: "Close image preview" }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  const still = await page.locator(".play-plane").getAttribute("style");
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  expect(await page.locator(".play-plane").getAttribute("style")).toBe(still);
   await context.close();
 });
