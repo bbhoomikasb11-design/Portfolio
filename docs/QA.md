@@ -4,22 +4,22 @@
 
 - Strict TypeScript and Vite production compilation passed.
 - npm install audit: 0 known vulnerabilities for portfolio dependencies.
-- Browser code approximately 296 KB / 94 KB gzip; CSS approximately 40 KB / 8.7 KB gzip.
+- Browser code approximately 300 KB / 95 KB gzip; CSS approximately 45 KB / 9.6 KB gzip.
 - Four local Latin-subset WOFF2 font files total approximately 79 KB. Source and SIL licenses included.
 - All four selected projects use optimized, genuine screenshots. Source clones are not included in this repository.
 
 ## Browser checks
 
-Final revision suite: **17 tests passed** (24.9 s), including every route/theme and all project dialogs.
+Current revision: **19 tests passed** across the complete 17-test regression run (1.0 min) and two focused navigation/motion checks (5.5 s), including every route/theme and all project dialogs.
 
 Google Chrome through Playwright against production output. T3 preview initially worked for source captures, then disconnected and timed out; local Chrome was used for final checks.
 
-- Six real routes tested at 320, 375, 430, 768, 1024, 1440 and 1680 pixels, with no horizontal overflow.
+- Nine real routes tested at 320, 375, 430, 768, 1024, 1440 and 1680 pixels, with no horizontal overflow.
 - Mobile menu open/close, Escape and focus return, navigation, skip link, archive filter, persisted theme switching, missing-route UI and reduced motion verified.
 - Images loaded; desktop/mobile visual layouts inspected. Project screenshot capture corrected after the original browser capture was distorted.
 - Form rejects incomplete input, encodes an email draft and reports “Nothing has been sent.” No email was sent by the test.
 - Accessibility review found and fixed animation opacity contrast, a small portrait label, and CampusMesh’s dark-theme surface. Button background transition was removed so theme colors switch together.
-- Automated axe WCAG 2 A/AA + 2.1 AA suite runs on all six routes in both themes. Final focused run passed with zero violations across all 12 route/theme combinations. Manual screen-reader testing and user research have not been performed.
+- Automated axe WCAG 2 A/AA + 2.1 AA suite runs on all nine routes in both themes. Final focused run passed with zero violations across all 18 route/theme combinations. Manual screen-reader testing and user research have not been performed.
 
 ## Performance lab measurement
 
@@ -32,7 +32,7 @@ Lighthouse mobile simulation against local production preview (`http://localhost
 - Cumulative layout shift: 0
 - Speed index: 1.8 s
 
-Machine/network variability applies; this is a lab run, not field Core Web Vitals, and does not measure INP. Raw report: `docs/qa/lighthouse-mobile.json`. An earlier pre-font-optimization run scored 72; WOFF2 subsetting reduced font transfer substantially. The latest measurement includes the supplied portrait, skills-first layout, floating navigation and expandable project dialogs.
+Machine/network variability applies; this is a lab run, not field Core Web Vitals, and does not measure INP. Raw report: `docs/qa/lighthouse-mobile.json`. An earlier pre-font-optimization run scored 72; WOFF2 subsetting reduced font transfer substantially. This measurement includes the supplied portrait, skills-first layout, floating navigation and expandable project dialogs. It predates the latest five-destination navigation and three additional profile routes; it is not a fresh performance score for this revision.
 
 ## Owner-requested design revision
 
@@ -51,3 +51,12 @@ The six project repositories were cloned successfully; SafeScan and résumé ope
 ## Publication
 
 The new remote supplied by the owner is `https://github.com/bbhoomikasb11-design/Portfolio.git`; it was checked empty before attachment. The implementation was successfully pushed to its main branch. Vercel CLI reported logged out. Production deployment requires account login. Canonicals, absolute OG URLs and a sitemap are generated only when the actual HTTPS `SITE_URL` is configured. No production URL is claimed until deployment succeeds.
+
+## Five-destination navigation and motion refinement
+
+- Reference Home, Experience, Education, Projects, Blogs and Contact pages inspected. The navbar now contains exactly Home, Experience, Education, Projects and Contact. Wordmark uses bold Manrope and reads `Bhoomika.S`. No Skills or Blogs item.
+- Active pill follows route changes and resize/font metrics; keyboard focus remains visible. Mobile uses an accessible disclosure panel. Theme control moved to the footer.
+- Added substantive `/experience`, `/education` and `/contact` routes using shared verified content. Nine production HTML entries have route-specific metadata and Vercel rewrites.
+- Native anchor scrolling, 450 ms page entrances, 650 ms once-only section arrivals and bounded stagger, 350 ms active-pill movement. No wheel interception or additional motion dependency.
+- Verified exact link order, one active link, active-pill alignment, new route navigation, focus movement, browser Back and live reduced-motion changes. The latter cancels running Web Animations API reveals as well as disabling CSS animation.
+- Updated desktop, mobile and dark-mobile hero captures; added experience/education desktop, education mobile, mobile navigation and dark contact captures.

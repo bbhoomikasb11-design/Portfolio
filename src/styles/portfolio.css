@@ -1182,3 +1182,331 @@ body {
   outline: 2px solid var(--blue);
   outline-offset: -3px;
 }
+
+/* Reference-inspired navigation: five destinations, one quiet active capsule. */
+.header-inner {
+  width: min(100%, 960px);
+  min-height: 72px;
+  padding: 10px 24px 10px 32px;
+  border-color: color-mix(in srgb, var(--line) 25%, transparent);
+}
+.wordmark {
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 750;
+  letter-spacing: -0.8px;
+}
+.wordmark-dot {
+  color: inherit;
+}
+.navigation {
+  position: relative;
+  gap: 3px;
+}
+.navigation a {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 14px 19px;
+}
+.navigation a[aria-current],
+.navigation a.active {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ink);
+  font-weight: 700;
+}
+.nav-active-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  background: var(--surface);
+  box-shadow: 0 1px 2px #10111606;
+  border-radius: 100px;
+  pointer-events: none;
+  transition:
+    transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    width 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.footer-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.footer-theme {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 8px 13px;
+  min-height: 44px;
+  font-size: 10px;
+}
+.footer-theme svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Dedicated pages share the existing, verified profile content. */
+.profile-page {
+  max-width: 1060px;
+  padding-block: 56px 90px;
+  min-height: calc(100svh - 230px);
+}
+.profile-page h1 {
+  font-size: clamp(52px, 6.3vw, 86px);
+  margin-block: 20px 28px;
+}
+.profile-page-heading > p:last-child {
+  max-width: 500px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.experience-page .section-heading {
+  margin-bottom: 55px;
+  align-items: end;
+}
+.experience-page .experience-list article {
+  grid-template-columns: 40px minmax(0, 1fr);
+  column-gap: 28px;
+  border: 0;
+  padding: 24px 0 40px;
+  position: relative;
+}
+.experience-page .experience-list article::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 24px;
+  bottom: -24px;
+  border-left: 1px solid var(--line);
+}
+.experience-page .experience-list article:last-child::before {
+  bottom: 40px;
+}
+.experience-page .experience-index {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  width: 33px;
+  height: 33px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 10px;
+}
+.experience-page .experience-title :is(h2, h3) {
+  margin-top: 12px;
+  font-size: clamp(27px, 3vw, 38px);
+}
+.experience-page .experience-copy {
+  grid-column: 2;
+  max-width: 730px;
+  padding-top: 18px;
+}
+.experience-page .experience-copy p,
+.experience-page .experience-copy li {
+  font-size: 14px;
+  line-height: 1.9;
+}
+.education-card {
+  margin-top: 48px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 35px 40px;
+  box-shadow: var(--card-shadow);
+}
+.education-card .education {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.education-card h2 {
+  font: 600 clamp(21px, 2.5vw, 30px)/1.5 var(--sans);
+  letter-spacing: -0.04em;
+  margin-block: 14px 10px;
+}
+.education-card .education p {
+  font-size: 14px;
+}
+.education-card .education .eyebrow {
+  font-size: 10px;
+}
+.education-card .education span {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--soft);
+  padding: 8px 14px;
+  margin-top: 20px;
+  border-radius: 100px;
+}
+.learning-note {
+  padding-top: 65px;
+  max-width: 640px;
+}
+.learning-note h2 {
+  font-size: clamp(39px, 4vw, 56px);
+  margin-block: 16px 24px;
+}
+.learning-note > p:not(.eyebrow) {
+  font-size: 14px;
+  line-height: 1.9;
+}
+.learning-note .text-link {
+  margin-top: 24px;
+}
+.contact-page {
+  margin: 38px auto 50px;
+  width: calc(100% - var(--gutter) * 2);
+  max-width: 1260px;
+  border-radius: 24px;
+  padding-block: 65px;
+}
+.contact-page .container {
+  width: 100%;
+  padding-inline: clamp(24px, 4vw, 64px);
+}
+.contact-page h1 {
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: 1.08;
+}
+.contact-page h1 em {
+  color: #9dbaff;
+}
+.case-body aside {
+  top: 125px;
+}
+
+@media (max-width: 1100px) {
+  .navigation a {
+    padding-inline: 15px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 900px) {
+  .header-inner {
+    min-height: 64px;
+    padding: 8px 14px 8px 24px;
+  }
+  .wordmark {
+    font-size: 20px;
+  }
+  .navigation {
+    position: absolute;
+  }
+  .navigation a {
+    font-size: 14px;
+    padding: 14px 18px;
+  }
+  .nav-active-pill {
+    display: none;
+  }
+  .navigation a[aria-current] {
+    background: var(--soft);
+    border-color: var(--line);
+  }
+}
+@media (max-width: 760px) {
+  .profile-page {
+    padding-block: 28px 60px;
+  }
+  .profile-page h1 {
+    font-size: clamp(43px, 9vw, 62px);
+  }
+  .profile-page-heading > p:last-child {
+    font-size: 14px;
+  }
+  .experience-page .section-heading {
+    align-items: start;
+    margin-bottom: 26px;
+  }
+  .experience-page .experience-list article {
+    grid-template-columns: 28px minmax(0, 1fr);
+    column-gap: 16px;
+  }
+  .experience-page .experience-list article::before {
+    left: 13px;
+  }
+  .experience-page .experience-index {
+    width: 27px;
+    height: 27px;
+  }
+  .experience-page .experience-copy p,
+  .experience-page .experience-copy li {
+    font-size: 13px;
+  }
+  .education-card {
+    padding: 25px;
+    margin-top: 32px;
+  }
+  .education-card .education p {
+    font-size: 12px;
+  }
+  .contact-page {
+    margin-top: 20px;
+    padding-block: 38px;
+  }
+  .contact-page h1 {
+    font-size: clamp(37px, 8vw, 55px);
+  }
+  .contact-page .email-link {
+    font-size: 12px;
+    gap: 8px;
+  }
+  .contact-page .social-links {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .footer-actions {
+    margin-left: auto;
+    gap: 15px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  main {
+    animation: page-arrive 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .section-heading {
+    animation: none;
+  }
+  .navigation.is-open {
+    animation: menu-arrive 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .button svg,
+  .text-link svg {
+    transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .button:hover svg,
+  .text-link:hover svg {
+    transform: translate(2px, -2px);
+  }
+  @keyframes page-arrive {
+    from {
+      translate: 0 12px;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+  @keyframes menu-arrive {
+    from {
+      translate: 0 -8px;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+}

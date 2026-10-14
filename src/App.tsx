@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { profile, achievements } from "./data/profile";
 import { projects, archive } from "./data/projects";
-import { experience } from "./data/experience";
+import Experience from "./components/Experience";
+import Education from "./components/Education";
+import ThemeToggle from "./components/ThemeToggle";
+import EducationPage from "./pages/EducationPage";
+import { pages } from "./data/pages";
+import { useScrollReveals } from "./hooks/useScrollReveals";
 import ProjectCard, { ProjectVisual } from "./components/ProjectCard";
 import Contact from "./components/Contact";
 import { Arrow } from "./components/Icons";
@@ -16,16 +21,14 @@ function RouteEffects() {
   const initial = useRef(true);
   useEffect(() => {
     const project = projects.find((p) => pathname === `/projects/${p.slug}`);
+    const page = pages.find((p) => p.path === pathname);
     const title = project
       ? `${project.name} — Bhoomika S`
-      : pathname === "/projects"
-        ? "Selected work — Bhoomika S"
-        : pathname === "/"
-          ? "Bhoomika S — Developer + Product Designer"
-          : "Page not found — Bhoomika S";
+      : page?.title || "Page not found — Bhoomika S";
     const description =
       project?.summary ||
-      "Bhoomika S — developer and product designer in Bengaluru. Thoughtful digital experiences, accessible interfaces and useful products.";
+      page?.description ||
+      "Explore Bhoomika S’s portfolio.";
     document.title = title;
     document
       .querySelector('meta[name="description"]')
@@ -60,7 +63,10 @@ function Footer() {
         Bhoomika S<span>© {new Date().getFullYear()}</span>
       </Link>
       <p>Thoughtfully designed. Purposefully built.</p>
-      <a href="#top">Back to top ↑</a>
+      <div className="footer-actions">
+        <ThemeToggle />
+        <a href="#top">Back to top ↑</a>
+      </div>
     </footer>
   );
 }
@@ -171,52 +177,11 @@ function Home() {
               matter just as much as building the interface. I bring that
               curiosity to both the design file and the code editor.
             </p>
-            <div className="education">
-              <p className="eyebrow">CURRENTLY LEARNING & BUILDING</p>
-              <h3>{profile.education}</h3>
-              <p>{profile.institution}</p>
-              <span>Reported CGPA: {profile.cgpa}</span>
-            </div>
+            <Education />
           </div>
         </div>
       </section>
-      <section id="experience" className="container section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">03 / EXPERIENCE</p>
-            <h2>
-              Learning through
-              <br />
-              <em>meaningful work.</em>
-            </h2>
-          </div>
-          <p className="section-aside">
-            Different contexts.
-            <br />
-            The same care for the details.
-          </p>
-        </div>
-        <div className="experience-list">
-          {experience.map((item, i) => (
-            <article key={item.organization}>
-              <span className="experience-index">0{i + 1}</span>
-              <div className="experience-title">
-                <p className="eyebrow">{item.kind}</p>
-                <h3>{item.organization}</h3>
-                <span>{item.role}</span>
-              </div>
-              <div className="experience-copy">
-                <p>{item.description}</p>
-                <ul>
-                  {item.contributions.map((c) => (
-                    <li key={c}>{c}</li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+      <Experience />
       <section className="recognition-section container section">
         <div className="section-heading">
           <div>
@@ -440,6 +405,8 @@ function NotFound() {
   );
 }
 export default function App() {
+  const { pathname } = useLocation();
+  useScrollReveals(pathname);
   return (
     <>
       <a className="skip-link" href="#main">
@@ -448,9 +415,12 @@ export default function App() {
       <div id="top" />
       <RouteEffects />
       <Header />
-      <main id="main" tabIndex={-1}>
+      <main id="main" tabIndex={-1} key={pathname}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/experience" element={<Experience page />} />
+          <Route path="/education" element={<EducationPage />} />
+          <Route path="/contact" element={<Contact page />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<CaseStudy />} />
           <Route path="*" element={<NotFound />} />

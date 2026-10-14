@@ -1,36 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Arrow, ThemeIcon } from "./Icons";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(
-    document.documentElement.dataset.theme === "dark",
-  );
   const { pathname, hash } = useLocation();
   const menuButton = useRef<HTMLButtonElement>(null);
   const header = useRef<HTMLElement>(null);
 
   useEffect(() => setOpen(false), [pathname, hash]);
-  useEffect(() => {
-    const media = matchMedia("(prefers-color-scheme: dark)");
-    const update = () => {
-      let saved = null;
-      try {
-        saved = localStorage.getItem("bhoomika-theme");
-      } catch {
-        /* Storage is optional. */
-      }
-      if (!saved) {
-        setDark(media.matches);
-        document.documentElement.dataset.theme = media.matches
-          ? "dark"
-          : "light";
-      }
-    };
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
   useEffect(() => {
     if (!open) return;
     const dismiss = (event: PointerEvent) => {
@@ -52,18 +29,33 @@ export default function Header() {
     };
   }, [open]);
 
-  function toggleTheme() {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.dataset.theme = next ? "dark" : "light";
-    try {
-      localStorage.setItem("bhoomika-theme", next ? "dark" : "light");
-    } catch {
-      /* Keep session preference. */
-    }
-  }
-  const sectionActive = (section: string) =>
-    pathname === "/" && hash === `#${section}`;
+  const navigation = useRef<HTMLElement>(null);
+  const [pill, setPill] = useState({ left: 0, width: 0, height: 0 });
+  useLayoutEffect(() => {
+    const nav = navigation.current;
+    if (!nav) return;
+    const measure = () => {
+      const active = nav.querySelector<HTMLElement>('a[aria-current="page"]');
+      if (active)
+        setPill({
+          left: active.offsetLeft,
+          width: active.offsetWidth,
+          height: active.offsetHeight,
+        });
+      else setPill({ left: 0, width: 0, height: 0 });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(nav);
+    let cancelled = false;
+    document.fonts.ready.then(() => {
+      if (!cancelled) measure();
+    });
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [pathname, open]);
 
   return (
     <header
@@ -82,53 +74,30 @@ export default function Header() {
         </Link>
         <div className="nav-area">
           <nav
+            ref={navigation}
             aria-label="Main navigation"
             id="main-navigation"
             className={open ? "navigation is-open" : "navigation"}
             onClick={() => setOpen(false)}
           >
-            <Link
-              to="/"
-              aria-current={pathname === "/" && !hash ? "page" : undefined}
-            >
+            <span
+              className="nav-active-pill"
+              aria-hidden="true"
+              style={{
+                visibility: pill.width ? "visible" : "hidden",
+                width: pill.width,
+                height: pill.height,
+                transform: `translateX(${pill.left}px)`,
+              }}
+            />
+            <NavLink to="/" end>
               Home
-            </Link>
-            <Link
-              to="/#skills"
-              aria-current={sectionActive("skills") ? "location" : undefined}
-            >
-              Skills
-            </Link>
-            <NavLink to="/projects">Work</NavLink>
-            <Link
-              to="/#about"
-              aria-current={sectionActive("about") ? "location" : undefined}
-            >
-              About
-            </Link>
-            <Link
-              to="/#experience"
-              aria-current={
-                sectionActive("experience") ? "location" : undefined
-              }
-            >
-              Experience
-            </Link>
-            <Link
-              className="nav-contact"
-              to="/#contact"
-              aria-current={sectionActive("contact") ? "location" : undefined}
-            >
-              Let’s talk <Arrow diagonal />
-            </Link>
+            </NavLink>
+            <NavLink to="/experience">Experience</NavLink>
+            <NavLink to="/education">Education</NavLink>
+            <NavLink to="/projects">Projects</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
           </nav>
-          <button
-            className="icon-button theme-toggle"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${dark ? "light" : "dark"} theme`}
-          >
-            <ThemeIcon dark={dark} />
-          </button>
           <button
             ref={menuButton}
             className="menu-button"

@@ -38,15 +38,15 @@ No backend, API keys, third-party form provider or analytics are configured. Nat
 
 ## Design and motion
 
-Semantic theme tokens live in `src/styles/tokens.css`; shared layout and responsive rules live in `global.css`, with navigation, skills, portrait and project-card presentation in `portfolio.css`. Exactly two primary font families are used: Cormorant Garamond and Manrope. Theme follows the system initially, persists an explicit choice and works when localStorage is blocked. CSS handles brief entrance movement, image hover/focus, dialog open/close transitions and supported scroll-linked heading movement; no motion dependency or scroll hijacking. Reduced motion disables these effects. Main content is never hidden by an animation.
+Semantic theme tokens live in `src/styles/tokens.css`; shared layout and responsive rules live in `global.css`, with navigation, skills, portrait and project-card presentation in `portfolio.css`. Exactly two primary font families are used: Cormorant Garamond and Manrope. Theme follows the system initially, persists an explicit choice and works when localStorage is blocked. CSS handles brief entrance movement, image hover/focus, dialog open/close transitions and short page entrances and staggered, once-only scroll reveals; no motion dependency or scroll hijacking. Reduced motion disables these effects. Main content is never hidden by an animation.
 
 ## Navigation and project previews
 
-The reference at https://www.kabillanta.me/ informed the floating pill navigation, skill chips, horizontal work cards and project-detail overlay. Its homepage, Projects page and More Info interaction were inspected in the browser. The portfolio keeps its own palette, typography and verified content. Skills replace selected projects on the homepage; Work opens `/projects`. More Info opens a native modal dialog with a scrollable detail region, focus containment, Escape and backdrop dismissal, scroll locking and focus return. Full case-study links remain directly accessible. No animation library was added.
+The reference at https://www.kabillanta.me/ informed the floating pill navigation, skill chips, horizontal work cards and project-detail overlay. Its Home, Experience, Education, Projects, Blogs and Contact pages, navigation changes, scroll behavior and More Info interaction were inspected in Chrome. The portfolio keeps its own palette, typography and verified content. The navbar contains Home, Experience, Education, Projects and Contact, with a sliding active capsule. Skills remain the first homepage section and do not appear in navigation. Experience, education and contact each have a real route, sharing verified content with the homepage. The theme toggle is in the footer. More Info opens a native modal dialog with a scrollable detail region, focus containment, Escape and backdrop dismissal, scroll locking and focus return. Full case-study links remain directly accessible. No animation library was added.
 
 ## Deployment to Vercel
 
-The production output is `dist`. Build: `npm run build`. The metadata script emits six HTML entry documents so page titles/descriptions exist before JavaScript runs. React Router handles subsequent navigation. Vercel rewrites preserve deep links; unknown project slugs show the application’s not-found page where a fallback is served.
+The production output is `dist`. Build: `npm run build`. The metadata script emits nine HTML entry documents so page titles/descriptions exist before JavaScript runs. React Router handles subsequent navigation. Vercel rewrites preserve deep links; unknown project slugs show the application’s not-found page where a fallback is served.
 
 ```sh
 npx vercel login
@@ -71,3 +71,7 @@ Vercel CLI reported logged out during the build. GitHub push succeeded through t
 8. Confirmed production origin and authenticated GitHub/Vercel access.
 
 The website intentionally does not claim production readiness for the source projects, user metrics, client results or unverified research. Owner-reported achievements and academic results remain identified as reported.
+
+### Motion implementation
+
+`useScrollReveals` uses IntersectionObserver and the browser’s animation API for one-time 650 ms upward arrivals, with a small stagger when several items enter together. Content is always rendered and readable. CSS adds a 450 ms route entrance, a 350 ms sliding navigation capsule and brief menu/hover/dialog transitions. Native scrolling remains intact; anchor links scroll smoothly. No wheel interception, perpetual animation or motion dependency is included. Changing reduced-motion preferences immediately cancels running reveal animations and disables CSS movement.

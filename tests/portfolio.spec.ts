@@ -2,6 +2,9 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 const routes = [
   "/",
+  "/experience",
+  "/education",
+  "/contact",
   "/projects",
   "/projects/campusmesh",
   "/projects/adaptui",
@@ -42,7 +45,7 @@ test("keyboard navigation, mobile menu, filters and theme persistence", async ({
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Menu" })).toBeFocused();
   await page.getByRole("button", { name: "Menu" }).click();
-  await page.getByRole("link", { name: "Work", exact: true }).click();
+  await page.getByRole("link", { name: "Projects", exact: true }).click();
   await expect(page).toHaveURL("/projects");
   await expect(page.getByRole("button", { name: "Menu" })).toHaveAttribute(
     "aria-expanded",
@@ -203,20 +206,114 @@ test("all project dialogs meet automated contrast and accessibility checks", asy
   }
 });
 
-test('reduced-motion dialog closes on backdrop and restores page position', async ({ page }) => {
+test("reduced-motion dialog closes on backdrop and restores page position", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/projects');
-  const trigger = page.getByRole('button', { name: 'More about SafeScan' });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/projects");
+  const trigger = page.getByRole("button", { name: "More about SafeScan" });
   await trigger.scrollIntoViewIfNeeded();
   await trigger.click();
   const position = await page.evaluate(() => window.scrollY);
-  const dialog = page.getByRole('dialog');
-  expect(await dialog.evaluate(element => getComputedStyle(element).animationName)).toBe('none');
-  await page.keyboard.press('Shift+Tab');
-  await expect(dialog.getByRole('link', { name: 'Full case study' })).toBeFocused();
+  const dialog = page.getByRole("dialog");
+  expect(
+    await dialog.evaluate((element) => getComputedStyle(element).animationName),
+  ).toBe("none");
+  await page.keyboard.press("Shift+Tab");
+  await expect(
+    dialog.getByRole("link", { name: "Full case study" }),
+  ).toBeFocused();
   await page.mouse.click(5, 5);
   await expect(dialog).toHaveCount(0);
   await expect(trigger).toBeFocused();
   expect(await page.evaluate(() => window.scrollY)).toBe(position);
+});
+
+test("five destination navigation, active pill and page metadata", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const nav = page.getByRole("navigation", { name: "Main navigation" });
+  await expect(nav.getByRole("link")).toHaveText([
+    "Home",
+    "Experience",
+    "Education",
+    "Projects",
+    "Contact",
+  ]);
+  for (const [name, path] of [
+    ["Experience", "/experience"],
+    ["Education", "/education"],
+    ["Projects", "/projects"],
+    ["Contact", "/contact"],
+    ["Home", "/"],
+  ]) {
+    await nav.getByRole("link", { name, exact: true }).click();
+    await expect(page).toHaveURL(path);
+    await expect(nav.getByRole("link", { name, exact: true })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    await expect(nav.locator("a[aria-current]")).toHaveCount(1);
+    await expect(page.locator("main")).toBeFocused();
+    await expect(page.locator("h1")).toHaveCount(1);
+    await expect(page).toHaveTitle(/Bhoomika S/);
+    await expect
+      .poll(async () =>
+        page.evaluate(() => {
+          const active = document
+            .querySelector('nav[aria-label="Main navigation"] a[aria-current]')!
+            .getBoundingClientRect();
+          const pill = document
+            .querySelector(".nav-active-pill")!
+            .getBoundingClientRect();
+          return (
+            Math.abs(active.left - pill.left) < 1 &&
+            Math.abs(active.width - pill.width) < 1
+          );
+        }),
+      )
+      .toBe(true);
+  }
+  await page.goBack();
+  await expect(page).toHaveURL("/contact");
+  await expect(
+    nav.getByRole("link", { name: "Contact", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(page.getByLabel("Your name")).toBeVisible();
+});
+
+test("scroll reveals respect changing reduced-motion preference", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.locator(".skills-panel").scrollIntoViewIfNeeded();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          document.getAnimations().filter((a) => a.playState === "running")
+            .length,
+      ),
+    )
+    .toBe(0);
+  await page.locator(".experience-list").scrollIntoViewIfNeeded();
+  expect(
+    await page
+      .locator(".experience-list article")
+      .first()
+      .evaluate((e) => e.getAnimations().length),
+  ).toBe(0);
+  await page
+    .getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "Education", exact: true })
+    .click();
+  expect(
+    await page
+      .locator("main")
+      .evaluate((e) => getComputedStyle(e).animationName),
+  ).toBe("none");
 });

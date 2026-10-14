@@ -35,3 +35,11 @@ Google Drive browser viewer works and exposes a one-page `Bhoomika_S_Resume (1).
 ## Design revision from owner feedback
 
 The wordmark now reads `Bhoomika.S`. The first section after the hero is a filterable verified-skills panel. Projects remain in the Work archive, where horizontal cards open an accessible detail dialog and retain links to full case-study routes. Reference: https://www.kabillanta.me/; homepage, skills, Projects and More Info overlay inspected directly on 14 October 2026. Reference claims, assets and personal content were not reused.
+
+## Expanded design reference review — 14 October 2026
+
+Inspected all six top-level pages at https://www.kabillanta.me/ in Chrome: Home, Experience, Education, Projects, Blogs and Contact. Followed navigation, scrolled the page content and inspected project overlays. The compact white capsule stays at the top; the active destination has a fine pill outline. Experience and education use spare vertical timelines; project previews use horizontal cards and detail overlays. Contact uses a two-column introduction and form. Generous spacing, understated shadows, short hover transitions and staged content entrances establish the rhythm. The homepage also has a subtle grid, recommendations and moving achievement content, which are not copied into Bhoomika’s portfolio.
+
+Browser sampling observed 150–200 ms navigation color transitions and several longer decorative animations; timing is observational rather than a complete source audit. This adaptation uses shorter, bounded motion with no scroll interception, preserves the requested blue/porcelain identity and two typefaces, and publishes only Bhoomika’s existing verified content. Navigation now follows the reference’s five relevant routes, excluding Blogs and Skills. No new career facts, dates, technologies or outcomes were inferred from the reference.
+
+T3 reference snapshots failed twice with `Preview automation snapshot timed out after 15000ms.` Chrome through Playwright was used for inspection and verification.

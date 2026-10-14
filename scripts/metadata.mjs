@@ -5,7 +5,9 @@ const {projects}=await import(`data:text/javascript;base64,${Buffer.from(code).t
 const base=await readFile('dist/index.html','utf8');
 const origin=process.env.SITE_URL?.replace(/\/$/,'');
 if(origin && !/^https:\/\/[^/]+$/.test(origin)) throw new Error('SITE_URL must be an HTTPS origin, with no path.');
-const routes=[{path:'/',title:'Bhoomika S — Developer + Product Designer',description:'Curiosity in design. Purpose in code. Selected projects by Bhoomika S, developer and product designer in Bengaluru.'},{path:'/projects',title:'Selected work — Bhoomika S',description:'Explore product design, accessibility, frontend and AI integration projects by Bhoomika S.'},...projects.map(p=>({path:`/projects/${p.slug}`,title:`${p.name} — Bhoomika S`,description:p.summary}))];
+const pageCode=ts.transpileModule(await readFile('src/data/pages.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext}}).outputText;
+const {pages}=await import(`data:text/javascript;base64,${Buffer.from(pageCode).toString('base64')}`);
+const routes=[...pages,...projects.map(p=>({path:`/projects/${p.slug}`,title:`${p.name} — Bhoomika S`,description:p.summary}))];
 const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 for(const route of routes){
  let html=base.replace(/<title>.*?<\/title>/,`<title>${esc(route.title)}</title>`).replace(/(<meta name="description" content=")[^"]*/,`$1${esc(route.description)}`).replace(/(<meta property="og:title" content=")[^"]*/,`$1${esc(route.title)}`).replace(/(<meta property="og:description" content=")[^"]*/,`$1${esc(route.description)}`);
