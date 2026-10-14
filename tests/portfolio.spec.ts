@@ -134,6 +134,9 @@ test("skills-first home and supplied portrait", async ({ page }) => {
     "/images/bhoomika-portrait-960.webp",
   );
   await expect(page.locator(".project-card")).toHaveCount(0);
+  await expect(page.locator("#experience")).toHaveCount(0);
+  await expect(page.locator("#achievements .achievement-card")).toHaveCount(4);
+  await expect(page.locator(".about-focus article")).toHaveCount(3);
   await page.getByRole("button", { name: "Frontend", exact: true }).click();
   await expect(page.locator(".skill-cloud li")).toHaveCount(5);
   await expect(page.locator(".skill-cloud")).toContainText("React");
@@ -300,10 +303,10 @@ test("scroll reveals respect changing reduced-motion preference", async ({
       ),
     )
     .toBe(0);
-  await page.locator(".experience-list").scrollIntoViewIfNeeded();
+  await page.locator(".achievement-grid").scrollIntoViewIfNeeded();
   expect(
     await page
-      .locator(".experience-list article")
+      .locator(".achievement-grid article")
       .first()
       .evaluate((e) => e.getAnimations().length),
   ).toBe(0);

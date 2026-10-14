@@ -6,4 +6,5 @@ import './styles/fonts.css';
 import './styles/tokens.css';
 import './styles/global.css';
 import './styles/portfolio.css';
+import './styles/sections.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><App /></BrowserRouter></React.StrictMode>);

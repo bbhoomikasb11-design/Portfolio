@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
-import { profile, achievements } from "./data/profile";
+import { profile } from "./data/profile";
 import { projects, archive } from "./data/projects";
 import Experience from "./components/Experience";
-import Education from "./components/Education";
+import About from "./components/About";
+import Achievements from "./components/Achievements";
 import ThemeToggle from "./components/ThemeToggle";
 import EducationPage from "./pages/EducationPage";
 import { pages } from "./data/pages";
@@ -149,70 +150,8 @@ function Home() {
         </div>
       </section>
       <Skills />
-      <section id="about" className="about-section section">
-        <div className="container about-grid">
-          <div>
-            <p className="eyebrow">02 / A LITTLE ABOUT ME</p>
-            <h2>
-              Curious by nature.
-              <br />
-              <em>Builder by choice.</em>
-            </h2>
-            <div className="about-mark" aria-hidden="true">
-              b<span>✳</span>
-            </div>
-          </div>
-          <div className="about-copy">
-            <p className="lead">
-              I like the space where an idea becomes something you can actually
-              use.
-            </p>
-            <p>
-              I’m Bhoomika, a developer and product designer based in Bengaluru.
-              I enjoy coding, designing useful products, and experimenting with
-              ideas across disciplines.
-            </p>
-            <p>
-              For me, understanding the product and communicating the idea
-              matter just as much as building the interface. I bring that
-              curiosity to both the design file and the code editor.
-            </p>
-            <Education />
-          </div>
-        </div>
-      </section>
-      <Experience />
-      <section className="recognition-section container section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">04 / BEYOND THE EVERYDAY</p>
-            <h2>
-              A little more <em>perspective.</em>
-            </h2>
-          </div>
-        </div>
-        <div className="recognition-grid">
-          {achievements.map((a, i) => (
-            <article key={a.title}>
-              <span className="recognition-number">0{i + 1}</span>
-              <h3>{a.title}</h3>
-              <p>{a.text}</p>
-              {a.href ? (
-                <a
-                  className="text-link"
-                  href={a.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Explore team project <Arrow diagonal />
-                </a>
-              ) : (
-                <span className="small-note">{a.note}</span>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
+      <About />
+      <Achievements />
       <Contact />
     </>
   );

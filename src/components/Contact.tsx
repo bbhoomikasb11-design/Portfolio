@@ -28,7 +28,7 @@ export default function Contact({ page = false }: { page?: boolean }) {
       <div className="container contact-grid">
         <div>
           <p className="eyebrow">
-            {page ? "LET’S CONNECT" : "05 / LET’S CONNECT"}
+            {page ? "LET’S CONNECT" : "04 / LET’S CONNECT"}
           </p>
           <Heading>
             Good things start
@@ -105,7 +105,7 @@ export default function Contact({ page = false }: { page?: boolean }) {
             ready; this website does not send or store your message.
           </p>
           <button
-            className="button button-light"
+            className="button button-primary"
             type="submit"
             aria-describedby="form-note"
           >

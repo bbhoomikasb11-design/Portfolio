@@ -6,7 +6,7 @@ export function useScrollReveals(pathname: string) {
     const media = matchMedia("(prefers-reduced-motion: reduce)");
     const animations = new Set<Animation>();
     const targets = document.querySelectorAll<HTMLElement>(
-      ".skills-panel, .about-grid > div, .experience-list article, .recognition-grid article, .project-card, .case-sections > section, [data-reveal]",
+      ".skills-panel, .about-overview > div, .about-focus article, .experience-list article, .achievement-grid article, .project-card, .case-sections > section, [data-reveal]",
     );
     const observer = new IntersectionObserver(
       (entries) => {

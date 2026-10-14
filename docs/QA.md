@@ -4,13 +4,13 @@
 
 - Strict TypeScript and Vite production compilation passed.
 - npm install audit: 0 known vulnerabilities for portfolio dependencies.
-- Browser code approximately 300 KB / 95 KB gzip; CSS approximately 45 KB / 9.6 KB gzip.
+- Browser code approximately 302 KB / 95.5 KB gzip; CSS approximately 51 KB / 10.5 KB gzip.
 - Four local Latin-subset WOFF2 font files total approximately 79 KB. Source and SIL licenses included.
 - All four selected projects use optimized, genuine screenshots. Source clones are not included in this repository.
 
 ## Browser checks
 
-Current revision: **19 tests passed** across the complete 17-test regression run (1.0 min) and two focused navigation/motion checks (5.5 s), including every route/theme and all project dialogs.
+Current revision: **19 tests passed** (1.2 min), including every route/theme, contact validation, reduced motion, navigation and project dialogs.
 
 Google Chrome through Playwright against production output. T3 preview initially worked for source captures, then disconnected and timed out; local Chrome was used for final checks.
 
@@ -60,3 +60,10 @@ The new remote supplied by the owner is `https://github.com/bbhoomikasb11-design
 - Native anchor scrolling, 450 ms page entrances, 650 ms once-only section arrivals and bounded stagger, 350 ms active-pill movement. No wheel interception or additional motion dependency.
 - Verified exact link order, one active link, active-pill alignment, new route navigation, focus movement, browser Back and live reduced-motion changes. The latter cancels running Web Animations API reveals as well as disabling CSS animation.
 - Updated desktop, mobile and dark-mobile hero captures; added experience/education desktop, education mobile, mobile navigation and dark contact captures.
+
+## Homepage and contact refinement
+
+- Replaced the long About text and oversized monogram with shorter reading lines, larger body text and Design / Develop / Communicate focus cards. Education is linked to its page.
+- Removed the homepage Experience section. `/experience` retains the verified professional content. Four achievement cards now follow About: debate first place, three poster wins, TechSprint Round 1 selection and Code Carnage participation. No photos or results were fabricated. Optional approved photo fields are available in the data.
+- Contact uses theme-aware powder-blue and porcelain surfaces with a separate form panel and blue action. Dark mode uses the existing blue-gray palette. Form text, fields, focus and status use semantic colors.
+- All nine routes fit seven viewport widths, and automated axe checks pass all 18 route/theme combinations. Visually reviewed About, achievements and Contact at desktop, 375 px and 320 px; reviewed the dark contact view.
