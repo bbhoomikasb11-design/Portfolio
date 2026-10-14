@@ -25,8 +25,6 @@ export default function DesignComparison() {
   const stage = useRef<HTMLDivElement>(null);
   const position = useRef(0);
   const pitch = useRef(424);
-  const hovering = useRef(false);
-  const focused = useRef(false);
   const inView = useRef(false);
   const [split, setSplit] = useState(50);
   const [imagesReady, setImagesReady] = useState(false);
@@ -67,8 +65,8 @@ export default function DesignComparison() {
     const tick = (now: number) => {
       const elapsed = last ? Math.min(now - last, 40) : 0;
       last = now;
-      if (inView.current && !hovering.current && !focused.current && !document.hidden) {
-        position.current = (position.current + elapsed * 0.024) % (pitch.current * studies.length);
+      if (inView.current && !document.hidden) {
+        position.current = (position.current + elapsed * 0.048) % (pitch.current * studies.length);
         stage.current?.style.setProperty("--travel", `${position.current}px`);
       }
       frame = requestAnimationFrame(tick);
@@ -98,12 +96,6 @@ export default function DesignComparison() {
         ref={stage}
         className={`comparison-stage${manual ? " is-manual" : ""}`}
         style={{ "--split": `${split}%` } as CSSProperties}
-        onPointerEnter={() => { hovering.current = true; }}
-        onPointerLeave={() => { hovering.current = false; }}
-        onFocusCapture={() => { focused.current = true; }}
-        onBlurCapture={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) focused.current = false;
-        }}
       >
         {(["before", "after"] as const).map(version => (
           <div className={`comparison-layer comparison-${version}`} key={version} aria-hidden="true">
@@ -136,7 +128,7 @@ export default function DesignComparison() {
           aria-label="Before and after design comparison"
           aria-valuetext={`${split}% original design, ${100 - split}% refined design`}
           aria-describedby="comparison-instructions"
-          onChange={event => { setSplit(Number(event.target.value)); setPaused(true); }}
+          onChange={event => setSplit(Number(event.target.value))}
         />
       </div>
       <div className="container comparison-controls">

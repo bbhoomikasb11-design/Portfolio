@@ -37,6 +37,15 @@ test("comparison tracks stay aligned, pause and respect a changing motion prefer
   const travel = () => page.locator(".comparison-stage").evaluate(e => e.style.getPropertyValue("--travel"));
   const initial = await travel();
   await expect.poll(travel).not.toBe(initial);
+  const range = page.getByRole("slider", { name: "Before and after design comparison" });
+  await range.hover();
+  const hovered = await travel();
+  await expect.poll(travel).not.toBe(hovered);
+  await range.focus();
+  await page.keyboard.press("ArrowRight");
+  const adjusted = await travel();
+  await expect.poll(travel).not.toBe(adjusted);
+  await expect(page.getByRole("button", { name: "Pause design comparison motion" })).toBeVisible();
   const tracks = await page.locator(".comparison-track").evaluateAll(items => items.map(e => getComputedStyle(e).transform));
   expect(tracks[0]).toBe(tracks[1]);
   await page.getByRole("button", { name: "Pause design comparison motion" }).click();

@@ -106,3 +106,7 @@ Current simplification validation: production TypeScript/build passed; all three
 - New tests verify placement, native slider keyboard endpoints and value text, synchronized before/after tracks, explicit pause/play, manual browsing, live reduced-motion changes, touch dragging, image delivery and axe checks in both themes. Layout checks include 320–1680 px across all ten routes.
 - Full suite: 24 passed and one image-delivery check exposed lazy images remaining unloaded in the clipped layer. Fixed by requesting all six unique images when the section enters view. Focused rerun passed all four affected checks, including the three comparison tests and the existing image-delivery check. All 25 distinct checks now pass across those runs.
 - Production TypeScript/build succeeds. No additional runtime dependency, integration or performance score claim. This section’s illustrations and UI visuals are authored in HTML/CSS rather than generated artwork.
+
+## Faster comparison movement
+
+Doubled the row speed from 24 to 48 px/s. Hover, focus and divider adjustments no longer pause it; explicit pause/manual browsing and reduced-motion behavior remain. Production build and all three comparison tests passed, including continued motion under the cursor and during keyboard divider adjustments, aligned layers, pause/play, touch and live reduced-motion changes.
