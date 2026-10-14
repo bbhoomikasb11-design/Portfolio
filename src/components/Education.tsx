@@ -1,12 +1,14 @@
-import { profile } from "../data/profile";
-export default function Education({ page = false }: { page?: boolean }) {
-  const Heading = page ? "h2" : "h3";
+import type { EducationEntry } from "../data/education";
+
+export default function Education({ entry }: { entry: EducationEntry }) {
   return (
-    <div className="education" data-reveal="">
-      <p className="eyebrow">CURRENTLY LEARNING & BUILDING</p>
-      <Heading>{profile.education}</Heading>
-      <p>{profile.institution}</p>
-      <span>Reported CGPA: {profile.cgpa}</span>
-    </div>
+    <article className="education-card" data-reveal="">
+      <div className="education">
+        <p className="eyebrow">{entry.level}</p>
+        <h2>{entry.qualification}</h2>
+        <p>{entry.institution}</p>
+        <span>{entry.result}</span>
+      </div>
+    </article>
   );
 }

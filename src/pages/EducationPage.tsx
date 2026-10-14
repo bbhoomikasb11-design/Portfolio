@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Education from "../components/Education";
+import { education } from "../data/education";
 import { Arrow } from "../components/Icons";
 
 export default function EducationPage() {
@@ -17,9 +18,9 @@ export default function EducationPage() {
           development.
         </p>
       </header>
-      <div className="education-card">
-        <Education page />
-      </div>
+      {education.map((entry) => (
+        <Education key={entry.institution} entry={entry} />
+      ))}
       <div className="learning-note" data-reveal="">
         <p className="eyebrow">LEARNING BY MAKING</p>
         <h2>

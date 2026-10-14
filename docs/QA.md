@@ -67,3 +67,7 @@ The new remote supplied by the owner is `https://github.com/bbhoomikasb11-design
 - Removed the homepage Experience section. `/experience` retains the verified professional content. Four achievement cards now follow About: debate first place, three poster wins, TechSprint Round 1 selection and Code Carnage participation. No photos or results were fabricated. Optional approved photo fields are available in the data.
 - Contact uses theme-aware powder-blue and porcelain surfaces with a separate form panel and blue action. Dark mode uses the existing blue-gray palette. Form text, fields, focus and status use semantic colors.
 - All nine routes fit seven viewport widths, and automated axe checks pass all 18 route/theme combinations. Visually reviewed About, achievements and Contact at desktop, 375 px and 320 px; reviewed the dark contact view.
+
+## Education history update
+
+Added the owner's Mahesh PU College (93.3%) and St. Mary's High School (83.3%) entries below the degree. Production build passed. Verified all three entries and no horizontal overflow at 320, 375, 768 and 1440 px using the repository's Chrome workflow; refreshed and inspected education screenshots. No new dates, board details or examination claims were added.

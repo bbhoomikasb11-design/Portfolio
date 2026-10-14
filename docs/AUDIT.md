@@ -43,3 +43,7 @@ Inspected all six top-level pages at https://www.kabillanta.me/ in Chrome: Home,
 Browser sampling observed 150–200 ms navigation color transitions and several longer decorative animations; timing is observational rather than a complete source audit. This adaptation uses shorter, bounded motion with no scroll interception, preserves the requested blue/porcelain identity and two typefaces, and publishes only Bhoomika’s existing verified content. Navigation now follows the reference’s five relevant routes, excluding Blogs and Skills. No new career facts, dates, technologies or outcomes were inferred from the reference.
 
 T3 reference snapshots failed twice with `Preview automation snapshot timed out after 15000ms.` Chrome through Playwright was used for inspection and verification.
+
+## Education update — owner supplied, 14 October 2026
+
+Bhoomika confirmed Pre-University education at Mahesh PU College (93.3%) and Primary & High School at St. Mary's High School (83.3%). Added both below the degree on `/education`. No dates, study streams, examination boards or school locations were supplied or inferred. The percentages are presented as supplied, without assigning the school score to a specific examination.
