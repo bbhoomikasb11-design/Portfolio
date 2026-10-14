@@ -355,7 +355,7 @@ export default function App() {
       </a>
       <div id="top" />
       <RouteEffects />
-      {pathname !== "/playground" && <Header />}
+      <Header />
       <main
         id="main"
         tabIndex={-1}

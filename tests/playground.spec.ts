@@ -166,6 +166,12 @@ test("touch pan and pinch, compact layouts and reduced motion", async ({
   });
   const page = await context.newPage();
   await page.goto("http://127.0.0.1:4173/playground");
+  await page.getByRole("button", { name: "Menu", exact: true }).click();
+  const navigation = page.getByRole("navigation", { name: "Main navigation" });
+  await expect(navigation).toBeVisible();
+  await expect(navigation.getByRole("link", { name: "Playground", exact: true })).toHaveAttribute("aria-current", "page");
+  await page.keyboard.press("Escape");
+  await expect(navigation).toBeHidden();
   const canvas = page.getByRole("region", { name: "Infinite design canvas" });
   await expect(canvas).toBeVisible();
   const r = await canvas.boundingBox();

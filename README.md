@@ -85,7 +85,7 @@ The website intentionally does not claim production readiness for the source pro
 
 ## Original image playground
 
-`/playground` is a full-screen, image-only design playground inspired by the owner’s supplied screen recording. Sixteen original concepts (12 interface studies, two posters and two pieces of artwork) repeat across a continuous canvas. It is an endless arrangement of a finite collection, not an image-generation service. No Figma or external project links appear on the cards or in the image viewer. Concept imagery is clearly distinguished from real portfolio projects and client work.
+`/playground` is an image-only design playground inspired by the owner’s supplied screen recording. It uses the same shared top navigation and mobile menu as the rest of the portfolio; the canvas fills the viewport beneath it. Theme switching remains available in the bottom canvas toolbar. Sixteen original concepts (12 interface studies, two posters and two pieces of artwork) repeat across a continuous canvas. It is an endless arrangement of a finite collection, not an image-generation service. No Figma or external project links appear on the cards or in the image viewer. Concept imagery is clearly distinguished from real portfolio projects and client work.
 
 Drag or scroll to pan, pinch or Ctrl-scroll to zoom, and use the reset/shuffle controls to explore. Click an image for a larger preview with previous/next controls. Filters select interfaces, posters or artwork. Gallery mode provides a conventional scrollable grid and full Tab/Enter browsing. The focused canvas supports arrow keys, +/− and 0. Escape closes previews and returns focus. Reduced motion removes inertia and entrance/hover movement.
 

@@ -83,3 +83,10 @@ Added the owner's Mahesh PU College (93.3%) and St. Mary's High School (83.3%) e
 - Fixed a CSS grid intrinsic-row sizing issue found in interaction tests: Gallery rows now keep their content height instead of overlapping. Corrected an existing reduced-motion test to wait for the newly mounted route before reading computed styles.
 - Inspected desktop Canvas, Gallery, expanded image preview, mobile Canvas and dark mobile Canvas; screenshots are `docs/qa/playground-*.png`. T3 collaborative preview worked for this revision; the repository’s Chrome workflow captured full-resolution QA images and ran automated checks.
 - Production TypeScript/build succeeded. The lazy playground chunk is 18.31 KB / 6.83 KB gzip plus 10.36 KB / 2.79 KB gzip of route CSS. Re-ran the editable-artboard renderer successfully. No new Lighthouse score is claimed; the lab result above predates this route.
+
+
+## Playground navigation correction
+
+Removed the reference-inspired left rail at the owner’s request. Playground now renders the shared `Header` with identical top pill navigation, active state and mobile menu. The canvas sits beneath the header and spans the full width; theme switching moved to the bottom toolbar. Production build and the four playground interaction/accessibility checks passed. Refreshed desktop, mobile, dark-mobile, Gallery and preview screenshots.
+
+Additional navigation/responsive run: all nine checks passed, covering all routes at seven widths, the shared active-pill navigation including Playground, and mobile menu dismissal followed by canvas touch gestures.

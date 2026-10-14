@@ -1,23 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 import { playgroundPieces } from "../data/playground";
 import type { PlaygroundCategory } from "../data/playground";
 import { usePlaygroundCanvas } from "../hooks/usePlaygroundCanvas";
 import Icon from "../components/playground/PlaygroundIcon";
-import type { PlaygroundIconName } from "../components/playground/PlaygroundIcon";
 import ImageViewer from "../components/playground/ImageViewer";
 import ThemeToggle from "../components/ThemeToggle";
 import "../styles/playground.css";
 
-const destinations: { label: string; to: string; icon: PlaygroundIconName }[] =
-  [
-    { label: "Home", to: "/", icon: "home" },
-    { label: "Experience", to: "/experience", icon: "experience" },
-    { label: "Education", to: "/education", icon: "education" },
-    { label: "Projects", to: "/projects", icon: "work" },
-    { label: "Playground", to: "/playground", icon: "play" },
-    { label: "Contact", to: "/contact", icon: "contact" },
-  ];
 const modulo = (value: number, by: number) => ((value % by) + by) % by;
 export default function PlaygroundPage() {
   const [mode, setMode] = useState<"canvas" | "gallery">("canvas");
@@ -78,31 +67,6 @@ export default function PlaygroundPage() {
   };
   return (
     <div className="playground-shell">
-      <aside className="play-rail">
-        <Link to="/" className="play-monogram" aria-label="Bhoomika.S home">
-          b<span>✳</span>
-        </Link>
-        <nav aria-label="Main navigation">
-          {destinations.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === "/"}
-              aria-label={item.label}
-              data-tooltip={item.label}
-            >
-              <Icon name={item.icon} />
-              <span className="sr-only">{item.label}</span>
-            </NavLink>
-          ))}
-        </nav>
-        <div className="play-rail-bottom">
-          <ThemeToggle />
-          <span className="play-rail-signature" aria-hidden="true">
-            B.S / 26
-          </span>
-        </div>
-      </aside>
       <div className="play-workspace">
         <header className="play-topbar">
           <div className="play-title">
@@ -254,6 +218,8 @@ export default function PlaygroundPage() {
             )}
           </p>
           <div className="play-tools">
+            <ThemeToggle />
+            <span className="play-tool-divider" />
             {mode === "canvas" && (
               <>
                 <button

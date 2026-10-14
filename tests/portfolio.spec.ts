@@ -252,6 +252,7 @@ test("portfolio navigation, active pill and page metadata", async ({
     ["Experience", "/experience"],
     ["Education", "/education"],
     ["Projects", "/projects"],
+    ["Playground", "/playground"],
     ["Contact", "/contact"],
     ["Home", "/"],
   ]) {
