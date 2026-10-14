@@ -49,11 +49,11 @@ npx vercel login
 npx vercel --prod
 ```
 
-Alternatively, create a **new** GitHub repository and import it into Vercel using the Vite preset. Do not attach this to an unrelated existing repository. This workspace has its own newly initialized local Git repository; remote creation requires authenticated GitHub access.
+Alternatively, create a **new** GitHub repository and import it into Vercel using the Vite preset. Do not attach this to an unrelated existing repository. This workspace has its own local Git repository, pushed to the owner-supplied remote `https://github.com/bbhoomikasb11-design/Portfolio`.
 
 Once the actual production origin is known, set build environment variable `SITE_URL` to that HTTPS origin (no path) and redeploy. The build then adds absolute canonical/OG URLs and `sitemap.xml`. `robots.txt` is always emitted. No domain is invented. See `.env.example`. The optional variable is build-time only, not a secret. A social preview PNG is provided.
 
-Authentication was unavailable during the initial build: Vercel CLI reported logged out, and GitHub CLI was not installed. A production URL must only be reported after a successful deployment. Do not treat the local preview as deployed.
+Vercel CLI reported logged out during the build. GitHub push succeeded through the existing Git credentials, without GitHub CLI. A production URL must only be reported after a successful deployment. Do not treat the local preview as deployed.
 
 ## Owner inputs still needed
 

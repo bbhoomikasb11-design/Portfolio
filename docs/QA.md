@@ -38,4 +38,4 @@ The six project repositories were cloned successfully; SafeScan and résumé ope
 
 ## Publication
 
-The new remote supplied by the owner is `https://github.com/bbhoomikasb11-design/Portfolio.git`; it was checked empty before attachment. Vercel CLI reported logged out. Production deployment requires account login. Canonicals, absolute OG URLs and a sitemap are generated only when the actual HTTPS `SITE_URL` is configured. No production URL is claimed until deployment succeeds.
+The new remote supplied by the owner is `https://github.com/bbhoomikasb11-design/Portfolio.git`; it was checked empty before attachment. The implementation was successfully pushed to its main branch. Vercel CLI reported logged out. Production deployment requires account login. Canonicals, absolute OG URLs and a sitemap are generated only when the actual HTTPS `SITE_URL` is configured. No production URL is claimed until deployment succeeds.
