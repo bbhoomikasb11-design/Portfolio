@@ -10,7 +10,7 @@ export default function Achievements() {
     >
       <div className="section-heading">
         <div>
-          <p className="eyebrow">03 / ACHIEVEMENTS & PARTICIPATION</p>
+          <p className="eyebrow">04 / ACHIEVEMENTS & PARTICIPATION</p>
           <h2 id="achievements-title">
             A few moments
             <br />

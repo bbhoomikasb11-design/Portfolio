@@ -1,0 +1,46 @@
+.design-comparison { overflow: hidden; }
+.comparison-intro { display:flex; align-items:end; justify-content:space-between; gap:48px; margin-bottom:48px; }
+.comparison-intro h2 { margin-top:16px; }
+.comparison-intro>p { max-width:340px; font-size:15px; line-height:1.85; }
+.comparison-stage { --card-width:clamp(280px,31vw,420px); --travel:0px; position:relative; height:calc(var(--card-width)*1.25 + 68px); isolation:isolate; }
+.comparison-layer { position:absolute; inset:0; overflow:hidden; padding-top:8px; }
+.comparison-after { clip-path:inset(0 0 0 var(--split)); z-index:1; }
+.comparison-track { display:flex; gap:24px; position:absolute; left:50%; width:max-content; transform:translateX(calc(-1*var(--travel) - (var(--card-width) + 24px)*3 - var(--card-width)/2)); will-change:transform; }
+.comparison-card { width:var(--card-width); flex-shrink:0; border:1px solid var(--line); border-radius:20px; background:var(--soft); padding:16px 12px 12px; box-shadow:0 2px 3px #10111608,0 8px 16px #10111610,inset 0 2px var(--surface); position:relative; }
+.comparison-card img { width:100%; height:auto; border-radius:10px; border:1px solid #18202c10; }
+.comparison-frame-dots { display:flex; justify-content:space-between; position:absolute; left:7px; right:7px; top:7px; }
+.comparison-frame-dots i { width:4px; height:4px; background:var(--line); border-radius:50%; box-shadow:0 1px var(--surface); }
+.comparison-divider { position:absolute; top:0; bottom:0; left:var(--split); width:3px; transform:translateX(-50%); background:var(--surface); box-shadow:0 0 0 1px var(--line); z-index:3; pointer-events:none; }
+.comparison-divider>span { display:flex; justify-content:center; align-items:center; gap:7px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:48px; height:48px; border-radius:50%; color:var(--ink); background:var(--surface); border:1px solid var(--line); box-shadow:0 3px 12px #10111615; font-size:24px; }
+.comparison-divider i { width:1px; height:17px; background:var(--line); }
+.comparison-range { position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; z-index:4; touch-action:pan-y; }
+.comparison-stage:has(.comparison-range:focus-visible) .comparison-divider>span { outline:3px solid var(--blue); outline-offset:4px; }
+.comparison-label { position:absolute; bottom:0; z-index:2; padding:5px 14px; font-size:12px; font-weight:600; border:1px solid var(--line); border-radius:7px; box-shadow:0 3px 8px #1011160a; }
+.comparison-label-before { left:24px; background:var(--surface); color:var(--ink); }
+.comparison-label-after { right:24px; background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.comparison-controls { display:flex; align-items:center; justify-content:space-between; gap:15px; margin-top:22px; }
+.comparison-controls p { font-size:12px; }
+.comparison-controls>div { display:flex; align-items:center; gap:5px; }
+.comparison-controls button { display:grid; place-items:center; min-width:44px; height:44px; padding:8px; border:1px solid var(--line); border-radius:50%; background:var(--surface); color:var(--ink); font-size:19px; }
+.comparison-controls .comparison-motion { width:62px; border:0; border-radius:8px; background:transparent; font-size:12px; }
+.comparison-controls button:hover { color:var(--blue); }
+.comparison-notes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:36px; margin-top:46px; }
+.comparison-notes article { border-top:1px solid var(--line); padding-top:23px; }
+.comparison-notes h3 { font-family:var(--sans); font-size:18px; font-weight:600; letter-spacing:-.5px; margin:12px 0; }
+.comparison-notes p { font-size:13px; line-height:1.8; }
+.comparison-footnote { font-size:10px; margin-top:28px; }
+@media(prefers-reduced-motion:no-preference) { .comparison-stage.is-manual .comparison-track { transition:transform 650ms cubic-bezier(.22,.68,.1,1); } }
+@media(max-width:760px) {
+ .comparison-intro { align-items:start; flex-direction:column; gap:22px; margin-bottom:32px; }
+ .comparison-intro>p { max-width:440px; font-size:14px; }
+ .comparison-stage { --card-width:clamp(256px,76vw,380px); }
+ .comparison-card { padding:13px 9px 9px; border-radius:16px; }
+ .comparison-label-before { left:16px; }
+ .comparison-label-after { right:16px; }
+ .comparison-notes { grid-template-columns:1fr; gap:22px; margin-top:28px; }
+ .comparison-notes h3 { margin:8px 0; }
+ .comparison-controls { gap:8px; }
+ .comparison-controls p { max-width:150px; font-size:11px; }
+ .comparison-controls .comparison-motion { width:48px; }
+ .comparison-footnote { line-height:1.7; }
+}

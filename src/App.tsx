@@ -4,6 +4,7 @@ import { profile } from "./data/profile";
 import { projects, archive } from "./data/projects";
 import Experience from "./components/Experience";
 import About from "./components/About";
+import DesignComparison from "./components/DesignComparison";
 import Achievements from "./components/Achievements";
 import ThemeToggle from "./components/ThemeToggle";
 import EducationPage from "./pages/EducationPage";
@@ -153,6 +154,7 @@ function Home() {
       </section>
       <Skills />
       <About />
+      <DesignComparison />
       <Achievements />
       <Contact />
     </>

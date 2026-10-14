@@ -74,7 +74,7 @@ The website intentionally does not claim production readiness for the source pro
 
 ### Motion implementation
 
-`useScrollReveals` uses IntersectionObserver and the browser’s animation API for one-time 650 ms upward arrivals, with a small stagger when several items enter together. Content is always rendered and readable. CSS adds a 450 ms route entrance, a 350 ms sliding navigation capsule and brief menu/hover/dialog transitions. Native scrolling remains intact; anchor links scroll smoothly. Ordinary portfolio pages retain native scrolling. Only the dedicated Playground canvas handles wheel gestures for panning and zoom. No perpetual animation or motion dependency is included. Changing reduced-motion preferences immediately cancels running reveal animations and disables CSS movement.
+`useScrollReveals` uses IntersectionObserver and the browser’s animation API for one-time 650 ms upward arrivals, with a small stagger when several items enter together. Content is always rendered and readable. CSS adds a 450 ms route entrance, a 350 ms sliding navigation capsule and brief menu/hover/dialog transitions. Native scrolling remains intact; anchor links scroll smoothly. Ordinary portfolio pages retain native scrolling. Only the dedicated Playground canvas handles wheel gestures for panning and zoom. No motion dependency is included. The before/after comparison row moves gently while visible, with pause controls and a static reduced-motion presentation. Changing reduced-motion preferences immediately cancels running reveal animations and disables CSS movement.
 
 ### About, achievements and contact
 
@@ -98,3 +98,12 @@ Drag or scroll to pan; pinch or Ctrl-scroll to zoom. The focused canvas supports
 To regenerate the 14 UI/poster images, run the dev server, then `node scripts/render-playground.mjs`. This development-only renderer requires installed Google Chrome and Python 3 with Pillow. It captures each artboard, saves ignored intermediate PNGs under `design/playground/renders/`, and writes final WebPs into `public/images/playground/`. Set `PLAYGROUND_ORIGIN` if the server is not at localhost:5173. Normal development, builds and deployment do not require Python. New concepts can be added as local images and typed data entries without changing the canvas.
 
 The route is lazy-loaded; canvas virtualization keeps the rendered tile count bounded while panning. Images remain local and no new runtime dependency or external integration was introduced.
+
+
+## Before and after design studies
+
+The homepage places `DesignComparison` directly after About and before Achievements. It adapts the owner’s second recording into a moving row of three original interface pairs with a draggable before/after divider. A campus listing clarifies price, condition and pickup; a study planner prioritizes today’s work; a book-swap signup asks for fewer details. These are original concept studies with sample content, not client projects or measured improvements.
+
+The six images are authored in HTML/CSS, including the small lamp and book illustrations. No generative imagery is used in this section. Edit `design/comparison/artboards.html`, run the dev server and then `node scripts/render-comparison.mjs` (installed Chrome and Python/Pillow required). The renderer writes optimized local WebPs to `public/images/comparison/`. The component copy lives in `src/components/DesignComparison.tsx`; presentation is in `src/styles/comparison.css`.
+
+The native range input supports dragging, touch and keyboard arrows/Home/End. Previous/next controls allow deliberate browsing; interacting with the divider pauses automatic movement. Hover/focus pauses the row, and an explicit Pause/Play action remains available. Reduced motion starts with a stationary row and manual browsing with no transition. Movement suspends outside the viewport and in hidden tabs. Both image layers share a single position so the comparison stays aligned. Images load when the section enters view, including the offscreen repeated copies needed for a seamless loop. The visible notes describe the changes for everyone; repeated decorative images are hidden from assistive technology.

@@ -97,3 +97,12 @@ Additional navigation/responsive run: all nine checks passed, covering all route
 At the owner’s request, removed the title/filter panel, Canvas/Gallery switch, conventional gallery, image-preview dialog, tile captions and bottom toolbar. The shared portfolio navbar remains above a full-width, full-height image canvas. Drag, wheel pan, pinch/Ctrl-scroll zoom and keyboard arrow/+/−/0 controls remain. Images are no longer buttons and clicking does not open an overlay. Each original concept is described once in screen-reader-only content; the repeating visual tiles are hidden from assistive technology. Deleted the unused viewer and icon components. Previous Gallery/preview screenshots document superseded UI and have been removed.
 
 Current simplification validation: production TypeScript/build passed; all three focused playground checks passed, covering mouse/keyboard navigation, image loading and no popups, axe in both themes, and mobile menu/touch/pinch/reduced-motion behavior. Visual and overflow checks completed at 320, 390, 768 and 1440 px. Route assets reduced to 9.97 KB JS and 1.27 KB CSS before gzip.
+
+
+## Homepage before/after comparison
+
+- Added after About, before Achievements, with three original average/refined interface pairs and six local WebPs. Updated achievement section numbering.
+- Inspected the six artboards and corrected bottom clipping in the planner and event designs. Reviewed desktop, mobile and dark mobile section captures in `docs/qa/comparison-*.png`.
+- New tests verify placement, native slider keyboard endpoints and value text, synchronized before/after tracks, explicit pause/play, manual browsing, live reduced-motion changes, touch dragging, image delivery and axe checks in both themes. Layout checks include 320–1680 px across all ten routes.
+- Full suite: 24 passed and one image-delivery check exposed lazy images remaining unloaded in the clipped layer. Fixed by requesting all six unique images when the section enters view. Focused rerun passed all four affected checks, including the three comparison tests and the existing image-delivery check. All 25 distinct checks now pass across those runs.
+- Production TypeScript/build succeeds. No additional runtime dependency, integration or performance score claim. This section’s illustrations and UI visuals are authored in HTML/CSS rather than generated artwork.
