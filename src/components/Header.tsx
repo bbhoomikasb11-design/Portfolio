@@ -96,6 +96,7 @@ export default function Header() {
             <NavLink to="/experience">Experience</NavLink>
             <NavLink to="/education">Education</NavLink>
             <NavLink to="/projects">Projects</NavLink>
+            <NavLink to="/playground">Playground</NavLink>
             <NavLink to="/contact">Contact</NavLink>
           </nav>
           <button

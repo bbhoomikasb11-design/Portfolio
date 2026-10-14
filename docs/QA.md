@@ -10,16 +10,16 @@
 
 ## Browser checks
 
-Current revision: **19 tests passed** (1.2 min), including every route/theme, contact validation, reduced motion, navigation and project dialogs.
+Current revision: **23 checks passed**: 22 in the full run and the remaining existing reduced-motion test in a focused rerun after correcting a navigation-wait race in that test. Includes all routes/themes, contact validation, navigation, project dialogs and the new playground.
 
 Google Chrome through Playwright against production output. T3 preview initially worked for source captures, then disconnected and timed out; local Chrome was used for final checks.
 
-- Nine real routes tested at 320, 375, 430, 768, 1024, 1440 and 1680 pixels, with no horizontal overflow.
+- Ten real routes tested at 320, 375, 430, 768, 1024, 1440 and 1680 pixels, with no horizontal overflow.
 - Mobile menu open/close, Escape and focus return, navigation, skip link, archive filter, persisted theme switching, missing-route UI and reduced motion verified.
 - Images loaded; desktop/mobile visual layouts inspected. Project screenshot capture corrected after the original browser capture was distorted.
 - Form rejects incomplete input, encodes an email draft and reports “Nothing has been sent.” No email was sent by the test.
 - Accessibility review found and fixed animation opacity contrast, a small portrait label, and CampusMesh’s dark-theme surface. Button background transition was removed so theme colors switch together.
-- Automated axe WCAG 2 A/AA + 2.1 AA suite runs on all nine routes in both themes. Final focused run passed with zero violations across all 18 route/theme combinations. Manual screen-reader testing and user research have not been performed.
+- Automated axe WCAG 2 A/AA + 2.1 AA suite runs on all ten routes in both themes. Current run passed with zero violations across all 20 route/theme combinations. Manual screen-reader testing and user research have not been performed.
 
 ## Performance lab measurement
 
@@ -71,3 +71,15 @@ The new remote supplied by the owner is `https://github.com/bbhoomikasb11-design
 ## Education history update
 
 Added the owner's Mahesh PU College (93.3%) and St. Mary's High School (83.3%) entries below the degree. Production build passed. Verified all three entries and no horizontal overflow at 320, 375, 768 and 1440 px using the repository's Chrome workflow; refreshed and inspected education screenshots. No new dates, board details or examination claims were added.
+
+
+## Original image playground
+
+- Added `/playground` and its navbar destination. Ten production HTML entries include metadata and the Vercel deep-link rewrite.
+- Sixteen local original visuals: twelve interface concepts, two typography posters and two AI-generated artworks. Cards and image previews contain no Figma or external project links. The continuous canvas repeats this finite collection and the help text explains it.
+- Verified mouse drag, long-distance wheel pan with bounded rendered tiles, zoom/reset/shuffle, keyboard panning, filters, Gallery browsing, image loading, image navigation, enlargement, Escape, focus containment and return, and restoration of body scrolling after leaving the route.
+- Chrome touch simulation verified one-finger pan and two-finger pinch at 375 px. All ten routes fit 320, 375, 430, 768, 1024, 1440 and 1680 px without document overflow.
+- Canvas, Gallery and image preview pass axe WCAG 2 A/AA and 2.1 AA checks in both themes. Reduced motion removes inertial and decorative animation. Manual screen-reader and real-device testing remain outside this run.
+- Fixed a CSS grid intrinsic-row sizing issue found in interaction tests: Gallery rows now keep their content height instead of overlapping. Corrected an existing reduced-motion test to wait for the newly mounted route before reading computed styles.
+- Inspected desktop Canvas, Gallery, expanded image preview, mobile Canvas and dark mobile Canvas; screenshots are `docs/qa/playground-*.png`. T3 collaborative preview worked for this revision; the repository’s Chrome workflow captured full-resolution QA images and ran automated checks.
+- Production TypeScript/build succeeded. The lazy playground chunk is 18.31 KB / 6.83 KB gzip plus 10.36 KB / 2.79 KB gzip of route CSS. Re-ran the editable-artboard renderer successfully. No new Lighthouse score is claimed; the lab result above predates this route.

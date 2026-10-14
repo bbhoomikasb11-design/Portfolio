@@ -4,6 +4,10 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/playground",
+      "destination": "/playground/index.html"
+    },
+    {
       "source": "/projects/:slug",
       "destination": "/projects/:slug/index.html"
     },

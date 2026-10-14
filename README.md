@@ -18,7 +18,7 @@ npm run preview
 npm test
 ```
 
-Browser tests use installed Google Chrome. For CI without Chrome, install Chrome with `npx playwright install chrome`, or adapt the Playwright config to your managed browser. The test suite covers six routes at seven widths, keyboard/menu behavior, filtering, theme persistence, draft validation, reduced motion, images and axe WCAG checks in both themes. Automated checks do not replace assistive-technology or usability testing.
+Browser tests use installed Google Chrome. For CI without Chrome, install Chrome with `npx playwright install chrome`, or adapt the Playwright config to your managed browser. The test suite covers ten routes at seven widths, keyboard/menu behavior, filtering, theme persistence, draft validation, reduced motion, images and axe WCAG checks in both themes. Automated checks do not replace assistive-technology or usability testing.
 
 ## Content and assets
 
@@ -42,11 +42,11 @@ Semantic theme tokens live in `src/styles/tokens.css`; shared layout and respons
 
 ## Navigation and project previews
 
-The reference at https://www.kabillanta.me/ informed the floating pill navigation, skill chips, horizontal work cards and project-detail overlay. Its Home, Experience, Education, Projects, Blogs and Contact pages, navigation changes, scroll behavior and More Info interaction were inspected in Chrome. The portfolio keeps its own palette, typography and verified content. The navbar contains Home, Experience, Education, Projects and Contact, with a sliding active capsule. Skills remain the first homepage section and do not appear in navigation. Experience, education and contact each have a real route. Experience appears only on its own page; the homepage moves from About to Achievements. Education is linked from About instead of repeated there. The theme toggle is in the footer. More Info opens a native modal dialog with a scrollable detail region, focus containment, Escape and backdrop dismissal, scroll locking and focus return. Full case-study links remain directly accessible. No animation library was added.
+The reference at https://www.kabillanta.me/ informed the floating pill navigation, skill chips, horizontal work cards and project-detail overlay. Its Home, Experience, Education, Projects, Blogs and Contact pages, navigation changes, scroll behavior and More Info interaction were inspected in Chrome. The portfolio keeps its own palette, typography and verified content. The navbar contains Home, Experience, Education, Projects, Playground and Contact, with a sliding active capsule. Skills remain the first homepage section and do not appear in navigation. Experience, education and contact each have a real route. Experience appears only on its own page; the homepage moves from About to Achievements. Education is linked from About instead of repeated there. The theme toggle is in the footer. More Info opens a native modal dialog with a scrollable detail region, focus containment, Escape and backdrop dismissal, scroll locking and focus return. Full case-study links remain directly accessible. No animation library was added.
 
 ## Deployment to Vercel
 
-The production output is `dist`. Build: `npm run build`. The metadata script emits nine HTML entry documents so page titles/descriptions exist before JavaScript runs. React Router handles subsequent navigation. Vercel rewrites preserve deep links; unknown project slugs show the application’s not-found page where a fallback is served.
+The production output is `dist`. Build: `npm run build`. The metadata script emits ten HTML entry documents so page titles/descriptions exist before JavaScript runs. React Router handles subsequent navigation. Vercel rewrites preserve deep links; unknown project slugs show the application’s not-found page where a fallback is served.
 
 ```sh
 npx vercel login
@@ -74,10 +74,27 @@ The website intentionally does not claim production readiness for the source pro
 
 ### Motion implementation
 
-`useScrollReveals` uses IntersectionObserver and the browser’s animation API for one-time 650 ms upward arrivals, with a small stagger when several items enter together. Content is always rendered and readable. CSS adds a 450 ms route entrance, a 350 ms sliding navigation capsule and brief menu/hover/dialog transitions. Native scrolling remains intact; anchor links scroll smoothly. No wheel interception, perpetual animation or motion dependency is included. Changing reduced-motion preferences immediately cancels running reveal animations and disables CSS movement.
+`useScrollReveals` uses IntersectionObserver and the browser’s animation API for one-time 650 ms upward arrivals, with a small stagger when several items enter together. Content is always rendered and readable. CSS adds a 450 ms route entrance, a 350 ms sliding navigation capsule and brief menu/hover/dialog transitions. Native scrolling remains intact; anchor links scroll smoothly. Ordinary portfolio pages retain native scrolling. Only the dedicated Playground canvas handles wheel gestures for panning and zoom; Gallery mode uses native scrolling. No perpetual animation or motion dependency is included. Changing reduced-motion preferences immediately cancels running reveal animations and disables CSS movement.
 
 ### About, achievements and contact
 
 `About.tsx` presents a short introduction and three data-driven focus areas. `Achievements.tsx` displays four distinct owner-reported milestones, distinguishing awards, Round 1 selection and hackathon participation. Add approved event photos through each achievement’s optional `photo: { src, alt }` field in `src/data/profile.ts`, placing optimized images in `public/images/`. No missing-image boxes are published.
 
 `sections.css` styles these sections. Contact uses semantic theme tokens: powder-blue/porcelain surfaces in light mode, blue-gray surfaces in dark mode. Its form remains an explicitly labeled email-draft flow.
+
+
+## Original image playground
+
+`/playground` is a full-screen, image-only design playground inspired by the owner’s supplied screen recording. Sixteen original concepts (12 interface studies, two posters and two pieces of artwork) repeat across a continuous canvas. It is an endless arrangement of a finite collection, not an image-generation service. No Figma or external project links appear on the cards or in the image viewer. Concept imagery is clearly distinguished from real portfolio projects and client work.
+
+Drag or scroll to pan, pinch or Ctrl-scroll to zoom, and use the reset/shuffle controls to explore. Click an image for a larger preview with previous/next controls. Filters select interfaces, posters or artwork. Gallery mode provides a conventional scrollable grid and full Tab/Enter browsing. The focused canvas supports arrow keys, +/− and 0. Escape closes previews and returns focus. Reduced motion removes inertia and entrance/hover movement.
+
+- `src/data/playground.ts`: image records, categories, descriptions and alt text.
+- `src/hooks/usePlaygroundCanvas.ts`: scoped pointer, wheel, pinch and keyboard interactions.
+- `src/styles/playground.css`: isolated responsive canvas/gallery presentation.
+- `public/images/playground/`: 16 optimized WebP assets, approximately 552 KiB combined.
+- `design/playground/artboards.html`: editable source for 14 original UI/poster images. The blue clay character and glossy blue ribbon artwork were generated with AI; their final assets are stored locally and reused in two concept artboards.
+
+To regenerate the 14 UI/poster images, run the dev server, then `node scripts/render-playground.mjs`. This development-only renderer requires installed Google Chrome and Python 3 with Pillow. It captures each artboard, saves ignored intermediate PNGs under `design/playground/renders/`, and writes final WebPs into `public/images/playground/`. Set `PLAYGROUND_ORIGIN` if the server is not at localhost:5173. Normal development, builds and deployment do not require Python. New concepts can be added as local images and typed data entries without changing the canvas.
+
+The route is lazy-loaded; canvas virtualization keeps the rendered tile count bounded while panning. Images remain local and no new runtime dependency or external integration was introduced.

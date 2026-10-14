@@ -6,6 +6,7 @@ const routes = [
   "/education",
   "/contact",
   "/projects",
+  "/playground",
   "/projects/campusmesh",
   "/projects/adaptui",
   "/projects/clearhead",
@@ -233,7 +234,7 @@ test("reduced-motion dialog closes on backdrop and restores page position", asyn
   expect(await page.evaluate(() => window.scrollY)).toBe(position);
 });
 
-test("five destination navigation, active pill and page metadata", async ({
+test("portfolio navigation, active pill and page metadata", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -244,6 +245,7 @@ test("five destination navigation, active pill and page metadata", async ({
     "Experience",
     "Education",
     "Projects",
+    "Playground",
     "Contact",
   ]);
   for (const [name, path] of [
@@ -314,9 +316,10 @@ test("scroll reveals respect changing reduced-motion preference", async ({
     .getByRole("navigation", { name: "Main navigation" })
     .getByRole("link", { name: "Education", exact: true })
     .click();
-  expect(
-    await page
-      .locator("main")
-      .evaluate((e) => getComputedStyle(e).animationName),
-  ).toBe("none");
+  await expect(page).toHaveURL("/education");
+  await expect
+    .poll(() =>
+      page.locator("main").evaluate((e) => getComputedStyle(e).animationName),
+    )
+    .toBe("none");
 });

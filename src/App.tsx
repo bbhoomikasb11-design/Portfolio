@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { profile } from "./data/profile";
 import { projects, archive } from "./data/projects";
@@ -16,6 +16,8 @@ import Header from "./components/Header";
 import Skills from "./components/Skills";
 import ProjectDialog from "./components/ProjectDialog";
 import type { Project } from "./data/projects";
+
+const PlaygroundPage = lazy(() => import("./pages/PlaygroundPage"));
 
 function RouteEffects() {
   const { pathname, hash } = useLocation();
@@ -353,19 +355,33 @@ export default function App() {
       </a>
       <div id="top" />
       <RouteEffects />
-      <Header />
-      <main id="main" tabIndex={-1} key={pathname}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/experience" element={<Experience page />} />
-          <Route path="/education" element={<EducationPage />} />
-          <Route path="/contact" element={<Contact page />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:slug" element={<CaseStudy />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+      {pathname !== "/playground" && <Header />}
+      <main
+        id="main"
+        tabIndex={-1}
+        key={pathname}
+        className={pathname === "/playground" ? "playground-route" : undefined}
+      >
+        <Suspense
+          fallback={
+            <p className="container" role="status">
+              Opening the playground…
+            </p>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/experience" element={<Experience page />} />
+            <Route path="/education" element={<EducationPage />} />
+            <Route path="/contact" element={<Contact page />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/playground" element={<PlaygroundPage />} />
+            <Route path="/projects/:slug" element={<CaseStudy />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
-      <Footer />
+      {pathname !== "/playground" && <Footer />}
     </>
   );
 }

@@ -7,3 +7,6 @@ dist/
 test-results/
 playwright-report/
 *.tsbuildinfo
+
+# Reproducible intermediate artwork captures
+design/playground/renders/

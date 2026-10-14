@@ -47,3 +47,10 @@ T3 reference snapshots failed twice with `Preview automation snapshot timed out 
 ## Education update — owner supplied, 14 October 2026
 
 Bhoomika confirmed Pre-University education at Mahesh PU College (93.3%) and Primary & High School at St. Mary's High School (83.3%). Added both below the degree on `/education`. No dates, study streams, examination boards or school locations were supplied or inferred. The percentages are presented as supplied, without assigning the school score to a specific examination.
+
+
+## Original Playground — 14 October 2026
+
+Inspected the owner’s 12.36-second “Screen Recording 2026-10-14 at 8.53.57 PM.mov” through 18 extracted frames. Observed a pannable, dotted gallery canvas with tilted, framed design images and a slim navigation rail. This is visual interaction evidence; no source code or Figma file for that reference was supplied.
+
+The owner explicitly requested original images and no design links. `/playground` therefore contains 16 new concept images, not SafeScan exports or other project evidence. Fourteen UI/poster artboards are authored in editable HTML/CSS and rasterized; two original illustrations (blue clay companion and blue ribbon sculpture) were AI-generated and incorporated into selected artboards. All 16 final assets are local, optimized WebP. Fictional interface names, example content and metrics exist only within clearly labelled concepts, not claims about Bhoomika’s professional work. No third-party brands, client work, awards, integrations or Figma links were added to the gallery.

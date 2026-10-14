@@ -25,6 +25,12 @@ export const pages = [
       "Explore product design, accessibility, frontend and AI integration projects by Bhoomika S.",
   },
   {
+    path: "/playground",
+    title: "Playground — Bhoomika S",
+    description:
+      "An endless image canvas of original interface concepts, playful artwork and typography experiments.",
+  },
+  {
     path: "/contact",
     title: "Contact — Bhoomika S",
     description:
