@@ -1320,39 +1320,6 @@ body {
   font-size: 14px;
   line-height: 1.9;
 }
-.education-card {
-  margin-top: 48px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: 24px;
-  padding: 35px 40px;
-  box-shadow: var(--card-shadow);
-}
-.education-card .education {
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-.education-card h2 {
-  font: 600 clamp(21px, 2.5vw, 30px)/1.5 var(--sans);
-  letter-spacing: -0.04em;
-  margin-block: 14px 10px;
-}
-.education-card .education p {
-  font-size: 14px;
-}
-.education-card .education .eyebrow {
-  font-size: 10px;
-}
-.education-card .education span {
-  display: inline-block;
-  font-size: 12px;
-  color: var(--ink);
-  background: var(--soft);
-  padding: 8px 14px;
-  margin-top: 20px;
-  border-radius: 100px;
-}
 .learning-note {
   padding-top: 65px;
   max-width: 640px;
@@ -1447,13 +1414,6 @@ body {
   .experience-page .experience-copy p,
   .experience-page .experience-copy li {
     font-size: 13px;
-  }
-  .education-card {
-    padding: 25px;
-    margin-top: 32px;
-  }
-  .education-card .education p {
-    font-size: 12px;
   }
   .contact-page {
     margin-top: 20px;

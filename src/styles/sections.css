@@ -370,8 +370,3 @@
     font-size: 28px;
   }
 }
-
-/* Keep the education history together as a readable sequence. */
-.education-card + .education-card {
-  margin-top: 20px;
-}

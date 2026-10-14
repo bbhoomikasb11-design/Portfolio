@@ -110,3 +110,10 @@ Current simplification validation: production TypeScript/build passed; all three
 ## Faster comparison movement
 
 Doubled the row speed from 24 to 48 px/s. Hover, focus and divider adjustments no longer pause it; explicit pause/manual browsing and reduced-motion behavior remain. Production build and all three comparison tests passed, including continued motion under the cursor and during keyboard divider adjustments, aligned layers, pause/play, touch and live reduced-motion changes.
+
+
+## Education card redesign
+
+Replaced the three identical wide cards with an academic folio layout: a featured powder-blue degree card with a prominent CGPA, followed by paired PU and school cards on desktop. Added numbered stages, small book line drawings, serif headings and large blue results. Mobile stacks the three cards with clear score dividers. Result data is structured into label/value/suffix fields; all institutions, qualifications and reported scores remain unchanged.
+
+Production build passed. Verified content and no horizontal overflow at 320, 375, 430, 768, 1024, 1440 and 1680 px. Education passes axe WCAG 2 A/AA and 2.1 AA checks in both themes. Inspected `education-cards-desktop.png`, `education-cards-mobile.png` and `education-cards-dark-mobile.png`.

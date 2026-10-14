@@ -1,0 +1,165 @@
+/* Academic records with the quiet structure of a personal folio. */
+.education-history {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 48px;
+}
+.education-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  padding: 28px 32px 26px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: 0 4px 16px #10111604;
+}
+.education-topline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 27px;
+}
+.education-index {
+  font: italic 25px/1 var(--serif);
+  color: var(--blue);
+}
+.education-topline .eyebrow {
+  font-size: 9px;
+  letter-spacing: .12em;
+}
+.education-book {
+  width: 25px;
+  height: 25px;
+  margin-left: auto;
+  color: var(--blue);
+}
+.education-detail h2 {
+  font: 400 clamp(28px, 2.8vw, 36px)/1.08 var(--serif);
+  letter-spacing: -.035em;
+  max-width: 22ch;
+}
+.education-institution {
+  font-size: 13px;
+  line-height: 1.75;
+  margin-top: 15px;
+  max-width: 40ch;
+}
+.education-result {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 30px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.education-result dt {
+  font-size: 11px;
+  color: var(--muted);
+}
+.education-result dd {
+  margin: 0;
+  font: 400 60px/.95 var(--serif);
+  letter-spacing: -.045em;
+  color: var(--blue);
+  white-space: nowrap;
+}
+.education-result dd>span {
+  font: 400 22px/1 var(--serif);
+  letter-spacing: 0;
+  margin-left: 4px;
+}
+.education-featured {
+  grid-column: 1/-1;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  grid-template-rows: auto 1fr;
+  gap: 0 40px;
+  padding: 35px 40px 40px;
+  background: var(--soft);
+  border-color: color-mix(in srgb, var(--blue) 20%, var(--line));
+  min-height: 310px;
+}
+.education-featured::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 70px;
+  height: 3px;
+  background: var(--blue);
+}
+.education-featured .education-topline {
+  grid-column: 1;
+  margin-bottom: 25px;
+}
+.education-featured .education-book { display: none; }
+.education-featured .education-detail {
+  grid-column: 1;
+  position: relative;
+  z-index: 1;
+}
+.education-featured h2 {
+  font-size: clamp(32px, 3.5vw, 44px);
+  max-width: 23ch;
+}
+.education-featured .education-institution { max-width: 42ch; }
+.education-featured .education-result {
+  grid-column: 2;
+  grid-row: 1/3;
+  margin: 0;
+  padding: 15px 0 15px 34px;
+  border-top: 0;
+  border-left: 1px solid var(--line);
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: start;
+  gap: 12px;
+  z-index: 1;
+}
+.education-featured .education-result dd { font-size: 100px; }
+.education-grid-mark {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 9px);
+  gap: 14px;
+  top: 25px;
+  right: 25px;
+  transform: rotate(-12deg);
+  opacity: .2;
+}
+.education-grid-mark span {
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+}
+.education-grid-mark span:nth-child(2n) { background: var(--blue); }
+@media(max-width: 760px) {
+  .education-history { grid-template-columns: 1fr; margin-top: 34px; gap: 18px; }
+  .education-card { padding: 24px; }
+  .education-topline { margin-bottom: 22px; gap: 10px; }
+  .education-topline .eyebrow { font-size: 8px; }
+  .education-featured { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; gap: 0; }
+  .education-featured::before { left: 24px; width: 52px; }
+  .education-featured h2 { font-size: 34px; }
+  .education-featured .education-result {
+    grid-column: 1;
+    grid-row: auto;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    margin-top: 25px;
+    padding: 20px 0 0;
+  }
+  .education-featured .education-result dd { font-size: 66px; }
+  .education-result { margin-top: 24px; }
+  .education-grid-mark { top: 24px; right: 20px; gap: 8px; grid-template-columns: repeat(3, 6px); }
+  .education-grid-mark span { width: 6px; height: 6px; }
+  .education-featured .education-topline { padding-right: 30px; }
+}
