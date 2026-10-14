@@ -5,4 +5,5 @@ import App from './App';
 import './styles/fonts.css';
 import './styles/tokens.css';
 import './styles/global.css';
+import './styles/portfolio.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><App /></BrowserRouter></React.StrictMode>);

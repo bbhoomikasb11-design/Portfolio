@@ -22,7 +22,7 @@ Google Drive browser viewer works and exposes a one-page `Bhoomika_S_Resume (1).
 
 ## Missing assets / publication decisions
 
-- Real owner portrait: missing. Hero uses a clearly labeled typographic portrait placeholder, controlled in profile.ts.
+- Portrait: resolved in the owner’s follow-up. The supplied “Sunlit Professional Portrait in Black Blazer.png” is used as approved, resized into 480/960 px WebP variants, controlled in profile.ts. No generative changes were made.
 - Jarurat approved dashboard screenshots: missing; not recreated or fabricated.
 - Jarurat dates/year: not published; 20 June–20 September and “four months” conflict.
 - WE3.BUILD dates, engagement classification and client permissions: missing; only owner-described role/responsibilities included.
@@ -31,3 +31,7 @@ Google Drive browser viewer works and exposes a one-page `Bhoomika_S_Resume (1).
 - Final domain unknown: canonical/sitemap generation deferred until SITE_URL is set; no invented domain.
 - Contact uses a clearly explained mailto draft, not claimed server delivery.
 - Remote repository creation and Vercel publication depend on available authenticated access. Local repository is newly initialized.
+
+## Design revision from owner feedback
+
+The wordmark now reads `Bhoomika.S`. The first section after the hero is a filterable verified-skills panel. Projects remain in the Work archive, where horizontal cards open an accessible detail dialog and retain links to full case-study routes. Reference: https://www.kabillanta.me/; homepage, skills, Projects and More Info overlay inspected directly on 14 October 2026. Reference claims, assets and personal content were not reused.

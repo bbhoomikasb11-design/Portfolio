@@ -1,6 +1,6 @@
 # Bhoomika S — personal portfolio
 
-An editorial, light-first React + Vite + TypeScript portfolio with a project archive, four case studies, an intentional dark theme, responsive navigation and a contact form that prepares an email draft.
+An editorial, light-first React + Vite + TypeScript portfolio with a skills-first homepage, supplied portrait, floating navigation, expandable project cards, four case studies, an intentional dark theme and a contact form that prepares an email draft.
 
 ## Run locally
 
@@ -30,7 +30,7 @@ Browser tests use installed Google Chrome. For CI without Chrome, install Chrome
 - `public/images`: real source-interface captures and cropped Figma overview; optimized WebP.
 - `public/fonts`: locally served official Google Fonts. See `public/fonts/SOURCES.md`.
 
-Replace the portrait by adding an optimized image under `public/images`, then setting `profile.portrait` to `{ src: '/images/portrait.webp', alt: 'Portrait of Bhoomika S' }`. The current monogram is explicitly labeled as a placeholder, not a fabricated portrait. Set `profile.resume` only after confirming a current public résumé. Until then the action opens a résumé request email.
+Replace the portrait by adding an optimized image under `public/images`, then setting `profile.portrait` to `{ src: '/images/portrait.webp', alt: 'Portrait of Bhoomika S' }`. The owner-supplied black-blazer portrait is served as 480 px and 960 px WebP variants through `srcSet`; it was resized/compressed without altering its contents. The monogram remains only as a fallback if portrait data is removed. Set `profile.resume` only after confirming a current public résumé. Until then the action opens a résumé request email.
 
 ## Contact behavior
 
@@ -38,7 +38,11 @@ No backend, API keys, third-party form provider or analytics are configured. Nat
 
 ## Design and motion
 
-Semantic theme tokens live in `src/styles/tokens.css`; shared layout and responsive rules live in `global.css`. Exactly two primary font families are used: Cormorant Garamond and Manrope. Theme follows the system initially, persists an explicit choice and works when localStorage is blocked. CSS handles brief entrance movement, image hover/focus and supported scroll-linked heading movement; no motion dependency or scroll hijacking. Reduced motion disables these effects. Main content is never hidden by an animation.
+Semantic theme tokens live in `src/styles/tokens.css`; shared layout and responsive rules live in `global.css`, with navigation, skills, portrait and project-card presentation in `portfolio.css`. Exactly two primary font families are used: Cormorant Garamond and Manrope. Theme follows the system initially, persists an explicit choice and works when localStorage is blocked. CSS handles brief entrance movement, image hover/focus, dialog open/close transitions and supported scroll-linked heading movement; no motion dependency or scroll hijacking. Reduced motion disables these effects. Main content is never hidden by an animation.
+
+## Navigation and project previews
+
+The reference at https://www.kabillanta.me/ informed the floating pill navigation, skill chips, horizontal work cards and project-detail overlay. Its homepage, Projects page and More Info interaction were inspected in the browser. The portfolio keeps its own palette, typography and verified content. Skills replace selected projects on the homepage; Work opens `/projects`. More Info opens a native modal dialog with a scrollable detail region, focus containment, Escape and backdrop dismissal, scroll locking and focus return. Full case-study links remain directly accessible. No animation library was added.
 
 ## Deployment to Vercel
 
@@ -57,7 +61,7 @@ Vercel CLI reported logged out during the build. GitHub push succeeded through t
 
 ## Owner inputs still needed
 
-1. Real portrait and approved Jarurat dashboard images.
+1. Approved Jarurat dashboard images. The portrait has been supplied and added.
 2. Confirm Jarurat year/dates: June 20–September 20 conflicts with the stated four-month duration.
 3. Confirm WE3.BUILD engagement type/dates and permission for any future client examples.
 4. Updated résumé: linked PDF says 8.59 CGPA and two poster wins; brief reports 9.0 and three. CampusMesh stack also differs from inspected source.
