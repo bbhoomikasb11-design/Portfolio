@@ -69,7 +69,8 @@ export default function DesignComparison() {
       const elapsed = last ? Math.min(now - last, 40) : 0;
       last = now;
       if (inView.current && !document.hidden) {
-        position.current = (position.current + elapsed * 0.048) % (pitch.current * studies.length);
+        const loop = pitch.current * studies.length;
+        position.current = (position.current - elapsed * 0.048 + loop) % loop;
         stage.current?.style.setProperty("--travel", `${position.current}px`);
       }
       frame = requestAnimationFrame(tick);
