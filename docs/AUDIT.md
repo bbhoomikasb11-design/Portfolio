@@ -32,9 +32,9 @@ Google Drive browser viewer works and exposes a one-page `Bhoomika_S_Resume (1).
 - WE3.BUILD dates, engagement classification and client permissions: missing; only owner-described role/responsibilities included.
 - Reference A/B/C images: not supplied; treated as verbal design principles.
 - Project screenshots: capture from unmodified source frontends or real Figma; label runtime limitations in case studies.
-- Final domain unknown: canonical/sitemap generation deferred until SITE_URL is set; no invented domain.
+- Production origin confirmed on 15 October 2026: `https://bhoomika-portfolio-liard.vercel.app`, assigned by Vercel. `SITE_URL` is configured and canonical/OG metadata, sitemap and robots output are verified. No custom domain was added.
 - Contact uses a clearly explained mailto draft, not claimed server delivery.
-- Remote repository creation and Vercel publication depend on available authenticated access. Local repository is newly initialized.
+- Owner-supplied GitHub repository is populated, and the site is published to the owner's Vercel account. Direct CLI deployments work; automatic GitHub deployments require a separate GitHub login connection in Vercel.
 
 ## Design revision from owner feedback
 

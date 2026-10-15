@@ -48,20 +48,23 @@ The reference at https://www.kabillanta.me/ informed the floating pill navigatio
 
 ## Deployment to Vercel
 
+Live portfolio: [bhoomika-portfolio-liard.vercel.app](https://bhoomika-portfolio-liard.vercel.app). Published on 15 October 2026 to the `bhoomika-portfolio` project in the owner's `bbhoomikasb11-6572` scope, using Node.js 24 and the Vite configuration in `vercel.json`.
+
 The production output is `dist`. Build: `npm run build`. The metadata script emits ten HTML entry documents so page titles/descriptions exist before JavaScript runs. React Router handles subsequent navigation. Vercel rewrites preserve deep links; unknown project slugs show the application’s not-found page where a fallback is served.
 
 `.vercelignore` keeps design sources, QA captures, tests and local environment files out of CLI uploads. The app source, public assets and metadata build script are included.
 
 ```sh
 npx vercel login
-npx vercel --prod
+npx vercel link --yes --project bhoomika-portfolio --scope bbhoomikasb11-6572
+npx vercel deploy --prod --scope bbhoomikasb11-6572
 ```
 
-Alternatively, create a **new** GitHub repository and import it into Vercel using the Vite preset. Do not attach this to an unrelated existing repository. This workspace has its own local Git repository, pushed to the owner-supplied remote `https://github.com/bbhoomikasb11-design/Portfolio`.
+Source is pushed to the owner-supplied [Portfolio repository](https://github.com/bbhoomikasb11-design/Portfolio). Automatic deployment on GitHub pushes is not connected: Vercel requires the owner to add a GitHub login connection first. The CLI deployment above works now. Once that connection exists, run `npx vercel git connect https://github.com/bbhoomikasb11-design/Portfolio.git --yes --scope bbhoomikasb11-6572` to enable repository deployments.
 
-Once the actual production origin is known, set build environment variable `SITE_URL` to that HTTPS origin (no path) and redeploy. The build then adds absolute canonical/OG URLs and `sitemap.xml`. `robots.txt` is always emitted. No domain is invented. See `.env.example`. The optional variable is build-time only, not a secret. A social preview PNG is provided.
+The Vercel production environment has `SITE_URL=https://bhoomika-portfolio-liard.vercel.app`. The build emits canonical/OG URLs, `sitemap.xml` and `robots.txt` for that origin, plus the supplied social preview image. If a custom domain is added later, change `SITE_URL` to that HTTPS origin (without a path) and redeploy. This is a public build-time setting, not a secret; see `.env.example`.
 
-Vercel CLI reported logged out during the build. GitHub push succeeded through the existing Git credentials, without GitHub CLI. A production URL must only be reported after a successful deployment. Do not treat the local preview as deployed.
+The public production URL was verified without Vercel authentication. All ten routes return their page-specific metadata, and direct case-study refreshes work. See `docs/QA.md` for production browser checks. No contact backend or third-party form provider was introduced; contact continues to prepare an email draft.
 
 ## Owner inputs still needed
 
@@ -72,7 +75,6 @@ Vercel CLI reported logged out during the build. GitHub push succeeded through t
 5. CampusMesh final demo, team attribution, and backend configuration for functional verification.
 6. Installed-browser AdaptUI validation, and the remaining SafeScan flow-screen exports/design rationale. The homepage image has been supplied and added.
 7. ClearHead server/key boundary and runtime corrections before claiming a working full-stack deployment. See audit.
-8. Confirmed production origin and authenticated GitHub/Vercel access.
 
 The website intentionally does not claim production readiness for the source projects, user metrics, client results or unverified research. Owner-reported achievements and academic results remain identified as reported.
 

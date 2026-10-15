@@ -50,7 +50,7 @@ The six project repositories were cloned successfully; SafeScan and résumé ope
 
 ## Publication
 
-The new remote supplied by the owner is `https://github.com/bbhoomikasb11-design/Portfolio.git`; it was checked empty before attachment. The implementation was successfully pushed to its main branch. Vercel CLI reported logged out. Production deployment requires account login. Canonicals, absolute OG URLs and a sitemap are generated only when the actual HTTPS `SITE_URL` is configured. No production URL is claimed until deployment succeeds.
+The remote supplied by the owner is `https://github.com/bbhoomikasb11-design/Portfolio.git`; it was checked empty before attachment. The implementation is pushed to its main branch. Vercel authentication and production publication were completed on 15 October 2026. The public site is https://bhoomika-portfolio-liard.vercel.app, with `SITE_URL` configured for canonical/OG metadata and sitemap generation. See the production verification entry below.
 
 ## Five-destination navigation and motion refinement
 
@@ -185,3 +185,14 @@ Inspected settled desktop, mobile and dark tablet openings, the staged hero, pro
 Replaced the Figma overview in the shared project visual with the owner's supplied homepage screenshot. The optimized WebP keeps the original 1232 × 978 dimensions, accurate alt text and a design-study caption. SafeScan-specific framing shows the complete image in the card, dialog and case study without changing other project layouts. Updated the case-study text and remaining-asset inventory to acknowledge the supplied homepage.
 
 Production TypeScript/build passed, along with four existing checks for filtered image reveals, reduced motion and project-dialog keyboard/scroll behavior. Chrome verification at 320, 390, 768 and 1440 px confirmed the new image loads in all three views, preserves its aspect ratio, stays inside its frame and causes no horizontal overflow or browser errors. Desktop/mobile cards, the dialog and the case-study figure were visually inspected. Shared preview snapshots timed out; verification used the repository's documented Chrome workflow.
+
+
+## Production deployment — 15 October 2026
+
+Published to **https://bhoomika-portfolio-liard.vercel.app** in the owner’s Vercel project `bbhoomikasb11-6572/bhoomika-portfolio`. Final application deployment: `dpl_D1XfKUqG8NdGM6xGUwNXYW3a8Ms1`, reported READY for production. The cloud build uses Node.js 24 and the repository’s Vite build configuration. `SITE_URL` is set in the production environment; the final cloud build includes canonical/OG URLs and sitemap generation. The production alias is public without a Vercel login. Vercel may protect individual deployment-preview URLs separately.
+
+The final local production build and all **31 automated tests passed (51.9 seconds)**. Public HTTP requests verified all ten routes return 200 with the expected page titles and canonical URLs; robots, sitemap, social preview, fonts and the current SafeScan/AdaptUI images load correctly. Local environment files, QA documents and design sources return 404 on the public site. `.vercelignore` limits the CLI upload to application build inputs (about 3.9 MB).
+
+Independent Chrome sessions at 390 and 1440 px verified the live homepage, mobile/desktop navigation, SafeScan dialog and supplied screenshot, removal of AdaptUI’s decorative Aa, persisted themes, Playground keyboard panning, contact validation/email link, and direct case-study refresh. Both runs reported no JavaScript errors, failed same-origin requests or horizontal overflow on the checked pages. No test email was sent. Visually inspected `docs/qa/production-390.png` and `docs/qa/production-1440.png`. Shared preview navigation timed out twice, so browser verification used the documented Chrome workflow.
+
+GitHub auto-deployment is not enabled: the repository-link attempt returned “You need to add a Login Connection to your GitHub account first.” This does not affect the published site or subsequent `vercel deploy --prod` updates. The README records both the working deployment command and the optional GitHub connection step. No new Lighthouse or field-performance score is claimed.
