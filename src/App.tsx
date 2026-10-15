@@ -1,6 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
-import { profile } from "./data/profile";
 import { projects, archive } from "./data/projects";
 import Experience from "./components/Experience";
 import About from "./components/About";
@@ -15,6 +14,7 @@ import Contact from "./components/Contact";
 import { Arrow } from "./components/Icons";
 import Header from "./components/Header";
 import Skills from "./components/Skills";
+import Hero from "./components/Hero";
 import ProjectDialog from "./components/ProjectDialog";
 import type { Project } from "./data/projects";
 
@@ -77,81 +77,7 @@ function Footer() {
 function Home() {
   return (
     <>
-      <section className="hero container">
-        <div className="hero-top">
-          <p className="eyebrow">DEVELOPER + PRODUCT DESIGNER</p>
-          <p className="location">
-            <span aria-hidden="true">↗</span> Bengaluru, India
-          </p>
-        </div>
-        <div className="hero-layout">
-          <div className="hero-copy">
-            <h1>
-              {profile.headline[0]}
-              <br />
-              <em>{profile.headline[1]}</em>
-            </h1>
-            <div className="hero-description">
-              <span className="small-star" aria-hidden="true">
-                ✳
-              </span>
-              <p>{profile.introduction}</p>
-            </div>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#skills">
-                Explore my skills <Arrow />
-              </a>
-              <Link className="text-link" to="/projects">
-                View my work <Arrow diagonal />
-              </Link>
-            </div>
-          </div>
-          <figure className="portrait">
-            <div className="portrait-corner top-left" />
-            <div className="portrait-corner bottom-right" />
-            {profile.portrait ? (
-              <img
-                src={profile.portrait.src}
-                srcSet={profile.portrait.srcSet}
-                sizes="(max-width: 760px) 75vw, 380px"
-                alt={profile.portrait.alt}
-                width="960"
-                height="1280"
-                fetchPriority="high"
-              />
-            ) : (
-              <div className="portrait-placeholder">
-                <span className="portrait-label">
-                  THE PERSON BEHIND THE PIXELS
-                </span>
-                <span className="portrait-initials" aria-hidden="true">
-                  bs<span>✳</span>
-                </span>
-                <span className="portrait-placeholder-note">
-                  A space for my portrait.
-                </span>
-              </div>
-            )}
-            <figcaption>
-              <span>Bhoomika S</span>
-              <span>
-                {profile.portrait
-                  ? "Designer. Developer. Always curious."
-                  : "Portrait to be added"}
-              </span>
-            </figcaption>
-          </figure>
-        </div>
-        <div className="hero-bottom">
-          <p className="availability">
-            <span aria-hidden="true" />
-            Open to internships & full-time opportunities
-          </p>
-          <a href="#skills">
-            A little further down <span aria-hidden="true">↓</span>
-          </a>
-        </div>
-      </section>
+      <Hero />
       <Skills />
       <About />
       <DesignComparison />

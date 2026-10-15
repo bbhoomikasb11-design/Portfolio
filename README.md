@@ -1,6 +1,6 @@
 # Bhoomika S — personal portfolio
 
-An editorial, light-first React + Vite + TypeScript portfolio with a skills-first homepage, supplied portrait, floating navigation, expandable project cards, four case studies, an intentional dark theme and a contact form that prepares an email draft.
+A light-first React + Vite + TypeScript portfolio with a bold portrait-led opening, a skills-first homepage, floating navigation, expandable project cards, four case studies, an intentional dark theme and a contact form that prepares an email draft.
 
 ## Run locally
 
@@ -30,7 +30,7 @@ Browser tests use installed Google Chrome. For CI without Chrome, install Chrome
 - `public/images`: real source-interface captures and cropped Figma overview; optimized WebP.
 - `public/fonts`: locally served official Google Fonts. See `public/fonts/SOURCES.md`.
 
-Replace the portrait by adding an optimized image under `public/images`, then setting `profile.portrait` to `{ src: '/images/portrait.webp', alt: 'Portrait of Bhoomika S' }`. The owner-supplied black-blazer portrait is served as 480 px and 960 px WebP variants through `srcSet`; it was resized/compressed without altering its contents. The monogram remains only as a fallback if portrait data is removed. Set `profile.resume` only after confirming a current public résumé. Until then the action opens a résumé request email.
+The opening content and portrait sources live in `profile.opening` and `profile.heroPortrait`. `Hero.tsx` uses 360/720 px transparent WebP variants of the owner's supplied black-blazer portrait, prepared with built-in imagegen background extraction. CSS supplies the monochrome treatment; the blue panel is a separate element. The edited source is preserved in `design/hero/portrait-cutout.png`, and the original, uncut owner photo remains available in the existing 480/960 px assets and `profile.portrait`. See the prompt and provenance in `docs/AUDIT.md`. When replacing the cutout, preserve alpha and update the image's intrinsic width/height in `Hero.tsx` if its proportions change. Set `profile.resume` only after confirming a current public résumé. Until then the action opens a résumé request email.
 
 ## Contact behavior
 
@@ -39,6 +39,8 @@ No backend, API keys, third-party form provider or analytics are configured. Nat
 ## Design and motion
 
 Semantic theme tokens live in `src/styles/tokens.css`; shared layout and responsive rules live in `global.css`, with navigation, skills, portrait and project-card presentation in `portfolio.css`. Exactly two primary font families are used: Cormorant Garamond and Manrope. Theme follows the system initially, persists an explicit choice and works when localStorage is blocked. CSS handles brief entrance movement, image hover/focus, dialog open/close transitions and short page entrances and staggered, once-only scroll reveals; no motion dependency or scroll hijacking. Reduced motion disables these effects. Main content is never hidden by an animation.
+
+The current opening is isolated in `components/Hero.tsx` and `styles/hero.css`: Manrope 800 stacked type, electric-blue emphasis, a monochrome portrait cutout, an availability seal linked to Contact, and an italic Cormorant margin note. The bold headline uses the confirmed designer/developer positioning. The original tagline remains in the lower strip. View my work opens Projects; Explore my skills jumps to the first section. Mobile recomposes these elements vertically. The portrait and blue panel have brief CSS entrances that respect reduced motion. Manrope 800 is locally hosted from official Google Fonts and preloaded; no third primary font was added.
 
 ## Navigation and project previews
 

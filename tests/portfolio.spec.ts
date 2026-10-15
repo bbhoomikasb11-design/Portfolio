@@ -130,9 +130,9 @@ test("skills-first home and supplied portrait", async ({ page }) => {
     "id",
     "skills",
   );
-  await expect(page.locator(".hero .portrait img")).toHaveAttribute(
+  await expect(page.locator(".opening-portrait img")).toHaveAttribute(
     "src",
-    "/images/bhoomika-portrait-960.webp",
+    "/images/bhoomika-hero-720.webp",
   );
   await expect(page.locator(".project-card")).toHaveCount(0);
   await expect(page.locator("#experience")).toHaveCount(0);

@@ -5,6 +5,15 @@ export const profile = {
   headline: ["Curiosity in design.", "Purpose in code."],
   introduction:
     "I design thoughtful digital experiences and build useful products, bringing together creativity, engineering, and a curiosity for how things work.",
+  opening: {
+    headline: ["I’M A", "DESIGNER &", "DEVELOPER."],
+    introduction: "I turn ideas into useful digital experiences—from the first wireframe to the code that brings it to life.",
+  },
+  heroPortrait: {
+    src: "/images/bhoomika-hero-720.webp",
+    srcSet: "/images/bhoomika-hero-360.webp 360w, /images/bhoomika-hero-720.webp 720w",
+    alt: "Bhoomika S in a black blazer, shown in a monochrome portrait",
+  },
   email: "bbhoomikasb11@gmail.com",
   github: "https://github.com/bbhoomikasb11-design",
   linkedin: "https://linkedin.com/in/bhoomika-s-743758381",
