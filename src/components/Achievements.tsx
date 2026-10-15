@@ -52,10 +52,6 @@ export default function Achievements() {
             {item.photo ? (
               <figure className={`achievement-media achievement-media--${item.photo.presentation}`}>
                 <img className="achievement-photo" src={item.photo.src} alt={item.photo.alt} loading="lazy" decoding="async" width={item.photo.width} height={item.photo.height} />
-                <figcaption>
-                  <span>Enhanced photo</span>
-                  <a href={item.photo.original} target="_blank" rel="noreferrer" aria-label={`View original photo: ${item.title} (opens in a new tab)`}>View original <Arrow diagonal /></a>
-                </figcaption>
               </figure>
             ) : (
               <div className="achievement-highlight" aria-hidden="true"><span>{item.highlight}</span><span>{item.label}</span></div>

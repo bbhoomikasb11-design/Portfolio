@@ -1,6 +1,6 @@
 # Achievement photos
 
-The owner supplied two photographs and requested enhancement and publication in the matching homepage achievements. The first is the poster-presentation event; the second is the debate certificate. Images were edited with the built-in imagegen tool (not the CLI). These are enhanced presentation images, not archival scans. Original JPEGs are retained unmodified and linked beside each image. Generative enhancement can reconstruct fine detail; consult the original for documentary evidence.
+The owner supplied two photographs and requested enhancement and publication in the matching homepage achievements. The first is the poster-presentation event; the second is the debate certificate. Images were edited with the built-in imagegen tool (not the CLI). These are enhanced presentation images, not archival scans. Original JPEGs are retained unmodified at the paths below and referenced by the achievement data. The owner requested removal of the visible “Enhanced photo / View original” strip; enhancement provenance remains documented here and in the descriptive image alt text. Generative enhancement can reconstruct fine detail; consult the original for documentary evidence.
 
 Published assets:
 - `public/images/achievements/poster-presentation-enhanced.webp` (840 × 1873)

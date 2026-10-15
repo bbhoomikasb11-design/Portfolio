@@ -13,13 +13,22 @@ export function useScrollReveals(pathname: string) {
         let stagger = 0;
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
+          const isAchievement = entry.target.classList.contains("achievement-card");
+          // Wait for enough of a shelf card to appear, including when browsing sideways.
+          if (isAchievement && entry.intersectionRatio < 0.15) return;
           observer.unobserve(entry.target);
           if (media.matches) return;
           const animation = entry.target.animate(
-            [{ translate: "0 24px" }, { translate: "0 0" }],
+            isAchievement
+              ? [
+                  { translate: "0 26px", scale: "0.94", opacity: 0.55 },
+                  { translate: "0 -4px", scale: "1", opacity: 1, offset: 0.72 },
+                  { translate: "0 0", scale: "1", opacity: 1 },
+                ]
+              : [{ translate: "0 24px" }, { translate: "0 0" }],
             {
               duration: 650,
-              delay: Math.min(stagger++ * 55, 165),
+              delay: Math.min(stagger++ * (isAchievement ? 85 : 55), 170),
               easing: "cubic-bezier(.16,1,.3,1)",
               fill: "backwards",
             },
@@ -30,7 +39,7 @@ export function useScrollReveals(pathname: string) {
             .catch(() => {});
         });
       },
-      { threshold: 0, rootMargin: "0px 0px -24px 0px" },
+      { threshold: [0, 0.15], rootMargin: "0px 0px -24px 0px" },
     );
     targets.forEach((target) => observer.observe(target));
     const stopMotion = () => {
