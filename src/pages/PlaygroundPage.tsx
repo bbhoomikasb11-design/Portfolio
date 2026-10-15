@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { playgroundPieces } from "../data/playground";
+import { playgroundLayout, playgroundPieces } from "../data/playground";
 import { usePlaygroundCanvas } from "../hooks/usePlaygroundCanvas";
 import "../styles/playground.css";
 
@@ -15,19 +15,19 @@ export default function PlaygroundPage() {
     };
   }, []);
   const tiles = useMemo(() => {
+    const { columnStep, rowStep } = playgroundLayout;
     const list = [];
-    const startCol = Math.floor(-view.x / view.scale / 480) - 1,
-      endCol = Math.ceil((size.width - view.x) / view.scale / 480);
-    const startRow = Math.floor(-view.y / view.scale / 580) - 1,
-      endRow = Math.ceil((size.height - view.y) / view.scale / 580);
+    const startCol = Math.floor(-view.x / view.scale / columnStep) - 1,
+      endCol = Math.ceil((size.width - view.x) / view.scale / columnStep);
+    const startRow = Math.floor(-view.y / view.scale / rowStep) - 1,
+      endRow = Math.ceil((size.height - view.y) / view.scale / rowStep);
     for (let row = startRow; row <= endRow; row++)
       for (let col = startCol; col <= endCol; col++) {
         list.push({
           key: `${row}:${col}`,
-          piece: playgroundPieces[modulo(row * 4 + col, playgroundPieces.length)],
-          x: col * 480,
-          y: row * 580 + (modulo(col, 2) ? 35 : 0),
-          angle: (modulo(col * 3 + row, 5) - 2) * 0.8,
+          piece: playgroundPieces[modulo(row * 3 + col, playgroundPieces.length)],
+          x: col * columnStep,
+          y: row * rowStep + (modulo(col, 2) ? 65 : 0),
         });
       }
     return list;
@@ -37,7 +37,7 @@ export default function PlaygroundPage() {
     <div className="playground-shell">
       <h1 className="sr-only">Playground</h1>
       <p className="sr-only" id="canvas-instructions">
-        Drag or scroll to explore these 16 original image concepts on a repeating
+        Drag or scroll to explore these eight full-length landing-page studies on a repeating
         canvas. Pinch or Ctrl-scroll to zoom. With the canvas focused, use arrow
         keys to move, plus and minus to zoom, and zero to reset.
       </p>
@@ -63,14 +63,14 @@ export default function PlaygroundPage() {
           {tiles.map((tile) => (
             <div
               key={tile.key}
-              className={`play-tile${tile.piece.category === "Artwork" ? " is-artwork" : ""}`}
-              style={{ left: tile.x, top: tile.y, rotate: `${tile.angle}deg` }}
+              className="play-tile"
+              style={{ left: tile.x, top: tile.y, width: playgroundLayout.tileWidth }}
             >
               <img
                 src={tile.piece.image}
                 alt=""
-                width="800"
-                height={tile.piece.category === "Artwork" ? 800 : 940}
+                width={tile.piece.width}
+                height={tile.piece.height}
                 draggable={false}
                 decoding="async"
               />

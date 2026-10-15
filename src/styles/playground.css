@@ -40,26 +40,23 @@
 }
 .play-tile {
   position: absolute;
-  width: 420px;
-  padding: 7px;
+  width: 600px;
+  padding: 0;
   border: 1px solid var(--line);
   background: var(--surface);
-  border-radius: 25px;
+  border-radius: 5px;
   box-shadow: 0 4px 0 #7386a212, 0 16px 36px #233b6510;
   overflow: hidden;
   transform-origin: center;
 }
 .play-tile img {
   display: block;
-  width: 404px;
-  height: 490px;
+  width: 100%;
+  height: auto;
   object-fit: contain;
-  border-radius: 18px;
+  border-radius: 0;
   background: #e8edf5;
   pointer-events: none;
-}
-.play-tile.is-artwork img {
-  height: 404px;
 }
 .play-canvas-vignette {
   position: absolute;

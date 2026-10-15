@@ -1,0 +1,34 @@
+{
+  "daily-bread": {
+    "width": 1000,
+    "height": 2528
+  },
+  "room-sixteen": {
+    "width": 1000,
+    "height": 2741
+  },
+  "kilometre": {
+    "width": 1000,
+    "height": 2714
+  },
+  "hand-earth": {
+    "width": 1000,
+    "height": 2722
+  },
+  "third-cup": {
+    "width": 1000,
+    "height": 2814
+  },
+  "patch-market": {
+    "width": 1000,
+    "height": 2847
+  },
+  "fieldwork": {
+    "width": 1000,
+    "height": 2885
+  },
+  "queue-desk": {
+    "width": 1000,
+    "height": 2674
+  }
+}

@@ -40,7 +40,7 @@ test("image-only canvas pans and zooms without opening overlays", async ({ page 
 
 test("image-only canvas remains accessible in both themes", async ({ page }) => {
   await page.goto("/playground");
-  await expect(page.getByRole("list", { name: "Original design concepts" }).getByRole("listitem")).toHaveCount(16);
+  await expect(page.getByRole("list", { name: "Original design concepts" }).getByRole("listitem")).toHaveCount(8);
   for (const theme of ["light", "dark"]) {
     await page.evaluate(t => { document.documentElement.dataset.theme = t; }, theme);
     expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze()).violations).toEqual([]);

@@ -1,3 +1,4 @@
+import { playgroundLayout } from "../data/playground";
 import {
   useCallback,
   useEffect,
@@ -13,6 +14,11 @@ export interface CanvasView {
 }
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
+
+function startingView(width: number): CanvasView {
+  const scale = width < 600 ? Math.max(0.3, (width - 48) / playgroundLayout.tileWidth) : 0.9;
+  return { x: width < 600 ? 24 : 56, y: width < 600 ? 24 : 40, scale };
+}
 
 export function usePlaygroundCanvas() {
   const canvas = useRef<HTMLDivElement>(null);
@@ -54,13 +60,7 @@ export function usePlaygroundCanvas() {
   const reset = useCallback(() => {
     stop();
     const width = canvas.current?.clientWidth || size.width;
-    const height = canvas.current?.clientHeight || size.height;
-    const scale = width < 600 ? 0.65 : 0.9;
-    update({
-      x: (width - 420 * scale) / 2,
-      y: (height - 500 * scale) / 2,
-      scale,
-    });
+    update(startingView(width));
   }, [size.width, size.height, stop, update]);
   useLayoutEffect(() => {
     if (!canvas.current) return;
@@ -71,12 +71,7 @@ export function usePlaygroundCanvas() {
         height = element.clientHeight;
       setSize({ width, height });
       if (first) {
-        const scale = width < 600 ? 0.65 : 0.9;
-        update({
-          x: (width - 420 * scale) / 2,
-          y: (height - 500 * scale) / 2,
-          scale,
-        });
+        update(startingView(width));
         first = false;
       }
     });
@@ -87,7 +82,7 @@ export function usePlaygroundCanvas() {
     (scale: number, point?: { x: number; y: number }) => {
       stop();
       const old = current.current;
-      const next = clamp(scale, 0.45, 1.6);
+      const next = clamp(scale, 0.3, 2.2);
       const center = point || {
         x: (canvas.current?.clientWidth || size.width) / 2,
         y: (canvas.current?.clientHeight || size.height) / 2,
@@ -191,8 +186,8 @@ export function usePlaygroundCanvas() {
       const scale = clamp(
         (start.view.scale * Math.hypot(a.x - b.x, a.y - b.y)) /
           Math.max(1, start.distance),
-        0.45,
-        1.6,
+        0.3,
+        2.2,
       );
       update({
         scale,
