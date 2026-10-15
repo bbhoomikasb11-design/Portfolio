@@ -22,15 +22,15 @@ export function ProjectVisual({ project }: { project: Project }) {
           height={project.imageSize.height}
         />
       </div>
-      <span className="visual-index" aria-hidden="true">
-        {project.slug === "adaptui"
-          ? "Aa"
-          : project.slug === "clearhead"
+      {project.slug !== "adaptui" && (
+        <span className="visual-index" aria-hidden="true">
+          {project.slug === "clearhead"
             ? "A little clarity."
             : project.slug === "safescan"
               ? "From scan to understanding."
               : "Made for campus life."}
-      </span>
+        </span>
+      )}
     </div>
   );
 }
