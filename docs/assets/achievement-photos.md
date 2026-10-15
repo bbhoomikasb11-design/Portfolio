@@ -1,14 +1,16 @@
 # Achievement photos
 
-The owner supplied two photographs and requested enhancement and publication in the matching homepage achievements. The first is the poster-presentation event; the second is the debate certificate. Images were edited with the built-in imagegen tool (not the CLI). These are enhanced presentation images, not archival scans. Original JPEGs are retained unmodified at the paths below and referenced by the achievement data. The owner requested removal of the visible “Enhanced photo / View original” strip; enhancement provenance remains documented here and in the descriptive image alt text. Generative enhancement can reconstruct fine detail; consult the original for documentary evidence.
+The owner supplied two photographs and initially requested enhancement and publication in the matching homepage achievements. The first is the poster-presentation event; the second is the debate certificate. On 15 October 2026, the owner requested the original poster-presentation photo instead. That card now uses the untouched original JPEG, byte-for-byte identical to the attachment (SHA-256 `efd84f9a665ad69cf1ba8a17d20f3c4fd1f9a1ef770fd673e11f9883d3556a92`). No enhancement, recoloring or re-encoding is applied; CSS frames the certificate exchange within the existing compact card.
 
-Published assets:
-- `public/images/achievements/poster-presentation-enhanced.webp` (840 × 1873)
-- `public/images/achievements/debate-enhanced.webp` (1280 × 959)
-- `public/images/achievements/poster-presentation-original.jpg`
-- `public/images/achievements/debate-original.jpg`
+The debate certificate still uses its enhanced presentation image, edited with the built-in imagegen tool. Its original JPEG is retained unmodified. The visible “Enhanced photo / View original” strip remains removed at the owner's request; the debate enhancement is documented here and in its alt text. Generative enhancement can reconstruct fine detail; consult the original for documentary evidence.
 
-Pillow was used only for final image resizing and WebP encoding. The event image is framed through CSS around the certificate exchange; its full image is retained. The certificate uses `object-fit: contain`, preserving the entire photographed document and overlapping handwritten note. Both images are lazy-loaded with explicit dimensions.
+Asset inventory:
+- `public/images/achievements/poster-presentation-original.jpg` (717 × 1600) — currently displayed.
+- `public/images/achievements/debate-enhanced.webp` (1280 × 959) — currently displayed.
+- `public/images/achievements/poster-presentation-enhanced.webp` (840 × 1873) — retained from the previous revision; no longer displayed.
+- `public/images/achievements/debate-original.jpg` — preserved source.
+
+Pillow was used only for resizing and encoding the earlier enhanced WebPs. The original event photo is framed through CSS around the certificate exchange; its full image is retained. The certificate uses `object-fit: contain`, preserving the entire photographed document and overlapping handwritten note. Both displayed images are lazy-loaded with accurate intrinsic dimensions.
 
 The original certificate supports the first-place debate result and spelling of Ghousia College of Engineering. Its handwritten note identifies a team result. The event photograph documents one presentation; the total of three poster wins remains owner-reported. No dates or further results were inferred.
 

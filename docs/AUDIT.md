@@ -1,6 +1,6 @@
 # Content and asset audit — 14 October 2026
 
-Update, 15 October: the owner supplied a poster-presentation award photo and a debate winner certificate. Both are now included in the corresponding achievements. Original JPEGs are retained; enhanced presentation copies are explicitly labeled and linked to their originals. The original certificate supports a first-place team debate result at Ghousia College of Engineering. One poster photograph does not verify the total of three reported wins. See `docs/assets/achievement-photos.md` for provenance and edit prompts.
+Update, 15 October: the owner supplied a poster-presentation award photo and a debate winner certificate. Both are now included in the corresponding achievements. The poster-presentation card now displays the untouched original JPEG at the owner’s request. The debate card retains its enhanced WebP, with the original JPEG preserved. The visible enhancement utility strip has been removed; provenance is recorded in the asset inventory. The original certificate supports a first-place team debate result at Ghousia College of Engineering. One poster photograph does not verify the total of three reported wins. See `docs/assets/achievement-photos.md` for provenance and edit prompts.
 
 The initial workspace was empty. Read-only shallow clones of the six supplied repositories are in `/tmp/bhoomika-audit` (not shipped with the portfolio). Repository claims are not treated as runtime validation.
 

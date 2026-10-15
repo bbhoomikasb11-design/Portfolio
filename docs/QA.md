@@ -196,3 +196,10 @@ The final local production build and all **31 automated tests passed (51.9 secon
 Independent Chrome sessions at 390 and 1440 px verified the live homepage, mobile/desktop navigation, SafeScan dialog and supplied screenshot, removal of AdaptUI’s decorative Aa, persisted themes, Playground keyboard panning, contact validation/email link, and direct case-study refresh. Both runs reported no JavaScript errors, failed same-origin requests or horizontal overflow on the checked pages. No test email was sent. Visually inspected `docs/qa/production-390.png` and `docs/qa/production-1440.png`. Shared preview navigation timed out twice, so browser verification used the documented Chrome workflow.
 
 GitHub auto-deployment is not enabled: the repository-link attempt returned “You need to add a Login Connection to your GitHub account first.” This does not affect the published site or subsequent `vercel deploy --prod` updates. The README records both the working deployment command and the optional GitHub connection step. No new Lighthouse or field-performance score is claimed.
+
+
+## Original poster-presentation photograph — 15 October 2026
+
+The poster-presentation achievement now uses the untouched original JPEG instead of the enhanced WebP, as requested. Its SHA-256 matches the owner's uploaded attachment exactly. Updated intrinsic dimensions to 717 × 1600 and removed enhancement wording from that image's alt text. The compact card frames both faces and the certificate exchange through CSS; the source image is unmodified. The debate certificate remains unchanged.
+
+Production TypeScript/build passed. Chrome checks at 320, 390 and 1440 px verified the original source URL, decoded dimensions and no horizontal overflow; inspected the mobile and desktop card framing. Shared preview navigation timed out twice, so these checks used the documented Chrome workflow.
