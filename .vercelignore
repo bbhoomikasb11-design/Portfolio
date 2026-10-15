@@ -1,0 +1,16 @@
+# Upload only the application and its build inputs.
+.git/
+.vercel/
+node_modules/
+dist/
+docs/
+design/
+tests/
+test-results/
+playwright-report/
+.env*
+!.env.example
+*.tsbuildinfo
+.DS_Store
+scripts/render-*.mjs
+playwright.config.ts

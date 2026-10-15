@@ -50,6 +50,8 @@ The reference at https://www.kabillanta.me/ informed the floating pill navigatio
 
 The production output is `dist`. Build: `npm run build`. The metadata script emits ten HTML entry documents so page titles/descriptions exist before JavaScript runs. React Router handles subsequent navigation. Vercel rewrites preserve deep links; unknown project slugs show the application’s not-found page where a fallback is served.
 
+`.vercelignore` keeps design sources, QA captures, tests and local environment files out of CLI uploads. The app source, public assets and metadata build script are included.
+
 ```sh
 npx vercel login
 npx vercel --prod
