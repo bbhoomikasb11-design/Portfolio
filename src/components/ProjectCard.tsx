@@ -18,8 +18,8 @@ export function ProjectVisual({ project }: { project: Project }) {
           src={project.image}
           alt={project.alt}
           loading="lazy"
-          width={project.slug === "adaptui" ? 380 : 1280}
-          height={project.slug === "adaptui" ? 740 : 800}
+          width={project.imageSize.width}
+          height={project.imageSize.height}
         />
       </div>
       <span className="visual-index" aria-hidden="true">

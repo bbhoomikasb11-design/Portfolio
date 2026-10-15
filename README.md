@@ -27,7 +27,7 @@ Browser tests use installed Google Chrome. For CI without Chrome, install Chrome
 - `src/data/experience.ts`: experience entries; dates intentionally omitted pending confirmation.
 - `docs/AUDIT.md`: inspected sources, scope limits, discrepancies and asset inventory.
 - `docs/QA.md`: measured checks and publication status.
-- `public/images`: real source-interface captures and cropped Figma overview; optimized WebP.
+- `public/images`: real source-interface captures, the owner-supplied SafeScan homepage and the original Figma overview; optimized WebP.
 - `public/fonts`: locally served official Google Fonts. See `public/fonts/SOURCES.md`.
 
 The opening content and portrait sources live in `profile.opening` and `profile.heroPortrait`. `Hero.tsx` uses 360/720 px transparent WebP variants of the owner's supplied black-blazer portrait, prepared with built-in imagegen background extraction. CSS supplies the monochrome treatment; the blue panel is a separate element. The edited source is preserved in `design/hero/portrait-cutout.png`, and the original, uncut owner photo remains available in the existing 480/960 px assets and `profile.portrait`. See the prompt and provenance in `docs/AUDIT.md`. When replacing the cutout, preserve alpha and update the image's intrinsic width/height in `Hero.tsx` if its proportions change. Set `profile.resume` only after confirming a current public résumé. Until then the action opens a résumé request email.
@@ -68,7 +68,7 @@ Vercel CLI reported logged out during the build. GitHub push succeeded through t
 3. Confirm WE3.BUILD engagement type/dates and permission for any future client examples.
 4. Updated résumé: linked PDF says 8.59 CGPA and two poster wins; brief reports 9.0 and three. CampusMesh stack also differs from inspected source.
 5. CampusMesh final demo, team attribution, and backend configuration for functional verification.
-6. Installed-browser AdaptUI validation, and readable SafeScan frame exports/design rationale.
+6. Installed-browser AdaptUI validation, and the remaining SafeScan flow-screen exports/design rationale. The homepage image has been supplied and added.
 7. ClearHead server/key boundary and runtime corrections before claiming a working full-stack deployment. See audit.
 8. Confirmed production origin and authenticated GitHub/Vercel access.
 

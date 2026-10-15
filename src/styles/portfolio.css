@@ -1368,3 +1368,29 @@ body {
     gap: 15px;
   }
 }
+/* Keep the supplied SafeScan homepage complete in every project view. */
+.project-card .visual-safescan .screenshot-frame,
+.dialog-scroll > .visual-safescan .screenshot-frame,
+.case-figure .visual-safescan .screenshot-frame {
+  inset: 64px 24px 28px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+  box-shadow: none;
+}
+.visual-safescan .screenshot-frame img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 12px 32px #10111618;
+}
+.visual-safescan .visual-index {
+  display: none;
+}
+.dialog-scroll > .visual-safescan {
+  height: clamp(270px, 55vw, 480px);
+}

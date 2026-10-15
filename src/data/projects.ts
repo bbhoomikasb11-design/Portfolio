@@ -2,6 +2,7 @@ export type Category = 'Engineering' | 'Product design';
 export interface Project {
   slug: string; name: string; category: Category; discipline: string; summary: string; role: string;
   status: string; stack: string[]; image: string; alt: string; caption: string; source: string; sourceLabel: string;
+  imageSize: { width: number; height: number };
   intro: string; sections: { title: string; text: string }[]; flow: string[];
 }
 const github = 'https://github.com/bbhoomikasb11-design/';
@@ -11,6 +12,7 @@ export const projects: Project[] = [
     summary: 'Bringing student resources closer to the students who need them.',
     role: 'Product design, frontend & some backend', status: 'Team project · Demo pending',
     stack: ['React', 'Node.js', 'Express', 'PostgreSQL'], image: '/images/campusmesh.webp',
+    imageSize: { width: 1280, height: 800 },
     alt: 'CampusMesh sign-in interface captured from the repository running locally.',
     caption: 'Actual local frontend. Authentication and marketplace transactions require the configured backend.',
     source: github + 'CampusMesh', sourceLabel: 'Explore source',
@@ -28,6 +30,7 @@ export const projects: Project[] = [
     slug: 'adaptui', name: 'AdaptUI', category: 'Engineering', discipline: 'Accessibility · Chrome extension',
     summary: 'A web experience that can adapt to the person using it.', role: 'Independent design & development', status: 'Active development',
     stack: ['JavaScript', 'Manifest V3', 'axe-core', 'DOM APIs'], image: '/images/adaptui.webp',
+    imageSize: { width: 380, height: 740 },
     alt: 'Real AdaptUI popup with accessibility profile switches and a Scan this page button.',
     caption: 'Actual popup rendered from source. This capture is not an installed-extension scan result.',
     source: github + 'AdaptUI', sourceLabel: 'Explore source',
@@ -45,6 +48,7 @@ export const projects: Project[] = [
     slug: 'clearhead', name: 'ClearHead', category: 'Engineering', discipline: 'AI integration · Interface development',
     summary: 'Turning a page of scattered thoughts into a structured reflection.', role: 'Project development', status: 'AI client · Validation pending',
     stack: ['React', 'Vite', 'Gemini API'], image: '/images/clearhead.webp',
+    imageSize: { width: 1280, height: 800 },
     alt: 'ClearHead writing interface rendered from the actual React source.',
     caption: 'Actual local writing interface. AI responses were not generated during the audit; source privacy copy is not a verified data-handling guarantee.',
     source: github + 'ClearHead', sourceLabel: 'Explore source',
@@ -61,17 +65,18 @@ export const projects: Project[] = [
   {
     slug: 'safescan', name: 'SafeScan', category: 'Product design', discipline: 'UI/UX · Figma design study',
     summary: 'Exploring a clearer path from product barcode to ingredients.', role: 'UI/UX design', status: 'Design study',
-    stack: ['Figma', 'User flows', 'Interface design'], image: '/images/safescan.webp',
-    alt: 'Overview of the real SafeScan Figma canvas showing Home, Scan, label, insights, history and profile frames.',
-    caption: 'Original SafeScan Figma canvas, viewed in the browser. Detailed frame exports are still needed.',
+    stack: ['Figma', 'User flows', 'Interface design'], image: '/images/safescan-home.webp',
+    imageSize: { width: 1232, height: 978 },
+    alt: 'SafeScan homepage design with a product preview, dark green navigation, and barcode scanning and label upload actions.',
+    caption: 'SafeScan homepage design supplied by Bhoomika. Interface concept from the UI/UX study.',
     source: 'https://www.figma.com/design/Gk104dZnM486TBImFXejHX/SafeScan', sourceLabel: 'Open Figma',
     intro: 'A UI/UX exploration of the journey from scanning a product barcode to seeing its ingredients. SafeScan is presented as a design study, with the original Figma file available to explore.',
     flow: ['Open scan', 'Capture barcode', 'Identify product', 'Read ingredients'],
     sections: [
       { title: 'Making a label easier to approach', text: 'The owner-defined core journey is simple: scan a barcode, then see the product’s ingredients. The design work gives that journey a dedicated interface rather than treating scanning as an isolated utility.' },
       { title: 'A connected set of screens', text: 'The accessible Figma canvas includes Home, multiple Scan and label frames, insights, History and profile screens. The progression separates capture from the product-detail view, while history and profile occupy their own areas.' },
-      { title: 'A visual direction in the file', text: 'The actual frames use light surfaces, dark green navigation and grouped content areas. The overview shows an extended product flow; detailed frame exports and annotations are still needed to explain individual decisions with greater precision.' },
-      { title: 'Design scope & next steps', text: 'No working barcode service, product database, allergy detection or ingredient analysis was verified. Research records and usability results were not supplied. Next steps are readable frame exports, a documented prototype path and owner-provided context for the design decisions.' },
+      { title: 'A visual direction in the file', text: 'The supplied homepage pairs light surfaces and dark green navigation with a prominent product preview. Scanning and label upload appear as clear entry points, while the lower panel groups these actions together. Additional flow screens and annotations would help explain the decisions beyond the homepage.' },
+      { title: 'Design scope & next steps', text: 'No working barcode service, product database, allergy detection or ingredient analysis was verified. Research records and usability results were not supplied. Next steps are the remaining flow-screen exports, a documented prototype path and owner-provided context for the design decisions.' },
     ],
   },
 ];
