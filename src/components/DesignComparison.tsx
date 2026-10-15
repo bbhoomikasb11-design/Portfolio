@@ -4,19 +4,22 @@ import "../styles/comparison.css";
 
 const studies = [
   {
-    id: "market",
-    title: "Make the next step obvious.",
-    description: "A campus listing that puts the price, condition and pickup details where you need them. And a button that says what happens next.",
+    id: "bakery",
+    label: "BUTTER & CRUMB / BAKERY",
+    title: "A shopfront with some warmth.",
+    description: "Red ink, butter-yellow paper and bread that fills the frame. The counter menu is easy to scan, and reserving a loaf is the obvious next step.",
   },
   {
-    id: "planner",
-    title: "Give everything its place.",
-    description: "A task list with one clear starting point. Today’s work comes first; tomorrow’s can wait. A little breathing room helps, too.",
+    id: "cycling",
+    label: "LONGWAY / CYCLE SHOP",
+    title: "A bike you want to take out.",
+    description: "Lime, ink and oversized type give the shop its own voice. Frame sizes, price and a test ride sit together; the Sunday ride gives you a reason to come back.",
   },
   {
-    id: "event",
-    title: "Ask for a little less.",
-    description: "An event signup that explains the plan before asking for your details. Two useful fields, a clear invitation, and no unnecessary homework.",
+    id: "stay",
+    label: "FIELD HOUSE / WEEKEND STAY",
+    title: "Let the room set the mood.",
+    description: "Olive, warm paper and an unhurried layout let the house speak. The booking strip stays close to the photograph, with the price and guest count just below.",
   },
 ];
 const repeatedStudies = [...studies, ...studies, ...studies];
@@ -87,10 +90,10 @@ export default function DesignComparison() {
     <section id="design-thinking" className="design-comparison section" aria-labelledby="comparison-title">
       <div className="container comparison-intro">
         <div>
-          <p className="eyebrow">03 / A LITTLE DESIGN THINKING</p>
-          <h2 id="comparison-title">Same idea.<br /><em>A little more care.</em></h2>
+          <p className="eyebrow">03 / BACK TO THE DRAWING BOARD</p>
+          <h2 id="comparison-title">Same brief.<br /><em>Different feeling.</em></h2>
         </div>
-        <p>A screen can work and still make you work too hard. Here’s how I’d make a few everyday moments feel easier.</p>
+        <p>A bakery, a bike shop, a weekend away. I kept the information and the photographs, then gave each page a personality of its own. Pull the divider across.</p>
       </div>
       <div
         ref={stage}
@@ -102,12 +105,11 @@ export default function DesignComparison() {
             <div className="comparison-track">
               {repeatedStudies.map((study, index) => (
                 <div className="comparison-card" key={`${study.id}-${index}`}>
-                  <span className="comparison-frame-dots"><i /><i /></span>
                   <img
                     src={`/images/comparison/${study.id}-${version}.webp`}
                     alt=""
-                    width="720"
-                    height="900"
+                    width="900"
+                    height="1125"
                     loading={imagesReady ? "eager" : "lazy"}
                     draggable={false}
                   />
@@ -142,7 +144,7 @@ export default function DesignComparison() {
       <div className="container comparison-notes">
         {studies.map((study, index) => (
           <article key={study.id}>
-            <span className="eyebrow">0{index + 1} / {index === 0 ? "A CAMPUS FIND" : index === 1 ? "A STUDY DAY" : "A BOOK SWAP"}</span>
+            <span className="eyebrow">0{index + 1} / {study.label}</span>
             <h3>{study.title}</h3>
             <p>{study.description}</p>
           </article>
