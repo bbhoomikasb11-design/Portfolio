@@ -9,7 +9,7 @@ export default function EducationPage() {
     <section className="container profile-page education-page">
       <header className="profile-page-heading">
         <p className="eyebrow">EDUCATION</p>
-        <h1>
+        <h1 data-reveal="heading">
           Curiosity is
           <br />
           <em>a good starting point.</em>
@@ -24,9 +24,9 @@ export default function EducationPage() {
           <Education key={entry.institution} entry={entry} index={index} />
         ))}
       </div>
-      <div className="learning-note" data-reveal="">
+      <div className="learning-note">
         <p className="eyebrow">LEARNING BY MAKING</p>
-        <h2>
+        <h2 data-reveal="heading">
           From an idea to
           <br />
           <em>something useful.</em>

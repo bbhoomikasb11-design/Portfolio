@@ -19,7 +19,7 @@ export default function Skills() {
     >
       <div className="skills-panel">
         <p className="eyebrow">01 / MY TOOLKIT</p>
-        <h2 id="skills-title">
+        <h2 id="skills-title" data-reveal="heading">
           Thoughtful design.
           <br />
           <em>A hands-on toolkit.</em>

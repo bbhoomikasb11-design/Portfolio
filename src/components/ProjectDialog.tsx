@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import type { Project } from "../data/projects";
 import { Arrow } from "./Icons";
 import { ProjectVisual } from "./ProjectCard";
+import { motionDuration } from "../lib/motion";
 
 export default function ProjectDialog({
   project,
@@ -39,7 +40,7 @@ export default function ProjectDialog({
       return;
     }
     setClosing(true);
-    timer.current = setTimeout(finish, 180);
+    timer.current = setTimeout(finish, motionDuration("hover"));
   }
   function isBackdrop(
     event:

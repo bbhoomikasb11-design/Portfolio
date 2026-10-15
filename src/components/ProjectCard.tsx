@@ -13,7 +13,7 @@ export function ProjectVisual({ project }: { project: Project }) {
             : "FROM THE SOURCE"}
         </span>
       </div>
-      <div className="screenshot-frame">
+      <div className="screenshot-frame" data-reveal="image">
         <img
           src={project.image}
           alt={project.alt}
@@ -44,7 +44,7 @@ export default function ProjectCard({
   onOpen: (project: Project) => void;
 }) {
   return (
-    <article className="project-card">
+    <article className="project-card" data-reveal="rise">
       <button
         type="button"
         className="project-image-link"

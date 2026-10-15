@@ -110,12 +110,7 @@
  .opening-seal-copy { font-size:8px; inset:21px 13px; }
  .opening-footer p { font-size:18px; }
 }
-@media (prefers-reduced-motion:no-preference) {
- .opening-blue-panel { animation:opening-panel .75s cubic-bezier(.16,1,.3,1) both; transform-origin:bottom; }
- .opening-portrait img { animation:opening-portrait .75s cubic-bezier(.16,1,.3,1) both; }
- @keyframes opening-panel { from { transform:scaleY(.94); } to { transform:scaleY(1); } }
- @keyframes opening-portrait { from { translate:0 18px; } to { translate:0 0; } }
-}
+
 @media (prefers-reduced-motion:reduce) {
  .opening-arrow,.opening-seal { transition:none; }
  .opening-work-link:hover .opening-arrow { transform:none; }

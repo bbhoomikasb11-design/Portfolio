@@ -1109,74 +1109,7 @@ body {
     gap: 18px;
   }
 }
-@media (prefers-reduced-motion: no-preference) {
-  .portrait {
-    animation: portrait-arrive 0.65s cubic-bezier(0.2, 0.7, 0.3, 1) both;
-  }
-  .skill-cloud {
-    animation: skill-arrive 0.3s ease-out;
-  }
-  .project-dialog[open] {
-    animation: card-open 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  .project-dialog.is-closing {
-    animation: card-close 0.18s ease-in both;
-  }
-  .project-dialog[open]::backdrop {
-    animation: backdrop-open 0.25s ease-out;
-  }
-  .project-dialog.is-closing::backdrop {
-    animation: backdrop-close 0.18s ease-in both;
-  }
-  @keyframes portrait-arrive {
-    from {
-      transform: translateY(18px);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-  @keyframes skill-arrive {
-    from {
-      transform: translateY(7px);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-  @keyframes card-open {
-    from {
-      transform: translateY(24px) scale(0.97);
-    }
-    to {
-      transform: translateY(0) scale(1);
-    }
-  }
-  @keyframes card-close {
-    from {
-      transform: translateY(0) scale(1);
-    }
-    to {
-      transform: translateY(18px) scale(0.98);
-    }
-  }
-  @keyframes backdrop-open {
-    from {
-      background: transparent;
-      backdrop-filter: blur(0);
-    }
-    to {
-      background: var(--overlay);
-      backdrop-filter: blur(5px);
-    }
-  }
-  @keyframes backdrop-close {
-    to {
-      background: transparent;
-      backdrop-filter: blur(0);
-    }
-  }
-}
+
 
 .dialog-scroll:focus-visible {
   outline: 2px solid var(--blue);
@@ -1228,8 +1161,8 @@ body {
   border-radius: 100px;
   pointer-events: none;
   transition:
-    transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    width 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform var(--motion-nav) var(--ease-reveal),
+    width var(--motion-nav) var(--ease-reveal);
 }
 .footer-actions {
   display: flex;
@@ -1433,40 +1366,5 @@ body {
   .footer-actions {
     margin-left: auto;
     gap: 15px;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  main {
-    animation: page-arrive 450ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .section-heading {
-    animation: none;
-  }
-  .navigation.is-open {
-    animation: menu-arrive 220ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .button svg,
-  .text-link svg {
-    transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .button:hover svg,
-  .text-link:hover svg {
-    transform: translate(2px, -2px);
-  }
-  @keyframes page-arrive {
-    from {
-      translate: 0 12px;
-    }
-    to {
-      translate: 0 0;
-    }
-  }
-  @keyframes menu-arrive {
-    from {
-      translate: 0 -8px;
-    }
-    to {
-      translate: 0 0;
-    }
   }
 }

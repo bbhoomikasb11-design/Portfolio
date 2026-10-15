@@ -1,0 +1,191 @@
+/* Motion tokens are shared with Web Animations through lib/motion.ts.
+   Keep durations in ms. Layout and content never depend on an entrance finishing. */
+:root {
+  --motion-hover: 180ms;
+  --motion-nav: 220ms;
+  --motion-page: 240ms;
+  --motion-image: 560ms;
+  --motion-heading: 620ms;
+  --motion-hero: 1000ms;
+  --motion-theme: 240ms;
+  --motion-card: 650ms;
+  --ease-reveal: cubic-bezier(.16, 1, .3, 1);
+  --ease-ui: cubic-bezier(.2, .7, .3, 1);
+}
+
+/* Only headline lines are masked; the semantic heading remains intact. */
+.opening-line { overflow: clip; padding-block: .08em; margin-block: -.08em; }
+.opening-line-text { display: block; }
+.opening-arrow { translate: var(--magnet-x, 0px) var(--magnet-y, 0px); }
+.theme-icon { display: grid; place-items: center; }
+
+.text-link, .email-link { position: relative; }
+.text-link::after, .email-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.navigation a::after {
+  content: "";
+  position: absolute;
+  bottom: 9px;
+  left: 19px;
+  right: 19px;
+  height: 1px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.text-link:focus-visible::after, .email-link:focus-visible::after,
+.navigation a:focus-visible::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Home has its own sequence; moving its entire page would double the motion. */
+  .portfolio-route { animation: page-arrive var(--motion-page) var(--ease-ui); }
+  .navigation.is-open { animation: menu-arrive var(--motion-nav) var(--ease-reveal); }
+  .nav-active-pill {
+    transition: transform var(--motion-nav) var(--ease-reveal), width var(--motion-nav) var(--ease-reveal);
+  }
+  .opening-kicker { animation: quiet-arrive var(--motion-heading) var(--ease-reveal) both; }
+  .opening-line-text { animation: opening-line var(--motion-hero) var(--ease-reveal) both; }
+  .opening-line:nth-child(2) .opening-line-text { animation-delay: 70ms; }
+  .opening-line:nth-child(3) .opening-line-text { animation-delay: 140ms; }
+  .opening-blue-panel { transform-origin: bottom; animation: opening-panel var(--motion-hero) var(--ease-reveal) both; }
+  .opening-portrait img { animation: portrait-layer var(--motion-hero) var(--ease-reveal) 100ms both; }
+  .opening-introduction { animation: quiet-arrive var(--motion-heading) var(--ease-reveal) 140ms both; }
+  .opening-actions { animation: quiet-arrive var(--motion-heading) var(--ease-reveal) 220ms both; }
+  .opening-margin { animation: quiet-arrive var(--motion-heading) var(--ease-reveal) 350ms both; }
+  .opening-seal { animation: seal-arrive var(--motion-heading) var(--ease-reveal) 440ms both; }
+  .opening-footer { animation: quiet-arrive var(--motion-heading) var(--ease-reveal) 340ms both; }
+  .opening-work-link:focus-visible .opening-arrow { rotate: -35deg; }
+  .opening-seal:focus-visible { transform: rotate(0); }
+
+  .button, .navigation a, .skill-filters button, .filter-bar button,
+  .footer-theme, .dialog-close, .achievement-controls button, .comparison-controls button {
+    transition: transform var(--motion-hover) var(--ease-ui), border-color var(--motion-hover), box-shadow var(--motion-hover);
+  }
+  .text-link, .email-link, .social-links a, .opening-skills-link, .archive-row h3,
+  .case-body aside nav a, .project-card-copy h2 button { transition: none; }
+  .button svg, .text-link svg, .email-link svg, .social-links svg,
+  .archive-row > svg, .next-project > svg { transition: transform var(--motion-hover) var(--ease-ui); }
+  .text-link::after, .email-link::after, .navigation a::after {
+    transition: transform var(--motion-nav) var(--ease-ui);
+  }
+  .opening-arrow {
+    transition: translate var(--motion-hover) var(--ease-reveal), rotate var(--motion-hover) var(--ease-ui), transform var(--motion-hover) var(--ease-ui);
+  }
+  .opening-seal { transition: transform var(--motion-hover) var(--ease-ui); }
+  .project-card {
+    transition: transform var(--motion-hover) var(--ease-ui), box-shadow var(--motion-hover);
+  }
+  .screenshot-frame { transition: transform var(--motion-image) var(--ease-reveal); }
+  .skill-cloud { animation: skill-arrive var(--motion-nav) var(--ease-ui); }
+  .skill-group li { transition: transform var(--motion-hover) var(--ease-ui), border-color var(--motion-hover); }
+  .contact-section input, .contact-section textarea { transition: border-color var(--motion-hover); }
+
+  /* Enter and leave a project without a layout jump or a second overlay system. */
+  .project-dialog[open] { animation: card-open var(--motion-page) var(--ease-reveal) both; }
+  .project-dialog.is-closing { animation: card-close var(--motion-hover) ease-in both; }
+  .project-dialog[open]::backdrop { animation: fade-in var(--motion-page) ease-out; }
+  .project-dialog.is-closing::backdrop { animation: fade-out var(--motion-hover) ease-in both; }
+  .theme-icon { animation: theme-icon-arrive var(--motion-theme) var(--ease-ui); }
+
+  /* Reveal a complete palette, preserving the text/background contrast in each view.
+     Unsupported browsers and reduced motion switch directly. */
+  :root.theme-transitioning *,
+  :root.theme-transitioning *::before,
+  :root.theme-transitioning *::after { transition: none !important; }
+  :root.theme-transitioning::view-transition { pointer-events: none; }
+  :root.theme-transitioning::view-transition-group(root) { animation: none; }
+  :root.theme-transitioning::view-transition-old(root),
+  :root.theme-transitioning::view-transition-new(root) {
+    mix-blend-mode: normal;
+    animation: none;
+  }
+  :root.theme-transitioning::view-transition-old(root) { z-index: 0; }
+  :root.theme-transitioning::view-transition-new(root) {
+    z-index: 1;
+    animation: theme-reveal var(--motion-theme) var(--ease-ui) both;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .text-link:hover::after, .email-link:hover::after,
+  .navigation a:not([aria-current]):hover::after { transform: scaleX(1); }
+  .navigation a:hover { transform: none; }
+  .button:hover { transform: translateY(-2px); }
+  .button:active { transform: translateY(0); }
+  .button:hover svg, .text-link:hover svg, .email-link:hover svg,
+  .social-links a:hover svg, .archive-row:hover > svg, .next-project:hover > svg { transform: translate(2px, -2px); }
+  .footer-theme:hover, .achievement-controls button:not(:disabled):hover { transform: translateY(-2px); }
+  .opening-work-link:hover .opening-arrow { transform: none; rotate: -35deg; }
+  .project-card .project-image-link:hover .screenshot-frame,
+  .project-card .project-image-link:focus-visible .screenshot-frame { transform: rotate(0) translateY(-5px); }
+}
+
+/* Touch never inherits sticky hover movement; keyboard focus remains visible. */
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .button:hover, .navigation a:hover, .skill-group li:hover, .dialog-close:hover,
+  .project-card:hover, .project-card:focus-within { transform: none; }
+  .project-card .project-image-link:is(:hover, :focus-visible) .screenshot-frame { transform: rotate(-2deg); }
+  .project-card .visual-adaptui .screenshot-frame { transform: rotate(3deg) !important; }
+  .opening-work-link:hover .opening-arrow { transform: none; rotate: none; translate: none; }
+  .opening-seal:hover { transform: rotate(-12deg); }
+}
+
+@keyframes opening-line {
+  from { translate: 0 105%; }
+  to { translate: 0 0; }
+}
+@keyframes opening-panel {
+  from { transform: scaleY(.78); opacity: .7; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+@keyframes portrait-layer {
+  from { translate: 0 24px; scale: 1.025; }
+  to { translate: 0 0; scale: 1; }
+}
+@keyframes seal-arrive {
+  from { scale: .86; }
+  to { scale: 1; opacity: 1; }
+}
+@keyframes quiet-arrive {
+  from { translate: 0 12px; }
+  to { translate: 0 0; opacity: 1; }
+}
+@keyframes page-arrive {
+  from { translate: 0 6px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes menu-arrive {
+  from { translate: 0 -6px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes skill-arrive {
+  from { translate: 0 4px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes card-open {
+  from { transform: translateY(14px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes card-close {
+  to { opacity: 0; transform: translateY(8px) scale(.99); }
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes theme-icon-arrive {
+  from { opacity: .6; rotate: -25deg; scale: .9; }
+  to { opacity: 1; rotate: 0deg; scale: 1; }
+}
+
+@keyframes theme-reveal {
+  from { clip-path: inset(100% 0 0); }
+  to { clip-path: inset(0); }
+}

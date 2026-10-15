@@ -39,7 +39,7 @@ export default function Achievements() {
       <div className="achievement-heading">
         <div>
           <p className="eyebrow">04 / A FEW MOMENTS WORTH SHARING</p>
-          <h2 id="achievements-title">Achievements<span>.</span></h2>
+          <h2 id="achievements-title" data-reveal="heading">Achievements<span>.</span></h2>
         </div>
         <div className="achievement-controls" aria-label="Browse achievements">
           <button type="button" aria-label="Previous achievements" aria-controls="achievement-track" disabled={edges.start} onClick={() => browse(-1)}><Arrow /></button>
@@ -48,7 +48,7 @@ export default function Achievements() {
       </div>
       <div ref={track} id="achievement-track" className="achievement-grid" role="region" aria-label="Achievements — swipe or use the arrow buttons to browse" tabIndex={0}>
         {achievements.map((item) => (
-          <article className="achievement-card" key={item.title}>
+          <article className="achievement-card" key={item.title} data-reveal="pop">
             {item.photo ? (
               <figure className={`achievement-media achievement-media--${item.photo.presentation}`}>
                 <img className="achievement-photo" src={item.photo.src} alt={item.photo.alt} loading="lazy" decoding="async" width={item.photo.width} height={item.photo.height} />

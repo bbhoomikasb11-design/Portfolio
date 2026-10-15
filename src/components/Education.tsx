@@ -2,7 +2,7 @@ import type { EducationEntry } from "../data/education";
 
 export default function Education({ entry, index }: { entry: EducationEntry; index: number }) {
   return (
-    <article className={`education-card${index === 0 ? " education-featured" : ""}`} data-reveal="">
+    <article className={`education-card${index === 0 ? " education-featured" : ""}`} data-reveal="rise">
       <div className="education-topline">
         <span className="education-index" aria-hidden="true">0{index + 1}</span>
         <p className="eyebrow">{entry.level}</p>

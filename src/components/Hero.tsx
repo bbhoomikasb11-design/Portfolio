@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { profile } from "../data/profile";
 import { Arrow } from "./Icons";
+import { useMagneticCTA } from "../hooks/useMagneticCTA";
 
 export default function Hero() {
+  const workLink = useMagneticCTA();
   return (
     <section className="opening-hero container" aria-labelledby="opening-title">
       <div className="opening-stage">
@@ -10,13 +12,15 @@ export default function Hero() {
           <p className="opening-kicker">{profile.name} <span aria-hidden="true">/</span> Product design + development</p>
           <h1 id="opening-title">
             {profile.opening.headline.map((line, index) => (
-              <span className={index === 1 ? "opening-emphasis" : undefined} key={line}>{line}{index < 2 && " "}</span>
+              <span className={`opening-line${index === 1 ? " opening-emphasis" : ""}`} key={line}>
+                <span className="opening-line-text">{line}{index < 2 && " "}</span>
+              </span>
             ))}
           </h1>
           <p className="opening-introduction">{profile.opening.introduction}</p>
-          <div className="opening-actions">
-            <Link className="opening-work-link" to="/projects">
-              <span className="opening-arrow"><Arrow /></span>
+          <div className="opening-actions" onFocusCapture={event => event.currentTarget.getAnimations().forEach(animation => animation.cancel())}>
+            <Link ref={workLink} className="opening-work-link" to="/projects">
+              <span className="opening-arrow" data-magnetic-surface=""><Arrow /></span>
               <span>View my work</span>
             </Link>
             <a className="opening-skills-link" href="#skills">Explore my skills <span aria-hidden="true">↘</span></a>
@@ -45,7 +49,7 @@ export default function Hero() {
               <span className="opening-margin-rule" />
             </div>
           </aside>
-          <Link to="/contact" className="opening-seal" aria-label="Open to internships and full-time opportunities. Let's talk.">
+          <Link to="/contact" className="opening-seal" onFocus={event => event.currentTarget.getAnimations().forEach(animation => animation.cancel())} aria-label="Open to internships and full-time opportunities. Let's talk.">
             <svg className="opening-seal-ring" viewBox="0 0 140 140" aria-hidden="true">
               <circle cx="70" cy="70" r="67" />
               <circle cx="70" cy="70" r="49" />

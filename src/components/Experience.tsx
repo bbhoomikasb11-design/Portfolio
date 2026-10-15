@@ -12,7 +12,7 @@ export default function Experience({ page = false }: { page?: boolean }) {
       <div className="section-heading">
         <div>
           <p className="eyebrow">{page ? "EXPERIENCE" : "03 / EXPERIENCE"}</p>
-          <Heading>
+          <Heading data-reveal="heading">
             Learning through
             <br />
             <em>meaningful work.</em>
@@ -26,7 +26,7 @@ export default function Experience({ page = false }: { page?: boolean }) {
       </div>
       <div className="experience-list">
         {experience.map((item, i) => (
-          <article key={item.organization}>
+          <article key={item.organization} data-reveal="rise">
             <span className="experience-index">0{i + 1}</span>
             <div className="experience-title">
               <p className="eyebrow">{item.kind}</p>

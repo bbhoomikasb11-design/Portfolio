@@ -30,7 +30,7 @@ export default function Contact({ page = false }: { page?: boolean }) {
           <p className="eyebrow">
             {page ? "LET’S CONNECT" : "04 / LET’S CONNECT"}
           </p>
-          <Heading>
+          <Heading data-reveal="heading">
             Good things start
             <br />
             with a <em>conversation.</em>
@@ -65,7 +65,7 @@ export default function Contact({ page = false }: { page?: boolean }) {
             </a>
           </div>
         </div>
-        <form onSubmit={submit} onChange={() => setDraft(null)}>
+        <form onSubmit={submit} onChange={() => setDraft(null)} data-reveal="rise">
           <FormHeading>Leave a little introduction.</FormHeading>
           <div className="form-row">
             <label>

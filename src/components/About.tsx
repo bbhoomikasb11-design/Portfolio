@@ -13,7 +13,7 @@ export default function About() {
         <div className="about-overview">
           <div className="about-heading">
             <p className="eyebrow">02 / A LITTLE ABOUT ME</p>
-            <h2 id="about-title">
+            <h2 id="about-title" data-reveal="heading">
               Curious by nature.
               <br />
               <em>Builder by choice.</em>
@@ -22,7 +22,7 @@ export default function About() {
               <span aria-hidden="true">↗</span> Bengaluru, India
             </p>
           </div>
-          <div className="about-story">
+          <div className="about-story" data-reveal="rise">
             <p className="about-lead">
               I like turning <em>“what if?”</em>
               <br />
@@ -44,7 +44,7 @@ export default function About() {
         </div>
         <div className="about-focus">
           {aboutFocus.map((item, index) => (
-            <article key={item.title}>
+            <article key={item.title} data-reveal="rise">
               <div className="focus-topline">
                 <span className="eyebrow">0{index + 1}</span>
                 <span className="focus-detail">{item.detail}</span>

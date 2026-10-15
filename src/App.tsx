@@ -95,7 +95,7 @@ function Projects() {
   return (
     <div className="container archive-page">
       <p className="eyebrow">THE PROJECT INDEX</p>
-      <h1>
+      <h1 data-reveal="heading">
         Thought, craft
         <br />
         and <em>working code.</em>
@@ -133,7 +133,7 @@ function Projects() {
       </div>
       <section className="additional-work section">
         <p className="eyebrow">ALSO ON THE WORKBENCH</p>
-        <h2>
+        <h2 data-reveal="heading">
           More things <em>I’ve explored.</em>
         </h2>
         {archive.map((p) => (
@@ -174,7 +174,7 @@ function CaseStudy() {
       </Link>
       <div className="case-heading">
         <p className="eyebrow">{project.discipline}</p>
-        <h1>
+        <h1 data-reveal="heading">
           {project.name}
           <span>.</span>
         </h1>
@@ -219,7 +219,7 @@ function CaseStudy() {
           </a>
         </aside>
         <div className="case-sections">
-          <section className="journey">
+          <section className="journey" data-reveal="rise">
             <p className="eyebrow">THE INTENDED JOURNEY</p>
             <ol>
               {project.flow.map((f, i) => (
@@ -233,7 +233,7 @@ function CaseStudy() {
           {project.sections.map((s, i) => (
             <section id={`section-${i}`} key={s.title}>
               <span className="eyebrow">0{i + 1}</span>
-              <h2>{s.title}</h2>
+              <h2 data-reveal="heading">{s.title}</h2>
               <p>{s.text}</p>
             </section>
           ))}
@@ -251,7 +251,7 @@ function CaseStudy() {
       <Link className="next-project" to={`/projects/${next.slug}`}>
         <div>
           <p className="eyebrow">NEXT EXPLORATION</p>
-          <h2>{next.name}</h2>
+          <h2 data-reveal="heading">{next.name}</h2>
         </div>
         <Arrow diagonal />
       </Link>
@@ -288,7 +288,7 @@ export default function App() {
         id="main"
         tabIndex={-1}
         key={pathname}
-        className={pathname === "/playground" ? "playground-route" : undefined}
+        className={pathname === "/playground" ? "playground-route" : pathname === "/" ? "home-route" : "portfolio-route"}
       >
         <Suspense
           fallback={

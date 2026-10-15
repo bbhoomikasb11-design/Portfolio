@@ -92,7 +92,7 @@ export default function DesignComparison() {
       <div className="container comparison-intro">
         <div>
           <p className="eyebrow">03 / BACK TO THE DRAWING BOARD</p>
-          <h2 id="comparison-title">Same brief.<br /><em>Different feeling.</em></h2>
+          <h2 id="comparison-title" data-reveal="heading">Same brief.<br /><em>Different feeling.</em></h2>
         </div>
         <p>A bakery, a bike shop, a weekend away. I kept the information and the photographs, then gave each page a personality of its own. Pull the divider across.</p>
       </div>
@@ -144,7 +144,7 @@ export default function DesignComparison() {
       </div>
       <div className="container comparison-notes">
         {studies.map((study, index) => (
-          <article key={study.id}>
+          <article key={study.id} data-reveal="rise">
             <span className="eyebrow">0{index + 1} / {study.label}</span>
             <h3>{study.title}</h3>
             <p>{study.description}</p>

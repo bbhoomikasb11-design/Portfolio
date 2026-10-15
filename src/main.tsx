@@ -8,4 +8,5 @@ import './styles/global.css';
 import './styles/portfolio.css';
 import './styles/sections.css';
 import './styles/hero.css';
+import './styles/motion.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><App /></BrowserRouter></React.StrictMode>);
