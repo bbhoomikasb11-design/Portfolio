@@ -30,5 +30,29 @@
   "queue-desk": {
     "width": 1000,
     "height": 2674
+  },
+  "stillwater": {
+    "width": 1000,
+    "height": 1399
+  },
+  "nocturne": {
+    "width": 1000,
+    "height": 1486
+  },
+  "forme-light": {
+    "width": 1000,
+    "height": 1439
+  },
+  "margin-finance": {
+    "width": 1000,
+    "height": 1244
+  },
+  "margin-ledger": {
+    "width": 1000,
+    "height": 860
+  },
+  "nocturne-player": {
+    "width": 1000,
+    "height": 851
   }
 }

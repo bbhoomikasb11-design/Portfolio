@@ -40,5 +40,17 @@
     "source": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=85",
     "bytes": 358245,
     "license": "https://unsplash.com/license"
+  },
+  {
+    "file": "coast.jpg",
+    "source": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1600&q=88",
+    "bytes": 412498,
+    "license": "https://unsplash.com/license"
+  },
+  {
+    "file": "lighting.jpg",
+    "source": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1600&q=88",
+    "bytes": 204964,
+    "license": "https://unsplash.com/license"
   }
 ]

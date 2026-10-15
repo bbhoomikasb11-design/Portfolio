@@ -1,8 +1,10 @@
-/* Image-only canvas beneath the shared portfolio navigation. */
-.playground-route {
-  animation: none !important;
-}
+/* Image-only gallery beneath the shared navigation. */
+.playground-route { animation: none !important; }
 .playground-shell {
+  --canvas-bg: #eceef0;
+  --canvas-dot: #cfd5db;
+  --frame-rim: #fff;
+  --frame-edge: #d9dee5;
   position: fixed;
   inset: 110px 0 0;
   display: flex;
@@ -11,62 +13,52 @@
   color: var(--ink);
   overflow: hidden;
 }
+:root[data-theme="dark"] .playground-shell {
+  --canvas-bg: #1c232d;
+  --canvas-dot: #35414e;
+  --frame-rim: #cad2dc;
+  --frame-edge: #080f17;
+}
 .play-canvas {
   position: relative;
   flex: 1;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-  background-color: var(--soft);
-  background-image: radial-gradient(var(--line) 1.2px, transparent 1.2px);
+  background-color: var(--canvas-bg);
+  background-image: radial-gradient(var(--canvas-dot) 1px, transparent 1px);
   touch-action: none;
   cursor: grab;
   user-select: none;
   isolation: isolate;
 }
-.play-canvas.is-dragging {
-  cursor: grabbing;
-}
-.play-canvas:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: -4px;
-}
-.play-plane {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: 0 0;
-  will-change: transform;
-}
+.play-canvas.is-dragging { cursor: grabbing; }
+.play-canvas:focus-visible { outline: 2px solid var(--blue); outline-offset: -4px; }
+.play-plane { position: absolute; top: 0; left: 0; transform-origin: 0 0; will-change: transform; }
 .play-tile {
   position: absolute;
-  width: 600px;
-  padding: 0;
-  border: 1px solid var(--line);
+  transform-origin: center;
+  transform: rotate(calc(var(--tile-tilt, 0deg) + var(--play-drift, 0deg)));
+}
+.play-card-surface {
+  height: 100%;
+  border: 5px solid var(--frame-rim);
+  border-radius: 26px;
   background: var(--surface);
-  border-radius: 5px;
-  box-shadow: 0 4px 0 #7386a212, 0 16px 36px #233b6510;
+  box-shadow: 0 5px 0 var(--frame-edge), 0 9px 8px #38455a12, 0 20px 30px #38455a09, inset 0 -5px 10px #293a5010;
   overflow: hidden;
   transform-origin: center;
 }
-.play-tile img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 0;
-  background: #e8edf5;
-  pointer-events: none;
-}
+.play-tile img { display: block; width: 100%; height: auto; pointer-events: none; }
 .play-canvas-vignette {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 45px 15px color-mix(in srgb, var(--soft) 55%, transparent);
+  box-shadow: inset 0 0 70px 18px color-mix(in srgb, var(--canvas-bg) 55%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .play-tile { transform: rotate(var(--tile-tilt, 0deg)); }
 }
 @media (max-width: 900px) {
-  .playground-shell {
-    top: 100px;
-    height: calc(100dvh - 100px);
-  }
+  .playground-shell { top: 100px; height: calc(100dvh - 100px); }
 }

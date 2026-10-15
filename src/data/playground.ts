@@ -11,6 +11,60 @@ export interface PlaygroundPiece {
 /** Fictional, independently designed landing-page studies; not client work. */
 export const playgroundPieces: PlaygroundPiece[] = [
   {
+    "id": "stillwater",
+    "title": "Stillwater — a lakeside stay",
+    "width": 1000,
+    "height": 1399,
+    "description": "A hospitality landing page with a photographic opening, a booking strip and two room concepts. Fictional accommodation; no real property or booking service is claimed.",
+    "alt": "Forest-green hospitality design with a lake photograph, oversized ivory serif typography, a booking strip and quiet room descriptions.",
+    "image": "/images/playground/stillwater.webp"
+  },
+  {
+    "id": "margin-ledger",
+    "title": "Margin — the monthly ledger",
+    "width": 1000,
+    "height": 860,
+    "description": "A detailed financial-interface study with explicitly illustrative invoice figures and a hand-built bar chart.",
+    "alt": "Lavender presentation of a white monthly ledger card, a twelve-bar chart and sample invoice totals.",
+    "image": "/images/playground/margin-ledger.webp"
+  },
+  {
+    "id": "forme-light",
+    "title": "Forme — lighting catalogue",
+    "width": 1000,
+    "height": 1439,
+    "description": "A restrained lighting catalogue concept built around product photography, materials and everyday use. The photograph is reference imagery, not a claimed manufactured product.",
+    "alt": "Silver-grey lighting catalogue with a large desk-lamp photograph, editorial typography and three material swatches.",
+    "image": "/images/playground/forme-light.webp"
+  },
+  {
+    "id": "nocturne-player",
+    "title": "Nocturne — the listening desk",
+    "width": 1000,
+    "height": 851,
+    "description": "A music-player interface with an original CSS vinyl-record illustration and an imagined late-night mix.",
+    "alt": "A dark music-player card on a muted sage surface, with a vinyl record, playback controls and a slender progress line.",
+    "image": "/images/playground/nocturne-player.webp"
+  },
+  {
+    "id": "nocturne",
+    "title": "Nocturne — a listening room",
+    "width": 1000,
+    "height": 1486,
+    "description": "An imagined record-listening venue with a three-part evening programme and a short room introduction. Record graphics are authored in CSS.",
+    "alt": "Charcoal and sage music landing page with a large vinyl record, expressive serif type and an evening listening programme.",
+    "image": "/images/playground/nocturne.webp"
+  },
+  {
+    "id": "margin-finance",
+    "title": "Margin — independent-work finances",
+    "width": 1000,
+    "height": 1244,
+    "description": "A product concept for independent workers, with invoice status, sample payments and practical interface copy. It is not a live financial product or advice.",
+    "alt": "Porcelain and violet software landing page with a detailed invoice workspace, twelve-bar chart and concise product sections.",
+    "image": "/images/playground/margin-finance.webp"
+  },
+  {
     id: "daily-bread", title: "Daily Bread — neighbourhood bakery", width: 1000, height: 2528,
     description: "A full bakery homepage with a daily menu, kitchen note and visiting information. Fictional brand and sample prices; licensed bread photography.",
     alt: "Warm paper and burgundy bakery page with an arched bread photograph, large serif headline, menu and kitchen notes.",
@@ -61,8 +115,8 @@ export const playgroundPieces: PlaygroundPiece[] = [
 ];
 
 export const playgroundLayout = {
-  tileWidth: 600,
-  columnStep: 672,
-  // Reserve enough height for the longest full page, plus stagger and breathing room.
-  rowStep: Math.ceil(Math.max(...playgroundPieces.map(p => p.height / p.width)) * 600) + 150,
+  tileWidth: 542,
+  columnStep: 622,
+  gap: 80,
+  rim: 5,
 };

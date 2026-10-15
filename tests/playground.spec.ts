@@ -40,11 +40,12 @@ test("image-only canvas pans and zooms without opening overlays", async ({ page 
 
 test("image-only canvas remains accessible in both themes", async ({ page }) => {
   await page.goto("/playground");
-  await expect(page.getByRole("list", { name: "Original design concepts" }).getByRole("listitem")).toHaveCount(8);
+  await expect(page.getByRole("list", { name: "Original design concepts" }).getByRole("listitem")).toHaveCount(14);
   for (const theme of ["light", "dark"]) {
     await page.evaluate(t => { document.documentElement.dataset.theme = t; }, theme);
     expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze()).violations).toEqual([]);
   }
+  await page.locator(".play-tile img").evaluateAll(images => Promise.all(images.map(image => (image as HTMLImageElement).decode())));
   for (const img of await page.locator(".play-tile img").all()) {
     expect(await img.evaluate(e => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   }
@@ -123,4 +124,45 @@ test("touch pan and pinch, compact layouts and reduced motion", async ({
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   expect(await page.locator(".play-plane").getAttribute("style")).toBe(still);
   await context.close();
+});
+
+test("wheel glides under the cursor and live reduced motion stops interpolation", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/playground");
+  const canvas = page.getByRole("region", { name: "Infinite design canvas" });
+  await canvas.focus();
+  await page.keyboard.press("0");
+  const before = await page.locator(".play-plane").evaluate(el => {
+    const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return { x: m.m41, y: m.m42 };
+  });
+  await page.mouse.move(350, 400);
+  await page.mouse.wheel(240, 380);
+  const samples = await page.locator(".play-plane").evaluate(async el => {
+    const started = performance.now();
+    const values: { x: number; y: number }[] = [];
+    for (const time of [0, 80, 250, 1500]) {
+      while (performance.now() - started < time) await new Promise(requestAnimationFrame);
+      const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+      values.push({ x: matrix.m41, y: matrix.m42 });
+    }
+    return values;
+  });
+  expect(samples[0].x).toBeGreaterThan(samples[2].x);
+  expect(samples[0].y).toBeGreaterThan(samples[2].y);
+  expect(samples[3].x).toBeCloseTo(before.x - 240, 0);
+  expect(samples[3].y).toBeCloseTo(before.y - 380, 0);
+  await page.mouse.wheel(300, 300);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect.poll(() => page.locator(".playground-shell").evaluate(el => el.getAnimations({ subtree: true }).filter(a => a.playState === "running").length)).toBe(0);
+  const stopped = await page.locator(".play-plane").getAttribute("style");
+  await page.evaluate(async () => { for (let i = 0; i < 10; i++) await new Promise(requestAnimationFrame); });
+  expect(await page.locator(".play-plane").getAttribute("style")).toBe(stopped);
+  await canvas.focus();
+  await page.keyboard.press("0");
+  for (let i = 0; i < 8; i++) await page.keyboard.press("-");
+  await expect(page.locator(".play-plane")).toHaveAttribute("style", /scale\(0.3\)/);
+  await page.mouse.wheel(25000, -35000);
+  expect(await page.locator(".play-tile").count()).toBeLessThan(70);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
