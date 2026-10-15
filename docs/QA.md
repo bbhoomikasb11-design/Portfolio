@@ -123,3 +123,10 @@ Production build passed. Verified content and no horizontal overflow at 320, 375
 Added enhanced poster-presentation and debate photographs to their matching achievement cards, with unmodified JPEG originals accessible alongside each. Two optimized WebPs total approximately 200 KiB. The certificate is displayed in full; the event frame focuses on the certificate exchange. Updated the debate institution spelling and acknowledged the team result from the original certificate. Enhancement prompts and provenance are recorded in `docs/assets/achievement-photos.md`.
 
 Production TypeScript/build passed. Verified both images load, original-photo URLs return successfully, and layouts have no horizontal overflow at 320, 375, 430, 768, 1024, 1440 and 1680 px. Achievement section passes axe WCAG 2 A/AA and 2.1 AA in light and dark themes. Inspected desktop/light and mobile/dark screenshots in `docs/qa/achievement-photos-*.png`. The existing image-delivery/reduced-motion and skills-first homepage checks passed.
+
+
+## Compact achievement row
+
+Replaced the large two-column/two-row section with a native horizontal shelf: three cards on desktop, two on tablet, and one with a next-card preview on mobile. Reduced photos to 180 px, tightened typography and spacing, and removed duplicate oversized award numbers on photo cards. Added labeled previous/next controls with boundary states and reduced-motion-aware scrolling; native swipe and keyboard scrolling remain available. Originals remain accessible.
+
+Production build passed. Checked 320–1680 px with no document overflow, verified previous/next movement, and ran axe on the section in both themes with zero violations. Section height is now approximately 668–752 px across those widths. Refreshed the achievement desktop/light and mobile/dark captures.
