@@ -158,11 +158,46 @@
   margin-top: 20px;
   font-size: 12px;
 }
+.achievement-media {
+  margin: 0;
+  background: var(--soft);
+  border-bottom: 1px solid var(--line);
+}
 .achievement-photo {
+  display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 8/5;
+  aspect-ratio: 4/3;
   object-fit: cover;
+}
+.achievement-media--event .achievement-photo {
+  object-position: center 46%;
+}
+.achievement-media--document .achievement-photo {
+  object-fit: contain;
+}
+.achievement-media figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding: 8px 20px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.achievement-media figcaption a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.achievement-media figcaption svg {
+  width: 14px;
+  height: 14px;
 }
 .achievement-provenance {
   font-size: 11px;

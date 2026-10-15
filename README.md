@@ -78,7 +78,7 @@ The website intentionally does not claim production readiness for the source pro
 
 ### About, achievements and contact
 
-`About.tsx` presents a short introduction and three data-driven focus areas. `Achievements.tsx` displays four distinct owner-reported milestones, distinguishing awards, Round 1 selection and hackathon participation. Add approved event photos through each achievement’s optional `photo: { src, alt }` field in `src/data/profile.ts`, placing optimized images in `public/images/`. No missing-image boxes are published.
+`About.tsx` presents a short introduction and three data-driven focus areas. `Achievements.tsx` displays four distinct milestones, distinguishing awards, Round 1 selection and hackathon participation. The owner’s poster-presentation photo and debate certificate are included as enhanced WebPs with links to the untouched originals. The certificate supports the debate result; three poster wins and TechSprint selection remain self-reported. Configure approved photos through each achievement’s optional `photo` field in `src/data/profile.ts` (source, alt text, dimensions, original path and event/document presentation). See [photo provenance and enhancement prompts](docs/assets/achievement-photos.md). No missing-image boxes are published.
 
 `sections.css` styles these sections. Contact uses semantic theme tokens: powder-blue/porcelain surfaces in light mode, blue-gray surfaces in dark mode. Its form remains an explicitly labeled email-draft flow.
 

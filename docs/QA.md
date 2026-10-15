@@ -117,3 +117,9 @@ Doubled the row speed from 24 to 48 px/s. Hover, focus and divider adjustments n
 Replaced the three identical wide cards with an academic folio layout: a featured powder-blue degree card with a prominent CGPA, followed by paired PU and school cards on desktop. Added numbered stages, small book line drawings, serif headings and large blue results. Mobile stacks the three cards with clear score dividers. Result data is structured into label/value/suffix fields; all institutions, qualifications and reported scores remain unchanged.
 
 Production build passed. Verified content and no horizontal overflow at 320, 375, 430, 768, 1024, 1440 and 1680 px. Education passes axe WCAG 2 A/AA and 2.1 AA checks in both themes. Inspected `education-cards-desktop.png`, `education-cards-mobile.png` and `education-cards-dark-mobile.png`.
+
+## Owner-supplied achievement photos
+
+Added enhanced poster-presentation and debate photographs to their matching achievement cards, with unmodified JPEG originals accessible alongside each. Two optimized WebPs total approximately 200 KiB. The certificate is displayed in full; the event frame focuses on the certificate exchange. Updated the debate institution spelling and acknowledged the team result from the original certificate. Enhancement prompts and provenance are recorded in `docs/assets/achievement-photos.md`.
+
+Production TypeScript/build passed. Verified both images load, original-photo URLs return successfully, and layouts have no horizontal overflow at 320, 375, 430, 768, 1024, 1440 and 1680 px. Achievement section passes axe WCAG 2 A/AA and 2.1 AA in light and dark themes. Inspected desktop/light and mobile/dark screenshots in `docs/qa/achievement-photos-*.png`. The existing image-delivery/reduced-motion and skills-first homepage checks passed.

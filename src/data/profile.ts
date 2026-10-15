@@ -74,16 +74,32 @@ export interface Achievement {
   label: string;
   text: string;
   href?: string;
-  photo?: { src: string; alt: string };
+  photo?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    original: string;
+    presentation: "event" | "document";
+  };
 }
-// Owner-reported; dates, additional results and event imagery remain unconfirmed.
+// Owner-reported; supplied award photo and debate certificate added October 2026.
+// The poster photo documents one presentation, not all three reported wins.
 export const achievements: Achievement[] = [
   {
     title: "First place in debate",
     category: "PUBLIC SPEAKING",
     highlight: "1st",
     label: "place",
-    text: "Debate competition at Gousia College.",
+    text: "A first-place team result at Ghousia College of Engineering.",
+    photo: {
+      src: "/images/achievements/debate-enhanced.webp",
+      alt: "Enhanced photo of Bhoomika S’s debate winner certificate from Ghousia College of Engineering, with the original handwritten team note.",
+      width: 1280,
+      height: 959,
+      original: "/images/achievements/debate-original.jpg",
+      presentation: "document",
+    },
   },
   {
     title: "Three poster-presentation wins",
@@ -91,6 +107,14 @@ export const achievements: Achievement[] = [
     highlight: "3",
     label: "wins",
     text: "Presenting ideas through a combination of visuals and storytelling.",
+    photo: {
+      src: "/images/achievements/poster-presentation-enhanced.webp",
+      alt: "Enhanced photo of Bhoomika receiving a certificate in front of her projected poster presentation.",
+      width: 840,
+      height: 1873,
+      original: "/images/achievements/poster-presentation-original.jpg",
+      presentation: "event",
+    },
   },
   {
     title: "SEBI Securities Market TechSprint",

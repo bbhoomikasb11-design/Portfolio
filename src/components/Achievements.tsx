@@ -25,14 +25,24 @@ export default function Achievements() {
         {achievements.map((item) => (
           <article className="achievement-card" key={item.title}>
             {item.photo && (
-              <img
-                className="achievement-photo"
-                src={item.photo.src}
-                alt={item.photo.alt}
-                loading="lazy"
-                width={800}
-                height={500}
-              />
+              <figure className={`achievement-media achievement-media--${item.photo.presentation}`}>
+                <img
+                  className="achievement-photo"
+                  src={item.photo.src}
+                  alt={item.photo.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width={item.photo.width}
+                  height={item.photo.height}
+                />
+                <figcaption>
+                  <span>Enhanced photo</span>
+                  <a href={item.photo.original} target="_blank" rel="noreferrer"
+                    aria-label={`View original photo: ${item.title} (opens in a new tab)`}>
+                    View original <Arrow diagonal />
+                  </a>
+                </figcaption>
+              </figure>
             )}
             <div className="achievement-card-body">
               <div className="achievement-topline">
@@ -62,8 +72,9 @@ export default function Achievements() {
         ))}
       </div>
       <p className="achievement-provenance">
-        Achievements and competition selection are self-reported. Hackathon
-        participation is listed separately from awards.
+        Photos shared from my own collection. The three poster wins and TechSprint
+        selection are self-reported; hackathon participation is listed separately
+        from awards.
       </p>
     </section>
   );
