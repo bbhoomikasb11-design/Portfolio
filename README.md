@@ -2,11 +2,11 @@
 
 A project-first, single-page portfolio for Bhoomika S, a developer and product designer in Bengaluru.
 
-**Local redesign:** http://localhost:5174 on branch `redesign/single-page`.
+**Redesign preview:** http://localhost:5174 on branch [`redesign/single-page`](https://github.com/bbhoomikasb11-design/Portfolio/tree/redesign/single-page).
 
 **Existing live site (previous design):** https://bhoomika-portfolio-liard.vercel.app
 
-Per the owner’s instruction, this redesign stays local. It has not been pushed or deployed; the existing production version stays unchanged.
+The redesign is backed up on its own GitHub branch. Per the owner’s instruction, it is previewed locally and remains undeployed; the existing production version stays unchanged. Pushing source to GitHub does not authorize publishing the redesign.
 
 ## Development
 
