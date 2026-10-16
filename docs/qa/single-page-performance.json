@@ -1,0 +1,62 @@
+{
+  "measurement": "One Chrome lab run against the local production preview, cold cache, 390x844, 4x CPU slowdown, 1.6 Mbps down / 750 Kbps up / 150 ms latency; not field data or a Lighthouse score.",
+  "initial": {
+    "lcp": 1956,
+    "cls": 0,
+    "frames": 0,
+    "resources": [
+      {
+        "name": "/fonts/cormorant-garamond-normal-400.woff2",
+        "bytes": 24108
+      },
+      {
+        "name": "/fonts/manrope-normal-400.woff2",
+        "bytes": 16456
+      },
+      {
+        "name": "/fonts/manrope-normal-600.woff2",
+        "bytes": 16340
+      },
+      {
+        "name": "/assets/index-CEaC8mxh.js",
+        "bytes": 76130
+      },
+      {
+        "name": "/assets/index-C2HKNYxS.css",
+        "bytes": 3928
+      },
+      {
+        "name": "/images/bhoomika-portrait-480.webp",
+        "bytes": 18068
+      },
+      {
+        "name": "/images/campusmesh.webp",
+        "bytes": 15418
+      },
+      {
+        "name": "/images/safescan-home.webp",
+        "bytes": 63552
+      },
+      {
+        "name": "/fonts/manrope-normal-800.woff2",
+        "bytes": 14044
+      },
+      {
+        "name": "/images/adaptui.webp",
+        "bytes": 12092
+      },
+      {
+        "name": "/favicon.svg",
+        "bytes": 519
+      }
+    ],
+    "galleryMounted": false
+  },
+  "gallery": {
+    "lcp": 1956,
+    "cls": 0,
+    "frames": 0,
+    "thumbnails": 2,
+    "sectionHeight": 601.375
+  }
+}

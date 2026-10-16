@@ -13,4 +13,6 @@ playwright-report/
 *.tsbuildinfo
 .DS_Store
 scripts/render-*.mjs
+scripts/measure-*.mjs
+scripts/playground-thumbnails.py
 playwright.config.ts

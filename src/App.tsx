@@ -1,315 +1,46 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
-import { projects, archive } from "./data/projects";
-import Experience from "./components/Experience";
-import About from "./components/About";
-import DesignComparison from "./components/DesignComparison";
-import Achievements from "./components/Achievements";
-import ThemeToggle from "./components/ThemeToggle";
-import EducationPage from "./pages/EducationPage";
-import { pages } from "./data/pages";
-import { useScrollReveals } from "./hooks/useScrollReveals";
-import ProjectCard, { ProjectVisual } from "./components/ProjectCard";
-import Contact from "./components/Contact";
-import { Arrow } from "./components/Icons";
-import Header from "./components/Header";
-import Skills from "./components/Skills";
-import Hero from "./components/Hero";
-import ProjectDialog from "./components/ProjectDialog";
-import type { Project } from "./data/projects";
+import { useEffect } from 'react';
+import { Header } from './components/Header';
+import { ProjectCard } from './components/ProjectCard';
+import { Skills } from './components/Skills';
+import { Background } from './components/Background';
+import { Achievements } from './components/Achievements';
+import { Playground } from './components/playground/Playground';
+import { Arrow } from './components/Icons';
+import { profile } from './data/profile';
+import { projects, additionalProjects } from './data/projects';
+import { resolveLegacyLocation } from './lib/location';
 
-const PlaygroundPage = lazy(() => import("./pages/PlaygroundPage"));
-
-function RouteEffects() {
-  const { pathname, hash } = useLocation();
-  const initial = useRef(true);
-  useEffect(() => {
-    const project = projects.find((p) => pathname === `/projects/${p.slug}`);
-    const page = pages.find((p) => p.path === pathname);
-    const title = project
-      ? `${project.name} — Bhoomika S`
-      : page?.title || "Page not found — Bhoomika S";
-    const description =
-      project?.summary ||
-      page?.description ||
-      "Explore Bhoomika S’s portfolio.";
-    document.title = title;
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute("content", description);
-    document
-      .querySelector('meta[property="og:title"]')
-      ?.setAttribute("content", title);
-    document
-      .querySelector('meta[property="og:description"]')
-      ?.setAttribute("content", description);
-    if (hash)
-      requestAnimationFrame(() =>
-        document
-          .getElementById(hash === "#work" ? "skills" : hash.slice(1))
-          ?.scrollIntoView(),
-      );
-    else {
-      window.scrollTo({ top: 0, behavior: "instant" });
-      if (!initial.current)
-        document
-          .querySelector<HTMLElement>("main")
-          ?.focus({ preventScroll: true });
-    }
-    initial.current = false;
-  }, [pathname, hash]);
-  return null;
-}
-function Footer() {
-  return (
-    <footer className="site-footer container">
-      <Link to="/" className="footer-wordmark">
-        Bhoomika S<span>© {new Date().getFullYear()}</span>
-      </Link>
-      <p>Thoughtfully designed. Purposefully built.</p>
-      <div className="footer-actions">
-        <ThemeToggle />
-        <a href="#top">Back to top ↑</a>
-      </div>
-    </footer>
-  );
-}
-function Home() {
-  return (
-    <>
-      <Hero />
-      <Skills />
-      <About />
-      <DesignComparison />
-      <Achievements />
-      <Contact />
-    </>
-  );
-}
-function Projects() {
-  const [filter, setFilter] = useState("All work");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const visible = projects.filter(
-    (p) => filter === "All work" || p.category === filter,
-  );
-  return (
-    <div className="container archive-page">
-      <p className="eyebrow">THE PROJECT INDEX</p>
-      <h1 data-reveal="heading">
-        Thought, craft
-        <br />
-        and <em>working code.</em>
-      </h1>
-      <p className="page-intro">
-        Product explorations, shared builds and independent experiments. Each
-        one is another way of learning by making.
-      </p>
-      <div className="filter-bar" aria-label="Filter projects">
-        {["All work", "Engineering", "Product design"].map((f) => (
-          <button
-            key={f}
-            aria-pressed={filter === f}
-            onClick={() => setFilter(f)}
-          >
-            {f}
-            <span>
-              {f === "All work" ? "04" : f === "Engineering" ? "03" : "01"}
-            </span>
-          </button>
-        ))}
-      </div>
-      <p className="sr-only" role="status">
-        {visible.length} projects shown
-      </p>
-      <div className="project-grid">
-        {visible.map((p) => (
-          <ProjectCard
-            key={p.slug}
-            project={p}
-            index={projects.indexOf(p)}
-            onOpen={setSelectedProject}
-          />
-        ))}
-      </div>
-      <section className="additional-work section">
-        <p className="eyebrow">ALSO ON THE WORKBENCH</p>
-        <h2 data-reveal="heading">
-          More things <em>I’ve explored.</em>
-        </h2>
-        {archive.map((p) => (
-          <a
-            className="archive-row"
-            key={p.name}
-            href={p.href}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <div>
-              <span className="eyebrow">{p.label}</span>
-              <h3>{p.name}</h3>
-            </div>
-            <p>{p.description}</p>
-            <Arrow diagonal />
-          </a>
-        ))}
-      </section>
-      {selectedProject && (
-        <ProjectDialog
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
-    </div>
-  );
-}
-function CaseStudy() {
-  const { slug } = useParams();
-  const project = projects.find((p) => p.slug === slug);
-  if (!project) return <NotFound />;
-  const next = projects[(projects.indexOf(project) + 1) % projects.length];
-  return (
-    <article className="case-study container">
-      <Link className="text-link back-link" to="/projects">
-        ← All projects
-      </Link>
-      <div className="case-heading">
-        <p className="eyebrow">{project.discipline}</p>
-        <h1 data-reveal="heading">
-          {project.name}
-          <span>.</span>
-        </h1>
-        <p className="case-intro">{project.intro}</p>
-      </div>
-      <dl className="case-facts">
-        <div>
-          <dt>MY ROLE</dt>
-          <dd>{project.role}</dd>
-        </div>
-        <div>
-          <dt>STATUS</dt>
-          <dd>{project.status}</dd>
-        </div>
-        <div>
-          <dt>TOOLS & TECHNOLOGIES</dt>
-          <dd>{project.stack.join(" · ")}</dd>
-        </div>
-      </dl>
-      <figure className="case-figure">
-        <ProjectVisual project={project} />
-        <figcaption>{project.caption}</figcaption>
-      </figure>
-      <div className="case-body">
-        <aside>
-          <p className="eyebrow">INSIDE THE PROJECT</p>
-          <nav aria-label="Case study sections">
-            {project.sections.map((s, i) => (
-              <a key={s.title} href={`#section-${i}`}>
-                {s.title}
-              </a>
-            ))}
-          </nav>
-          <a
-            className="text-link"
-            href={project.source}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {project.sourceLabel}
-            <Arrow diagonal />
-          </a>
-        </aside>
-        <div className="case-sections">
-          <section className="journey" data-reveal="rise">
-            <p className="eyebrow">THE INTENDED JOURNEY</p>
-            <ol>
-              {project.flow.map((f, i) => (
-                <li key={f}>
-                  <span>0{i + 1}</span>
-                  {f}
-                </li>
-              ))}
-            </ol>
-          </section>
-          {project.sections.map((s, i) => (
-            <section id={`section-${i}`} key={s.title}>
-              <span className="eyebrow">0{i + 1}</span>
-              <h2 data-reveal="heading">{s.title}</h2>
-              <p>{s.text}</p>
-            </section>
-          ))}
-          <a
-            className="button button-primary"
-            href={project.source}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {project.sourceLabel}
-            <Arrow diagonal />
-          </a>
-        </div>
-      </div>
-      <Link className="next-project" to={`/projects/${next.slug}`}>
-        <div>
-          <p className="eyebrow">NEXT EXPLORATION</p>
-          <h2 data-reveal="heading">{next.name}</h2>
-        </div>
-        <Arrow diagonal />
-      </Link>
-    </article>
-  );
-}
-function NotFound() {
-  return (
-    <section className="container not-found">
-      <p className="eyebrow">404 / A SMALL DETOUR</p>
-      <h1>
-        Nothing here.
-        <br />
-        <em>Plenty to explore.</em>
-      </h1>
-      <Link className="button button-primary" to="/">
-        Back to home <Arrow />
-      </Link>
-    </section>
-  );
-}
 export default function App() {
-  const { pathname } = useLocation();
-  useScrollReveals(pathname);
-  return (
-    <>
-      <a className="skip-link" href="#main">
-        Skip to content
-      </a>
-      <div id="top" />
-      <RouteEffects />
-      <Header />
-      <main
-        id="main"
-        tabIndex={-1}
-        key={pathname}
-        className={pathname === "/playground" ? "playground-route" : pathname === "/" ? "home-route" : "portfolio-route"}
-      >
-        <Suspense
-          fallback={
-            <p className="container" role="status">
-              Opening the playground…
-            </p>
-          }
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/experience" element={<Experience page />} />
-            <Route path="/education" element={<EducationPage />} />
-            <Route path="/contact" element={<Contact page />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/playground" element={<PlaygroundPage />} />
-            <Route path="/projects/:slug" element={<CaseStudy />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </main>
-      {pathname !== "/playground" && <Footer />}
-    </>
-  );
+  useEffect(() => {
+    resolveLegacyLocation();
+    const id = window.location.hash.slice(1);
+    if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'instant' });
+  }, []);
+  return <>
+    <div id="top" aria-hidden="true" />
+    <a className="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabIndex={-1} className="container">
+      <section className="introduction" aria-labelledby="intro-title">
+        <div className="intro-person">
+          <span className="portrait-frame"><img className="portrait" src="/images/bhoomika-portrait-480.webp" alt={profile.portrait?.alt} width="96" height="112" fetchPriority="high" /></span>
+          <div><p className="eyebrow">Bengaluru, India</p><h1 id="intro-title">Hi, I’m Bhoomika<span className="blue">.</span></h1><p className="intro-role">Developer & Product Designer</p></div>
+        </div>
+        <div className="intro-note"><p>I like figuring out how a product should work, then building the interface that makes it useful.</p><p className="availability"><span aria-hidden="true" />Open to internships & full-time roles</p></div>
+      </section>
+      <section id="work" className="work section" aria-labelledby="work-title">
+        <div className="section-heading"><div><p className="eyebrow">01 / Selected work</p><h2 id="work-title">From a sketch to a screen.</h2></div><p>Product thinking, interface design<br className="desktop-break" /> and the code behind it.</p></div>
+        <div className="project-grid">{projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</div>
+        <div className="more-work"><span>Also explored</span>{additionalProjects.map(project => <a key={project.name} href={project.source} target="_blank" rel="noreferrer">{project.name}<span className="more-work-note">{project.note}</span><Arrow diagonal /></a>)}</div>
+      </section>
+      <Skills />
+      <Playground />
+      <Background />
+      <Achievements />
+    </main>
+    <footer id="connect" className="site-footer container">
+      <div className="footer-top"><div><p className="eyebrow">Have something in mind?</p><h2>Let’s make it happen.</h2></div><a className="email-link" href={`mailto:${profile.email}`}>{profile.email}<Arrow diagonal /></a></div>
+      <div className="footer-bottom"><p>Bhoomika.S <span aria-hidden="true">/</span> Bengaluru, India</p><div className="social-links"><a href={profile.github} target="_blank" rel="noreferrer">GitHub<Arrow diagonal /></a><a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn<Arrow diagonal /></a><a href="#top">Back to top ↑</a></div></div>
+    </footer>
+  </>;
 }

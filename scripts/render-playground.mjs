@@ -7,7 +7,7 @@ const run = promisify(execFile);
 const browser = await chromium.launch({ channel: 'chrome' });
 try {
   const page = await browser.newPage({ viewport: { width: 1000, height: 1100 }, deviceScaleFactor: 1 });
-  await page.goto(process.env.PLAYGROUND_ORIGIN || 'http://localhost:5173');
+  await page.goto(process.env.PLAYGROUND_ORIGIN || 'http://localhost:5174');
   await mkdir('design/playground/renders', { recursive: true });
   await mkdir('public/images/playground', { recursive: true });
   const premiumOnly = process.argv.includes('--premium');

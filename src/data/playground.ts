@@ -113,10 +113,3 @@ export const playgroundPieces: PlaygroundPiece[] = [
     image: "/images/playground/queue-desk.webp",
   },
 ];
-
-export const playgroundLayout = {
-  tileWidth: 542,
-  columnStep: 622,
-  gap: 80,
-  rim: 5,
-};

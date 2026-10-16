@@ -1,103 +1,16 @@
-import { Link } from "react-router-dom";
-import type { Project } from "../data/projects";
-import { Arrow } from "./Icons";
-
-export function ProjectVisual({ project }: { project: Project }) {
-  return (
-    <div className={`project-visual visual-${project.slug}`}>
-      <div className="visual-topline">
-        <span>{project.name}</span>
-        <span>
-          {project.category === "Product design"
-            ? "DESIGN EXPLORATION"
-            : "FROM THE SOURCE"}
-        </span>
-      </div>
-      <div className="screenshot-frame" data-reveal="image">
-        <img
-          src={project.image}
-          alt={project.alt}
-          loading="lazy"
-          width={project.imageSize.width}
-          height={project.imageSize.height}
-        />
-      </div>
-      {project.slug !== "adaptui" && (
-        <span className="visual-index" aria-hidden="true">
-          {project.slug === "clearhead"
-            ? "A little clarity."
-            : project.slug === "safescan"
-              ? "From scan to understanding."
-              : "Made for campus life."}
-        </span>
-      )}
-    </div>
-  );
-}
-export default function ProjectCard({
-  project,
-  index,
-  onOpen,
-}: {
-  project: Project;
-  index: number;
-  onOpen: (project: Project) => void;
-}) {
-  return (
-    <article className="project-card" data-reveal="rise">
-      <button
-        type="button"
-        className="project-image-link"
-        aria-label={`Preview ${project.name}`}
-        aria-haspopup="dialog"
-        onClick={() => onOpen(project)}
-      >
-        <ProjectVisual project={project} />
-        <span className="image-arrow">
-          <Arrow diagonal />
-        </span>
-      </button>
-      <div className="project-card-copy">
-        <p className="eyebrow">
-          {String(index + 1).padStart(2, "0")} / {project.discipline}
-        </p>
-        <h2>
-          <button
-            type="button"
-            onClick={() => onOpen(project)}
-            aria-haspopup="dialog"
-          >
-            {project.name}
-          </button>
-        </h2>
-        <p className="project-summary">{project.summary}</p>
-        <p className="project-status">
-          <span aria-hidden="true" />
-          {project.status}
-        </p>
-        <ul
-          className="project-tools"
-          aria-label={`${project.name} technologies`}
-        >
-          {project.stack.map((tool) => (
-            <li key={tool}>{tool}</li>
-          ))}
-        </ul>
-        <div className="project-card-actions">
-          <button
-            className="button button-primary"
-            type="button"
-            aria-haspopup="dialog"
-            aria-label={`More about ${project.name}`}
-            onClick={() => onOpen(project)}
-          >
-            More info <Arrow />
-          </button>
-          <Link to={`/projects/${project.slug}`} className="text-link">
-            Case study <Arrow diagonal />
-          </Link>
-        </div>
-      </div>
-    </article>
-  );
+import type { Project } from '../data/projects';
+import { Arrow } from './Icons';
+export function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return <article id={`project-${project.slug}`} className={`project-card project-${project.slug}`} aria-labelledby={`${project.slug}-title`}>
+    <a className="project-visual" href={project.source} target="_blank" rel="noreferrer" aria-label={`${project.name}: ${project.sourceLabel} (opens in a new tab)`}>
+      <img src={project.image} alt={project.alt} width={project.width} height={project.height} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />
+      <span className="visual-link" aria-hidden="true"><Arrow diagonal /></span>
+    </a>
+    <div className="project-caption"><span>{project.discipline}</span><span>{project.status}</span></div>
+    <div className="project-title-row"><h3 id={`${project.slug}-title`}>{project.name}</h3><a className="text-link" href={project.source} target="_blank" rel="noreferrer" aria-label={`${project.sourceLabel} for ${project.name}`}>{project.sourceLabel}<Arrow diagonal /></a></div>
+    <p className="project-description">{project.summary}</p>
+    <p className="project-role"><span>My role</span>{project.role}</p>
+    <ul className="project-tools" aria-label={`${project.name} tools`}>{project.stack.map(tool => <li key={tool}>{tool}</li>)}</ul>
+    <details className="project-evidence"><summary>About this preview</summary><p>{project.evidence}</p></details>
+  </article>;
 }
