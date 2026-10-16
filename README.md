@@ -2,6 +2,14 @@
 
 A light-first React + Vite + TypeScript portfolio with a bold portrait-led opening, a skills-first homepage, floating navigation, expandable project cards, four case studies, an intentional dark theme and a contact form that prepares an email draft.
 
+## Production and redesign branches
+
+`main` retains the application currently deployed at [bhoomika-portfolio-liard.vercel.app](https://bhoomika-portfolio-liard.vercel.app).
+
+The new, project-first single-page version is backed up separately on [`redesign/single-page`](https://github.com/bbhoomikasb11-design/Portfolio/tree/redesign/single-page). Its development server uses **http://localhost:5174**; the original version uses port 5173. The redesign has not been merged into the production application or deployed. Keep it as a local preview until the owner requests publication.
+
+See [the separate-preview workflow](docs/LOCAL_PREVIEWS.md) for running both versions and [the redesign review record](docs/REDESIGN_REVIEW.md) for completed validation and remaining publication checks.
+
 ## Run locally
 
 Use Node.js 22.12+ (Node 24 LTS recommended).
