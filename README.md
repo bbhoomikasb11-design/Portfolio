@@ -12,7 +12,16 @@ See [the separate-preview workflow](docs/LOCAL_PREVIEWS.md) for running both ver
 
 ## Run locally
 
-Use Node.js 22.12+ (Node 24 LTS recommended).
+Use Node.js 24 to match production. The version is recorded in `.nvmrc`.
+
+If you use nvm, select the project’s Node version first:
+
+```sh
+nvm install
+nvm use
+```
+
+Then install the locked dependencies and start the development server:
 
 ```sh
 npm ci
